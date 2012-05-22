@@ -2,9 +2,9 @@
 #include <cstdio>
 
 #include "getglut.h"
-#include "object.h"
+#include "task.h"
 
-namespace ep1 {
+namespace ep2 {
 
 void Object::update () {
   updater_(*this);
