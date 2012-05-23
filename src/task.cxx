@@ -6,11 +6,11 @@
 
 namespace ep2 {
 
-void Object::add_model (Model& model) {
+void Task::add_model (Model& model) {
   models_.push_back(model);
 }
 
-void Object::update () {
+void Task::update () {
   updater_(*this);
 }
 

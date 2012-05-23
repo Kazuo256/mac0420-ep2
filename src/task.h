@@ -1,6 +1,5 @@
-
-#ifndef EP1_TASK_H_
-#define EP1_TASK_H_
+#ifndef EP2_TASK_H_
+#define EP2_TASK_H_
 
 #include <tr1/functional>
 #include <tr1/memory>
@@ -16,10 +15,10 @@ class Task {
     /// Type used to store the update function of the object.
     /** It can store either pointer to functions or callable objects that
      ** satisfy the given signature. */
-    typedef std::tr1::function<void (Object&)>  Updater;
-    typedef std::vector<Model>                  Models;
+    typedef std::tr1::function<void (&)>  Updater;
+    typedef std::vector<Model>            Models;
     /// Reference-counting smart pointer for renderable objects.
-    typedef std::tr1::shared_ptr<Object>    Ptr;
+    typedef std::tr1::shared_ptr<Task>    Ptr;
     /// Updates this object.
     /** Must be called whithin a glut timed callback. */
     void update ();
@@ -34,7 +33,7 @@ class Task {
   private:
     // This object's rendering function.
     Updater   updater_;
-    explicit Object (const Updater updater) :
+    explicit Task (const Updater updater) :
       updater_(updater) {}
     Models models_;
 };
