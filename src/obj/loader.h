@@ -1,20 +1,22 @@
 
-#ifndef EP1_OBJ_LOADER_H_
-#define EP1_OBJ_LOADER_H_
+#ifndef EP2_OBJ_LOADER_H_
+#define EP2_OBJ_LOADER_H_
 
 #include <string>
 
 namespace ep2 {
+namespace obj {
 
 class Model;
 class Model::Ptr;
 
-class ModelLoader {
+class Loader {
   public:
-    ModelLoader () {}
+    Loader () {}
     Model::Ptr load (const std::string& filename);
 };
 
+} // namespace obj
 } // namespace ep2
 
 #endif
