@@ -1,5 +1,5 @@
-#ifndef EP1_RENDER_H_
-#define EP1_RENDER_H_
+#ifndef EP2_MODEL_H_
+#define EP2_MODEL_H_
 
 #include <tr1/functional>
 #include <tr1/memory>
