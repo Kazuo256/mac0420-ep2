@@ -11,7 +11,7 @@ void Task::add_model (Model& model) {
 }
 
 void Task::update () {
-  updater_(*this);
+  updater_();
 }
 
 }

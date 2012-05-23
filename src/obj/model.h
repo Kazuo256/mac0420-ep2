@@ -4,6 +4,8 @@
 #include <tr1/functional>
 #include <tr1/memory>
 
+#include <vector>
+
 namespace ep2 {
 
 class Model {
@@ -13,7 +15,7 @@ class Model {
      ** satisfy the given signature. */
     typedef std::tr1::function<void (void)> Renderer;
     /// Reference-counting smart pointer for renderable objects.
-    typedef std::tr1::shared_ptr<Object>    Ptr;
+    typedef std::tr1::shared_ptr<Model>    Ptr;
     /// Toggles object visibility.
     void toggle_visibility () {
       visible_ = !visible_;
@@ -33,7 +35,7 @@ class Model {
   private:
     Model (const Renderer& renderer) :
       visible_(true),
-      redenrer_(renderer) {}
+      renderer_(renderer) {}
     // Visibility flag.
     bool      visible_;
     // This object's rendering function.

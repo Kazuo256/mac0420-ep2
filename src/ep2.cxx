@@ -1,7 +1,8 @@
 
 #include "ep2.h"
-#include "model.h"
+#include "obj/model.h"
 #include "task.h"
+#include "getglut.h"
 
 namespace ep2 {
 

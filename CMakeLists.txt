@@ -21,7 +21,7 @@ endif (${GLUT_FOUND})
 add_executable (ep2
   src/main.cxx
   src/ep2.cxx
-  src/model.cxx
+  src/obj/model.cxx
   src/task.cxx
 )
 target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
