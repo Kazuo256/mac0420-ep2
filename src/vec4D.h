@@ -2,11 +2,12 @@
 #ifndef EP2_VEC4D_H_
 #define EP2_VEC4D_H_
 
+#include "base4D.h"
 #include <cstring>
 
 namespace ep2 {
 
-class Vec4D : public base4D {
+class Vec4D : public Base4D {
   public:
     /// Constructor.
     /** @param x X-coordinate of the vector

@@ -4,7 +4,7 @@
 #include <tr1/functional>
 #include <tr1/memory>
 
-#include "vec3D.h"
+#include "vec4D.h"
 #include "obj/model.h"
 
 namespace ep2 {

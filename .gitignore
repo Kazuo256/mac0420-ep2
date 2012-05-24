@@ -3,3 +3,5 @@ cmake_install.cmake
 CMakeFiles
 *~
 .*.swp
+Makefile
+ep2

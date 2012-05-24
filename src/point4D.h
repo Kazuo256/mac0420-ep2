@@ -1,9 +1,13 @@
 
+#ifndef EP2_POINT4D_H_
+#define EP2_POINT4D_H_
+
 #include "base4D.h"
+#include "vec4D.h"
 
 namespace ep2 {
 
-class Point4D : public base4D {
+class Point4D : public Base4D {
   public:
     /// Constructor.
     /** @param x X-coordinate of the point
@@ -17,7 +21,7 @@ class Point4D : public base4D {
     /** @param val Arrays of double with size 3 containing the point
      **            coordinates. */
     Point4D (const double val[3]) :
-      Base(val[0], val[1], val[2], 1.0) {}
+      Base4D(val[0], val[1], val[2], 1.0) {}
     /// Subtraction.
     Vec4D operator - (const Point4D& rhs) const;
     /// Product with scalar.
@@ -27,3 +31,5 @@ class Point4D : public base4D {
 };
 
 } //namespace ep2
+
+#endif

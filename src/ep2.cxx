@@ -4,6 +4,7 @@
 #include "task.h"
 #include "getglut.h"
 #include "point4D.h"
+#include "vec4D.h"
 
 namespace ep2 {
 

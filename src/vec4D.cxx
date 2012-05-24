@@ -10,36 +10,6 @@
 
 namespace ep2 {
 
-double Vec4D::length () const {
-  return sqrt(x_*x_ + y_*y_ + z_*z_, a_*a_);
-}
-
-double Vec4D::min () const {
-  if (x_ < y_)
-    if (x_ < z_) 
-      if (x_ < a_) return x_;
-}
-
-double Vec4D::max () const {
-  return std::max(x_, std::max(y_, z_));
-}
-
-Vec4D Vec4D::vec_floor () const {
-  Vec4D ret = (*this);
-  ret.x_ = floor(ret.x_);
-  ret.y_ = floor(ret.y_);
-  ret.z_ = floor(ret.z_);
-  return ret;
-} 
-
-Vec4D Vec4D::vec_ceil () const {
-  Vec4D ret = (*this);
-  ret.x_ = ceil(ret.x_);
-  ret.y_ = ceil(ret.y_);
-  ret.z_ = ceil(ret.z_);
-  return ret;
-}
-
 double Vec4D::angle_to (const Vec4D& rhs) const {
   if (*this == rhs) return 0.0;
   else return acos(normalized()*rhs.normalized())*180.0/PI;

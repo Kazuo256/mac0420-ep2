@@ -1,6 +1,6 @@
 
-#ifndef EP2_VEC4D_H_
-#define EP2_VEC4D_H_
+#ifndef EP2_BASE4D_H_
+#define EP2_BASE4D_H_
 
 #include <cstring>
 
@@ -49,9 +49,6 @@ class Base4D {
     void set_z (double z) { z_ = z; }
     /// Sets the alpha-coordinate of the vector.
     /** @param z The new z-coordinate of the vector. */
-    void set_z (double z) { z_ = z; }
-    /// Sets all the vector's coordinates.
-    /** @param val A 3-sized array with the new coordinates' value. */
     void set_val (const double val[4]) {
       memcpy(val_, val, 4*sizeof(double));
     }
@@ -65,7 +62,7 @@ class Base4D {
     /// Checks if two vectors are the same.
     /** @param rhs Another vector.
      ** @return bool True if they are the same, false otherwise. */
-    bool operator == (const Vec4D& rhs) const;
+    bool operator == (const Base4D& rhs) const;
     /// Calculates the length of this vector.
     /** @return double The length of this vector. */
     double length () const;
@@ -77,10 +74,10 @@ class Base4D {
     double max () const;
     /// Generates a vector with the floor values of this vector.
     /** @return Vec3D a vector with the floor values of this vector. */
-    Vec3D vec_floor () const;
+    Base4D vec_floor () const;
     /// Generates a vector with the ceil values of this vector.
     /** @return Vec3D a vector with the ceil values of this vector. */
-    Vec3D vec_ceil () const;
+    Base4D vec_ceil () const;
     /// Dumps vector's information.
     void dump() const;
     private:
@@ -90,7 +87,7 @@ class Base4D {
     };
 };
 
-inline bool Vec4D::operator == (const Vec4D& rhs) const {
+inline bool Base4D::operator == (const Base4D& rhs) const {
   return x_ == rhs.x_ &&
          y_ == rhs.y_ &&
          z_ == rhs.z_ &&

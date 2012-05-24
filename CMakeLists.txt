@@ -23,6 +23,9 @@ add_executable (ep2
   src/ep2.cxx
   src/obj/model.cxx
   src/task.cxx
+  src/vec4D.cxx
+  src/point4D.cxx
+  src/base4D.cxx
 )
 target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
 set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O2")
