@@ -5,6 +5,7 @@
 #include "getglut.h"
 #include "point4D.h"
 #include "vec4D.h"
+#include "transform.h"
 
 namespace ep2 {
 

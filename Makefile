@@ -252,6 +252,30 @@ src/task.cxx.s:
 	$(MAKE) -f CMakeFiles/ep2.dir/build.make CMakeFiles/ep2.dir/src/task.cxx.s
 .PHONY : src/task.cxx.s
 
+src/transform.o: src/transform.cxx.o
+.PHONY : src/transform.o
+
+# target to build an object file
+src/transform.cxx.o:
+	$(MAKE) -f CMakeFiles/ep2.dir/build.make CMakeFiles/ep2.dir/src/transform.cxx.o
+.PHONY : src/transform.cxx.o
+
+src/transform.i: src/transform.cxx.i
+.PHONY : src/transform.i
+
+# target to preprocess a source file
+src/transform.cxx.i:
+	$(MAKE) -f CMakeFiles/ep2.dir/build.make CMakeFiles/ep2.dir/src/transform.cxx.i
+.PHONY : src/transform.cxx.i
+
+src/transform.s: src/transform.cxx.s
+.PHONY : src/transform.s
+
+# target to generate assembly for a file
+src/transform.cxx.s:
+	$(MAKE) -f CMakeFiles/ep2.dir/build.make CMakeFiles/ep2.dir/src/transform.cxx.s
+.PHONY : src/transform.cxx.s
+
 src/vec4D.o: src/vec4D.cxx.o
 .PHONY : src/vec4D.o
 
@@ -303,6 +327,9 @@ help:
 	@echo "... src/task.o"
 	@echo "... src/task.i"
 	@echo "... src/task.s"
+	@echo "... src/transform.o"
+	@echo "... src/transform.i"
+	@echo "... src/transform.s"
 	@echo "... src/vec4D.o"
 	@echo "... src/vec4D.i"
 	@echo "... src/vec4D.s"

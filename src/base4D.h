@@ -48,6 +48,9 @@ class Base4D {
     /** @param z The new z-coordinate of the vector. */
     void set_z (double z) { z_ = z; }
     /// Sets the alpha-coordinate of the vector.
+    /** @param a The new alpha-coordinate of the vector. */
+    void set_a (double a) { a_ = a; }
+    /// Sets the alpha-coordinate of the vector.
     /** @param z The new z-coordinate of the vector. */
     void set_val (const double val[4]) {
       memcpy(val_, val, 4*sizeof(double));
