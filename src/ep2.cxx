@@ -3,6 +3,7 @@
 #include "obj/model.h"
 #include "task.h"
 #include "getglut.h"
+#include "point4D.h"
 
 namespace ep2 {
 
