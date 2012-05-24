@@ -22,6 +22,7 @@ add_executable (ep2
   src/main.cxx
   src/ep2.cxx
   src/obj/model.cxx
+  src/obj/parser.cxx
   src/task.cxx
   src/vec4D.cxx
   src/point4D.cxx
