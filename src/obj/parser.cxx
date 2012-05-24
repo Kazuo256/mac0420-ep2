@@ -24,7 +24,7 @@ bool Parser::parse_command (Command& cmd) {
     if (token == EOF) return false;
     // comment, skip line.
     if (token == '#') {
-      while ((token = next()) != EOF || token != '\n');
+      while ((token = next()) != EOF && token != '\n');
       continue;
     } else break; // else something useful has been found.
   } while(true);
@@ -33,7 +33,7 @@ bool Parser::parse_command (Command& cmd) {
     string item;
     item += token;
     // read item
-    while ((token == next()) != ' ' && token != '\t' &&
+    while ((token = next()) != ' ' && token != '\t' &&
            token != '\n' && token != EOF && token != '#')
       item += token;
     // add item
