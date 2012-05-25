@@ -55,63 +55,7 @@ bool Parser::parse_command (Command& cmd) {
   return true;
 }
 
-//struct token {
-//  int val;
-//  token () : val(0) {}
-//  token& next (FILE *in) { val = fgetc(in); return *this; }
-//  token& undo (FILE *in) { ungetc(val, in); return *this; }
-//  unsigned type () const {
-//    switch(val) {
-//      case EOF: return eof();
-//      case '\n': return eol();
-//      case '#': return comment();
-//      case ' ':
-//      case '\t': return space();
-//      default: return any();
-//    }
-//  }
-//  static unsigned eof () { return 0x1; }
-//  static unsigned eol () { return 0x2; }
-//  static unsigned comment () { return 0x4; }
-//  static unsigned space () { return 0x8; }
-//  static unsigned any () { return 0x10; }
-//};
-
 int Parser::next () { return fgetc(objfile); }
-
-/*
-void Parser::skip (unsigned mask) {
-  token t;
-  for (t.next(objfile); t.type() & mask; t.next(objfile));
-  t.undo(objfile);
-}
-
-void Parser::until (unsigned mask) {
-  token t;
-  for (t.next(objfile); !(t.type() & mask); t.next(objfile));
-  t.undo(objfile);
-}
-
-static bool is_item_token (int token) {
-  return !isspace(token) && token != EOF;
-}
-
-bool Parser::skip_to_item () {
-  int token;
-  while (!is_item_token(token = fgetc(objfile)));
-
-}
-
-void Parser::skip_space () {
-  int token;
-  while (isspace(token = fgetc(objfile)));
-  ungetc(token, objfile);
-}
-
-void Parser::skip_line () {
-  while (!feof(objfile) && fgetc(objfile) != '\n');
-}
-*/
 
 } // namespace obj
 } // namespace ep2

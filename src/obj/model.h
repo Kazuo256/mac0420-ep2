@@ -15,7 +15,7 @@ class Model {
      ** satisfy the given signature. */
     typedef std::tr1::function<void (void)> Renderer;
     /// Reference-counting smart pointer for renderable objects.
-    typedef std::tr1::shared_ptr<Model>    Ptr;
+    typedef std::tr1::shared_ptr<Model>     Ptr;
     /// Toggles object visibility.
     void toggle_visibility () {
       visible_ = !visible_;

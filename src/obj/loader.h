@@ -4,16 +4,15 @@
 
 #include <string>
 
+#include "obj/model.h"
+
 namespace ep2 {
 namespace obj {
-
-class Model;
-class Model::Ptr;
 
 class Loader {
   public:
     Loader () {}
-    Model::Ptr load (const std::string& filename);
+    Model::Ptr load (const std::string& modelname);
 };
 
 } // namespace obj

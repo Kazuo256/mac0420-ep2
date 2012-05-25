@@ -17,10 +17,7 @@ class Parser {
     bool parse_command (Command& cmd);
   private:
     FILE *objfile;
-    //bool parse_item (std::string& item);
     int next ();
-    //void skip (unsigned mask);
-    //void until (unsigned mask);
 };
 
 } // namespace obj
