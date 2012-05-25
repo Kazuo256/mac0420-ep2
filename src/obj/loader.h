@@ -3,16 +3,24 @@
 #define EP2_OBJ_LOADER_H_
 
 #include <string>
+#include <map>
+
+#include <tr1/functional>
 
 #include "obj/model.h"
+#include "obj/modeldata_fwd.h"
 
 namespace ep2 {
 namespace obj {
 
 class Loader {
   public:
-    Loader () {}
+    typedef std::tr1::function<void (ModelDataPtr&)> CmdHandler;
+    Loader ();
     Model::Ptr load (const std::string& modelname);
+    void handle_vertex (ModelDataPtr& data);
+  private:
+    std::map<std::string, CmdHandler> handlers_;
 };
 
 } // namespace obj
