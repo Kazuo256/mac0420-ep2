@@ -46,12 +46,35 @@ Model::Ptr Loader::load (const string& modelname) {
   return Model::create(ModelRenderer(data));
 }
 
-void Loader::handle_vertex (ModelDataPtr data, const Command& cmd) {
+#define DEFINE_HANDLER(name) \
+  void Loader::handle_##name (ModelDataPtr data, \
+                              const Command& cmd)
+
+DEFINE_HANDLER(objname) {
+  if (cmd.size() >= 2)
+    data->set_name(cmd[1]);
+}
+
+DEFINE_HANDLER(vertex) {
   double raw_vertex[4] = { 0.0, 0.0, 0.0, 1.0 };
   for (unsigned i = 0; i < 4 && i+1 < cmd.size(); i++)
     raw_vertex[i] = atof(cmd[i+1].c_str());
   data->add_vertex(Base4D(raw_vertex));
 }
+
+DEFINE_HANDLER(face) {
+
+}
+
+DEFINE_HANDLER(materialimport) {
+
+}
+
+DEFINE_HANDLER(materialusage) {
+
+}
+
+#undef DEFINE_HANDLER
 
 } // namespace obj
 } // namespace ep2

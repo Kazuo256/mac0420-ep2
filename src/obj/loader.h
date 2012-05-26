@@ -24,10 +24,16 @@ class Loader {
     typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
     Loader ();
     Model::Ptr load (const std::string& modelname);
+    DECLARE_HANDLER(objname);
     DECLARE_HANDLER(vertex);
+    DECLARE_HANDLER(face);
+    DECLARE_HANDLER(materialimport);
+    DECLARE_HANDLER(materialusage);
   private:
     HandlerTable handlers_;
 };
+
+#undef DECLARE_HANDLER
 
 } // namespace obj
 } // namespace ep2
