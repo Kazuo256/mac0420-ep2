@@ -1,7 +1,7 @@
 
 #include "ep2.h"
 #include "obj/model.h"
-#include "obj/parser.h"
+#include "obj/loader.h"
 #include "task.h"
 #include "getglut.h"
 #include "point4D.h"
@@ -12,6 +12,7 @@ namespace ep2 {
 
 void init (int argc, char **argv) {
   glutInit(&argc, argv);
+  obj::Loader().load("wall00-00");
 }
 
 void run () {

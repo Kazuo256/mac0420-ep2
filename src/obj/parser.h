@@ -10,9 +10,10 @@
 namespace ep2 {
 namespace obj {
 
+typedef std::vector<std::string> Command;
+
 class Parser {
   public:
-    typedef std::vector<std::string>  Command;
     Parser (const std::string& filename);
     bool parse_command (Command& cmd);
   private:

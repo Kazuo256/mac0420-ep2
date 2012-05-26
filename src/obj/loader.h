@@ -6,6 +6,7 @@
 #include <map>
 
 #include <tr1/functional>
+#include <tr1/unordered_map>
 
 #include "obj/model.h"
 #include "obj/modeldata_fwd.h"
@@ -14,14 +15,18 @@
 namespace ep2 {
 namespace obj {
 
+#define DECLARE_HANDLER(name) \
+  void handle_##name (ModelDataPtr data, const Command& cmd);
+
 class Loader {
   public:
-    typedef std::tr1::function<void (ModelDataPtr&)> CmdHandler;
+    typedef std::tr1::function<void (ModelDataPtr, const Command&)> CmdHandler;
+    typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
     Loader ();
     Model::Ptr load (const std::string& modelname);
-    void handle_vertex (ModelDataPtr& data, const Parser::Command& cmd);
+    DECLARE_HANDLER(vertex);
   private:
-    std::map<std::string, CmdHandler> handlers_;
+    HandlerTable handlers_;
 };
 
 } // namespace obj

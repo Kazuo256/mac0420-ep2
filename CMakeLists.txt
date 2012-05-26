@@ -33,5 +33,5 @@ add_executable (ep2
   src/transform.cxx
 )
 target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
-set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O2")
+set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O2 -g")
 message(${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
