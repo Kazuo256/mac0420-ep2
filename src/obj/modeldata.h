@@ -12,9 +12,12 @@ namespace obj {
 
 class ModelData {
   public:
-    ModelData () {}
     void add_vertex (const Base4D& vertex);
+    static ModelDataPtr create () {
+      return ModelDataPtr(new ModelData);
+    }
   private:
+    ModelData () {}
     std::vector<Base4D> vertexes_;
 };
 

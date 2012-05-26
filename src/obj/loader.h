@@ -9,6 +9,7 @@
 
 #include "obj/model.h"
 #include "obj/modeldata_fwd.h"
+#include "obj/parser.h"
 
 namespace ep2 {
 namespace obj {
@@ -18,7 +19,7 @@ class Loader {
     typedef std::tr1::function<void (ModelDataPtr&)> CmdHandler;
     Loader ();
     Model::Ptr load (const std::string& modelname);
-    void handle_vertex (ModelDataPtr& data);
+    void handle_vertex (ModelDataPtr& data, const Parser::Command& cmd);
   private:
     std::map<std::string, CmdHandler> handlers_;
 };
