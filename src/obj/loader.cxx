@@ -17,12 +17,18 @@ using namespace std::tr1::placeholders;
 
 typedef void (Loader::*Handler) (ModelDataPtr, const Command&);
 
-#define HANDLERTABLE_SIZE 1
+#define HANDLERTABLE_SIZE 5
+#define GET_HANDLER(name) &Loader::handle_##name
+
 static struct RawHandlerTable {
   const char* tag;
   Handler     handler;
 } handlers_table[HANDLERTABLE_SIZE] = {
-  {"v", &Loader::handle_vertex}
+  {"o", GET_HANDLER(objname) },
+  {"v", GET_HANDLER(vertex) },
+  {"f", GET_HANDLER(face) },
+  {"mtllib", GET_HANDLER(materialimport) },
+  {"usemtl", GET_HANDLER(materialusage) }
 };
 
 Loader::Loader () {
@@ -41,7 +47,8 @@ Model::Ptr Loader::load (const string& modelname) {
     if (handler != handlers_.end())
       handler->second(data, cmd);
     else
-      printf("No handler for '%s'.\n", cmd.front().c_str());
+      printf("Ignoring unsuported OBJ instruction '%s'.\n",
+             cmd.front().c_str());
   }
   return Model::create(ModelRenderer(data));
 }
@@ -51,6 +58,7 @@ Model::Ptr Loader::load (const string& modelname) {
                               const Command& cmd)
 
 DEFINE_HANDLER(objname) {
+  // TODO: fix?
   if (cmd.size() >= 2)
     data->set_name(cmd[1]);
 }
@@ -63,7 +71,7 @@ DEFINE_HANDLER(vertex) {
 }
 
 DEFINE_HANDLER(face) {
-
+  
 }
 
 DEFINE_HANDLER(materialimport) {
