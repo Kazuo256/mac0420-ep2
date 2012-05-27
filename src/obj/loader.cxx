@@ -71,15 +71,19 @@ DEFINE_HANDLER(vertex) {
 }
 
 DEFINE_HANDLER(face) {
-  
+  Face                    face;
+  Command::const_iterator it;
+  for (it = cmd.begin()+1; it != cmd.end(); it++)
+    face.push_back(strtoul(it->c_str(), NULL, 0));
+  data->add_face(face);
 }
 
 DEFINE_HANDLER(materialimport) {
-
+  // ignored for now
 }
 
 DEFINE_HANDLER(materialusage) {
-
+  // ignored for now
 }
 
 #undef DEFINE_HANDLER
