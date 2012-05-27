@@ -7,9 +7,12 @@
 namespace ep2 {
 namespace obj {
 
+typedef std::vector<unsigned> Face;
+
 class ModelData;
 
 typedef std::tr1::shared_ptr<ModelData> ModelDataPtr;
+
 
 } // namespace obj
 } // namespace ep2

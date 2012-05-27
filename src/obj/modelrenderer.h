@@ -17,6 +17,8 @@ class ModelRenderer {
     void operator () ();
   private:
     ModelDataPtr  data_;
+    void render_face (const Face& face);
+    void vertex (unsigned i);
 };
 
 } // namespace obj

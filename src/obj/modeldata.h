@@ -21,13 +21,18 @@ struct VertexData {
 */
 
 //typedef std::vector<VertexData> Face;
-typedef std::vector<unsigned> Face;
 
 class ModelData {
   public:
     void set_name (const std::string& name) { name_ = name; }
     void add_vertex (const Base4D& vertex);
     void add_face (const Face& face);
+    const std::vector<Base4D>& vertices () const {
+      return vertices_;
+    }
+    const std::vector<Face>& faces () const {
+      return faces_;
+    }
     static ModelDataPtr create () {
       return ModelDataPtr(new ModelData);
     }
