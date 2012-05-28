@@ -1,0 +1,4 @@
+Scenes  -> Colocar um vetor de tasks
+        -> O update da window vai chamar esses tasks.
+
+Window  -> Vetor de scenes.
