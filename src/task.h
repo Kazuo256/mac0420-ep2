@@ -16,11 +16,8 @@ class Task {
     /** It can store either pointer to functions or callable objects that
      ** satisfy the given signature. */
     typedef std::tr1::function<void (void)>  Updater;
-    typedef std::vector<Model>            Models;
     /// Reference-counting smart pointer for renderable objects.
     typedef std::tr1::shared_ptr<Task>    Ptr;
-    ///Add a new model to the Task///
-    void add_model (Model& model);
     /// Updates this object.
     /** Must be called whithin a glut timed callback. */
     void update ();
