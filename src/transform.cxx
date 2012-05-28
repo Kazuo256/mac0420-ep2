@@ -17,4 +17,12 @@ void Transform::composition (Matrix matrix) {
   }
 }
 
+void pushModel (Model model) {
+ modelvec_.push_back(model); 
+}
+
+void pushTransform (Transform transform) {
+  transformvec_.push_back(transform);
+}
+
 } // namespace ep2
