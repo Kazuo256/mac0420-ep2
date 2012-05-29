@@ -37,7 +37,7 @@ Loader::Loader () {
       bind(handlers_table[i].handler, this, _1, _2);
 }
 
-Model::Ptr Loader::load (const string& modelname) {
+Model Loader::load (const string& modelname) {
   Parser parser("models/"+modelname+".obj");
   ModelDataPtr data = ModelData::create();
   while (true) {
@@ -50,7 +50,7 @@ Model::Ptr Loader::load (const string& modelname) {
       printf("Ignoring unsuported OBJ instruction '%s'.\n",
              cmd.front().c_str());
   }
-  return Model::create(ModelRenderer(data));
+  return Model(ModelRenderer(data));
 }
 
 #define DEFINE_HANDLER(name) \
