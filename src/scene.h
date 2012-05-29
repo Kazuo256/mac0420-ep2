@@ -24,6 +24,7 @@ class Scene {
     }
     
     void pushtask (const Task& task);
+    void updatetasks ();
   private:
     Root  root_;
     Tasks tasks_;
