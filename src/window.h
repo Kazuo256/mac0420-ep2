@@ -10,11 +10,12 @@
 
 #include "object.h"
 #include "camera.h"
+#include "window.h"
 
 #define WIN_REFRESH 16 /* more or less 60 fps */
 #define MILI 1e-3
 
-namespace ep1 {
+namespace ep2 {
 
 /// Represents a graphic window.
 class Window {
@@ -23,6 +24,8 @@ class Window {
     typedef std::tr1::shared_ptr<Window>        Ptr;
     /// Keyboard event handler.
     typedef std::tr1::function<void (int, int)> KeyEvent;
+    /// Scene vector.
+    typedef std::vector<Scene>                  Scenes;
     /// Initializes the window.
     /** Even if created, a window is only displayed if it has been initialized
      ** before. */
@@ -39,11 +42,10 @@ class Window {
     /** @param key    Character key associated to the given event.
      ** @param event  The event that happens when the given key is pressed. */
     void register_keyevent (unsigned char key, KeyEvent event);
-    /// Adds an object to be drawn in the window.
-    /** @param obj The object to be added. */
-    void add_object (const Object::Ptr& obj);
     /// Defines the initial window size.
     static void init_size(int w, int h);
+    /// Add a new scene to the actual window
+    void pushscene (const Scene& scene);
     /// Creates a new window object.
     /** @param caption - The window's caption. */
     static Ptr create (const std::string& caption) {
@@ -62,8 +64,8 @@ class Window {
     int                       stop_;
     // The window's camera into the scene.
     Camera                    camera_;
-    // Objects to be drawn.
-    std::vector<Object::Ptr>  objects_;
+    // Scenes vector
+    Scenes                    scenes_;
     // Indicates which mouse buttons are currently pressed.
     bool                      buttons_[3];
     // Last mouse position detected.

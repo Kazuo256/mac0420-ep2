@@ -7,6 +7,7 @@
 #include "point4D.h"
 #include "vec4D.h"
 #include "transform.h"
+#include "scene.h"
 
 namespace ep2 {
 
