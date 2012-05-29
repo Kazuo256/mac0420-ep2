@@ -3,7 +3,7 @@
 #define EP2_TRANSFORM_H_
 
 #include "vec4D.h"
-#include "model.h"
+#include "obj/model.h"
 
 #include <vector>
 
@@ -19,9 +19,9 @@ class Transform {
     typedef std::vector<Transform>  TransformVec;
     Transform (Matrix matrix) :
       matrix_(matrix) {}
-    void composition (Matrix matrix);
-    void pushModel (Model model);
-    void pushTransform (Transform transform);
+    void composition (const Matrix& matrix);
+    void pushmodel (const Model& model);
+    void pushtransform (const Transform& transform);
   private:
     Matrix        matrix_;
     ModelVec      modelvec_;

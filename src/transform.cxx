@@ -4,7 +4,7 @@
 
 namespace ep2 {
 
-void Transform::composition (Matrix matrix) {
+void Transform::composition (const Matrix& matrix) {
   if (matrix.size() == 4) {
     Matrix comp;
     for (int i = 0; i < 4; i++) {
@@ -17,11 +17,11 @@ void Transform::composition (Matrix matrix) {
   }
 }
 
-void pushModel (Model model) {
+void Transform::pushmodel (const Model& model) {
  modelvec_.push_back(model); 
 }
 
-void pushTransform (Transform transform) {
+void Transform::pushtransform (const Transform& transform) {
   transformvec_.push_back(transform);
 }
 

@@ -34,7 +34,6 @@ class Task {
     Updater   updater_;
     explicit Task (const Updater updater) :
       updater_(updater) {}
-    Models models_;
 };
 
 } // namespace ep1
