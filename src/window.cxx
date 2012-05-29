@@ -7,7 +7,7 @@
 #include "vec3D.h"
 #include "window.h"
 
-namespace ep1 {
+namespace ep2 {
 
 using std::vector;
 using std::tr1::unordered_map;
@@ -50,14 +50,14 @@ void Window::init (double w, double h, double d) {
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
 
-void Window::add_object(const Object::Ptr& obj) {
-  objects_.push_back(obj);
-}
-
 void Window::init_size (int w, int h) {
   init_width_ = w;
   init_height_ = h;
   glutInitWindowSize(w, h);
+}
+
+void Window::pushscene (const Scene& scene) {
+  scenes_.push_back(scene);
 }
 
 void Window::set_current () {
@@ -159,13 +159,6 @@ void Window::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   // Place the camera.
   win->camera_.place();
-  // Render all objects.
-  vector<Object::Ptr>::iterator it;
-  for (it = win->objects_.begin(); it != win->objects_.end(); ++it) {
-    glPushMatrix();
-    (*it)->render();
-    glPopMatrix();
-  }
   // Swap buffers to display result.
   glutSwapBuffers();
 }
@@ -174,8 +167,8 @@ void Window::timer_func (int value) {
   // Get the current window.
   Ptr win = current_window();
   // Update all objects.
-  vector<Object::Ptr>::iterator it;
-  for (it = win->objects_.begin(); it != win->objects_.end(); ++it)
+  Scenes::iterator it;
+  for (it = win->scenes_.begin(); it != win->scenes_.end(); ++it)
     (*it)->update();
   // Prepare for next update, if needed.
   if (win->stop_ == 0)

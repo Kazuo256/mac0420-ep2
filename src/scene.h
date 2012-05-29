@@ -25,6 +25,7 @@ class Scene {
     
     void pushtask (const Task& task);
     void updatetasks ();
+    Root& root () { return root_; }
   private:
     Root  root_;
     Tasks tasks_;
