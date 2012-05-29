@@ -23,7 +23,7 @@ class Loader {
     typedef std::tr1::function<void (ModelDataPtr, const Command&)> CmdHandler;
     typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
     Loader ();
-    Model::Ptr load (const std::string& modelname);
+    Model load (const std::string& modelname);
     DECLARE_HANDLER(objname);
     DECLARE_HANDLER(vertex);
     DECLARE_HANDLER(face);
