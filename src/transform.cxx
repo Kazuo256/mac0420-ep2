@@ -1,6 +1,7 @@
 
 
 #include "transform.h"
+#include "obj/model.h"
 
 namespace ep2 {
 
@@ -17,7 +18,7 @@ void Transform::composition (const Matrix& matrix) {
   }
 }
 
-void Transform::pushmodel (const Model& model) {
+void Transform::pushmodel (const obj::Model& model) {
  modelvec_.push_back(model); 
 }
 

@@ -8,19 +8,20 @@
 #include <tr1/functional>
 #include <tr1/unordered_map>
 
-#include "obj/model.h"
-#include "obj/modeldata_fwd.h"
 #include "obj/parser.h"
+#include "obj/modeldata.h"
 
 namespace ep2 {
 namespace obj {
 
+class Model;
+
 #define DECLARE_HANDLER(name) \
-  void handle_##name (ModelDataPtr data, const Command& cmd);
+  void handle_##name (ModelData::Ptr data, const Command& cmd);
 
 class Loader {
   public:
-    typedef std::tr1::function<void (ModelDataPtr, const Command&)> CmdHandler;
+    typedef std::tr1::function<void (ModelData::Ptr, const Command&)> CmdHandler;
     typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
     Loader ();
     Model load (const std::string& modelname);

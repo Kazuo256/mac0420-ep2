@@ -6,7 +6,6 @@
 #include "getglut.h"
 
 #include "obj/modelrenderer.h"
-#include "obj/modeldata.h"
 
 namespace ep2 {
 namespace obj {

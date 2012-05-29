@@ -15,12 +15,12 @@ class Transform {
     /** Matriz em notação de coluna. Matrix[0] é a primeira 
      ** coluna da matriz */ 
     typedef std::vector<Vec4D>      Matrix;
-    typedef std::vector<Model>      ModelVec;
+    typedef std::vector<obj::Model> ModelVec;
     typedef std::vector<Transform>  TransformVec;
     Transform (Matrix matrix) :
       matrix_(matrix) {}
     void composition (const Matrix& matrix);
-    void pushmodel (const Model& model);
+    void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
   private:
     Matrix        matrix_;

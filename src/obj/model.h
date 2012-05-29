@@ -7,6 +7,7 @@
 #include <vector>
 
 namespace ep2 {
+namespace obj {
 
 class Model {
   public:
@@ -33,6 +34,7 @@ class Model {
     Renderer  renderer_;
 };
 
-}
+} // namespace obj
+} // namespace ep2
 
 #endif

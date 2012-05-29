@@ -3,6 +3,8 @@
 #include <vector>
 
 #include "obj/loader.h"
+#include "obj/parser.h"
+#include "obj/model.h"
 #include "obj/modeldata.h"
 #include "obj/modelrenderer.h"
 
@@ -15,7 +17,7 @@ using std::tr1::bind;
 using std::tr1::unordered_map;
 using namespace std::tr1::placeholders;
 
-typedef void (Loader::*Handler) (ModelDataPtr, const Command&);
+typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
 #define HANDLERTABLE_SIZE 5
 #define GET_HANDLER(name) &Loader::handle_##name
@@ -39,7 +41,7 @@ Loader::Loader () {
 
 Model Loader::load (const string& modelname) {
   Parser parser("models/"+modelname+".obj");
-  ModelDataPtr data = ModelData::create();
+  ModelData::Ptr data = ModelData::create();
   while (true) {
     Command cmd;
     if (!parser.parse_command(cmd)) break;
@@ -54,7 +56,7 @@ Model Loader::load (const string& modelname) {
 }
 
 #define DEFINE_HANDLER(name) \
-  void Loader::handle_##name (ModelDataPtr data, \
+  void Loader::handle_##name (ModelData::Ptr data, \
                               const Command& cmd)
 
 DEFINE_HANDLER(objname) {

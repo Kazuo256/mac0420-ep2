@@ -1,7 +1,7 @@
 
 #include "ep2.h"
-#include "obj/model.h"
 #include "obj/loader.h"
+#include "obj/model.h"
 #include "task.h"
 #include "getglut.h"
 #include "point4D.h"

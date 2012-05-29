@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "obj/modeldata_fwd.h"
+#include "obj/modeldata.h"
 
 namespace ep2 {
 
@@ -13,10 +13,10 @@ namespace obj {
 
 class ModelRenderer {
   public:
-    explicit ModelRenderer (const ModelDataPtr& data) : data_(data) {}
+    explicit ModelRenderer (const ModelData::Ptr& data) : data_(data) {}
     void operator () ();
   private:
-    ModelDataPtr  data_;
+    ModelData::Ptr data_;
     void render_face (const Face& face);
     void vertex (unsigned i);
 };
