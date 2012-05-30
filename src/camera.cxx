@@ -6,9 +6,9 @@
 #include "getglut.h"
 #include "camera.h"
 
-namespace ep1 {
+namespace ep2 {
 
-void Camera::enframe (const Vec3D& target) {
+void Camera::enframe (const Vec4D& target) {
   sphere_pos_.set(0.0, 0.0, 2.0*view_.z());
   target_ = target;
 }

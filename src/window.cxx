@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include "getglut.h"
-#include "vec3D.h"
+#include "vec4D.h"
 #include "window.h"
 
 namespace ep2 {
@@ -45,7 +45,7 @@ void Window::init (double w, double h, double d) {
   glutKeyboardFunc(keyboard);
   camera_.set_view(w, h, d);
   init_opengl(camera_, ratio());
-  camera_.enframe(Vec3D());
+  camera_.enframe(Vec4D());
   if (!stop_)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
@@ -113,7 +113,7 @@ void Window::motion (int x, int y) {
   // Get the current window.
   Ptr win = current_window();
   // Calculate mouse motion.
-  Vec3D movement(
+  Vec4D movement(
     x - win->mouse_pos_.first,
     -(y - win->mouse_pos_.second)
   );
@@ -169,7 +169,7 @@ void Window::timer_func (int value) {
   // Update all objects.
   Scenes::iterator it;
   for (it = win->scenes_.begin(); it != win->scenes_.end(); ++it)
-    (*it)->update();
+    it->updatetasks();
   // Prepare for next update, if needed.
   if (win->stop_ == 0)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);

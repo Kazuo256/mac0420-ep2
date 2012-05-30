@@ -7,8 +7,8 @@ namespace ep2 {
 /// Initializes the program.
 /** @param argc Frist parameter from main.
  ** @param argv Second parameter from main.
- ** First arguments are for GLUT. The first non-GLUT argument should be the name
- ** of the input file from where the force field will be read. */
+ ** First arguments are for GLUT. The first non-GLUT argument should be the ones
+ ** specified in the README files. */
 void init (int argc, char **argv);
 
 /// Runs the program.

@@ -1,16 +1,17 @@
 
-#ifndef EP1_WINDOW_H_
-#define EP1_WINDOW_H_
+#ifndef EP2_WINDOW_H_
+#define EP2_WINDOW_H_
 
 #include <string>
 #include <vector>
 #include <utility>
 #include <tr1/unordered_map>
 #include <tr1/memory>
+#include <tr1/functional>
 
-#include "object.h"
 #include "camera.h"
 #include "window.h"
+#include "scene.h"
 
 #define WIN_REFRESH 16 /* more or less 60 fps */
 #define MILI 1e-3

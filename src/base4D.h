@@ -59,7 +59,7 @@ class Base4D {
     /** @param x The new x-coordinate of the vector.
      ** @param y The new y-coordinate of the vector.
      ** @param z The new z-coordinate of the vector. */
-    void set (double x, double y, double z, double a) {
+    void set (double x, double y, double z, double a = 1.0) {
       x_ = x; y_ = y; z_ = z; a_ = a;
     }
     /// Checks if two vectors are the same.
