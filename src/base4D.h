@@ -85,7 +85,7 @@ class Base4D {
     Base4D vec_ceil () const;
     /// Dumps vector's information.
     void dump() const;
-    private:
+  protected:
     union {
       struct { double x_, y_, z_, a_; };
       struct { double val_[4]; };

@@ -22,8 +22,11 @@ class Vec4D : public Base4D {
      **            coordinates. */
     Vec4D (const double val[4]) :
       Base4D(val[0], val[1], val[2], 0.0) {}
+    /// Downcast constructor.
+    Vec4D (const Base4D& base) :
+      Base4D(base) { a_ = 0.0; }
     /// Unary minus.
-    Vec4D operator - () const;
+    using Base4D::operator-;
     /// Addition.
     Vec4D operator + (const Vec4D& rhs) const;
     /// In-place addition.
@@ -72,16 +75,7 @@ class Vec4D : public Base4D {
      ** @return Vec4D Corresponding rotation vector in the yaw-pitch-woll
      **               format. */
     static Vec4D dir (const Vec4D& v, const Vec4D& up = Vec4D::Y()); 
-  private:
-    union {
-      struct { double x_, y_, z_, a_; };
-      struct { double val_[4]; };
-    };
 };
-
-inline Vec4D Vec4D::operator - () const {
-  return Vec4D(-x_, -y_, -z_);
-}
 
 inline Vec4D Vec4D::operator + (const Vec4D& rhs) const {
   return Vec4D(x_ + rhs.x_, y_ + rhs.y_, z_ + rhs.z_);
