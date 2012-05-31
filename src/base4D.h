@@ -85,6 +85,18 @@ class Base4D {
     Base4D vec_ceil () const;
     /// Dumps vector's information.
     void dump() const;
+    /// Canonical x-axis.
+    /** @return Base4D The (1,0,0,0) vector. */
+    static Base4D X () { return Base4D(1.0, 0.0, 0.0, 0.0); }
+    /// Canonical y-axis.
+    /** @return Base4D The (0,1,0,0) vector. */
+    static Base4D Y () { return Base4D(0.0, 1.0, 0.0, 0.0); }
+    /// Canonical z-axis.
+    /** @return Base4D The (0,0,1,0) vector. */
+    static Base4D Z () { return Base4D(0.0, 0.0, 1.0, 0.0); }
+    /// Canonical w-axis.
+    /** @return Base4D The (0,0,0,1) vector. */
+    static Base4D W () { return Base4D(0.0, 0.0, 0.0, 1.0); }
   protected:
     union {
       struct { double x_, y_, z_, a_; };

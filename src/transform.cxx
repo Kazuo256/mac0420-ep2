@@ -5,10 +5,10 @@
 
 namespace ep2 {
 
-Transform::Matrix::Matrix (const Vec4D& xaxis,
-                           const Vec4D& yaxis,
-                           const Vec4D& zaxis,
-                           const Vec4D& origin) {
+Transform::Matrix::Matrix (const Base4D& xaxis,
+                           const Base4D& yaxis,
+                           const Base4D& zaxis,
+                           const Base4D& origin) {
   columns[0] = xaxis;
   columns[1] = yaxis;
   columns[2] = zaxis;
@@ -24,16 +24,16 @@ void Transform::set_position (const Point4D& position) {
 }
 
 void Transform::translate (const Vec4D& translation) {
-  matrix_[3] += translation;
+  matrix_[3] = Point4D(matrix_[3]) + translation;
 }
 
 void Transform::composition (const Matrix& matrix) {
     Matrix comp;
     for (int i = 0; i < 4; i++) {
-      comp[i] = (matrix[0]*matrix_[i].x())+
-                (matrix[1]*matrix_[i].y())+
-                (matrix[2]*matrix_[i].z())+
-                (matrix[3]*matrix_[i].a());
+      comp[i] = (Vec4D(matrix[0])*matrix_[i].x())+
+                (Vec4D(matrix[1])*matrix_[i].y())+
+                (Vec4D(matrix[2])*matrix_[i].z())+
+                (Vec4D(matrix[3])*matrix_[i].a());
     }
     matrix_ = comp;
 }
