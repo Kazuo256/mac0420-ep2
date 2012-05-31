@@ -22,16 +22,21 @@ class Scene {
     static Ptr create() {
       return Ptr(new Scene); 
     }
-    
+    /// Add a new task to this scene.
     void pushtask (const Task& task);
+    /// Update all tasks of this scene.
     void updatetasks ();
+    /// Return the root of this scene.
     Root& root () { return root_; }
   private:
+    /// The root of the transforms Tree.
     Root  root_;
+    /// Vector of tasks.
     Tasks tasks_;
-
+     
     explicit Scene () {}
 };
+
 
 } //namespace ep2
 

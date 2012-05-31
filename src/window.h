@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <stack>
 #include <tr1/unordered_map>
 #include <tr1/memory>
 #include <tr1/functional>
@@ -26,7 +27,7 @@ class Window {
     /// Keyboard event handler.
     typedef std::tr1::function<void (int, int)> KeyEvent;
     /// Scene vector.
-    typedef std::vector<Scene>                  Scenes;
+    typedef std::stack<Scene>                   SceneStack;
     /// Initializes the window.
     /** Even if created, a window is only displayed if it has been initialized
      ** before. */
@@ -45,8 +46,14 @@ class Window {
     void register_keyevent (unsigned char key, KeyEvent event);
     /// Defines the initial window size.
     static void init_size(int w, int h);
+    /// Get the current scene
+    Scene currentscene () { return scenestack_.top(); }
+    /// Pop the head of the scene stack.
+    void popscene () { scenestack_.pop(); }
     /// Add a new scene to the actual window
     void pushscene (const Scene& scene);
+    /// Update the current Scene
+    void update ();
     /// Creates a new window object.
     /** @param caption - The window's caption. */
     static Ptr create (const std::string& caption) {
@@ -66,7 +73,7 @@ class Window {
     // The window's camera into the scene.
     Camera                    camera_;
     // Scenes vector
-    Scenes                    scenes_;
+    SceneStack                scenestack_;
     // Indicates which mouse buttons are currently pressed.
     bool                      buttons_[3];
     // Last mouse position detected.
