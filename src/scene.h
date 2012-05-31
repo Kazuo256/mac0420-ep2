@@ -30,7 +30,7 @@ class Scene {
     Root  root_;
     Tasks tasks_;
 
-    explicit Scene (const Transform& root) :
+    explicit Scene (const Transform& root = Transform()) :
       root_(root) {}
 };
 

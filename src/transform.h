@@ -15,14 +15,16 @@ class Transform {
     ///
     /** Matriz em notação de coluna. Matrix[0] é a primeira 
      ** coluna da matriz */ 
-    struct Matrix {
-      Vec4D columns[4];
-      Matrix (const Vec4D& xaxis = Vec4D::X(),
-              const Vec4D& yaxis = Vec4D::Y(),
-              const Vec4D& zaxis = Vec4D::Z(),
-              const Vec4D& origin = Vec4D::A());
-      Vec4D& operator [] (unsigned i) { return columns[i]; }
-      Vec4D operator [] (unsigned i) const { return columns[i]; }
+    class Matrix {
+      public:
+        Matrix (const Vec4D& xaxis = Vec4D::X(),
+                const Vec4D& yaxis = Vec4D::Y(),
+                const Vec4D& zaxis = Vec4D::Z(),
+                const Vec4D& origin = Vec4D::A());
+        Vec4D& operator [] (unsigned i) { return columns[i]; }
+        Vec4D operator [] (unsigned i) const { return columns[i]; }
+      private:
+        Vec4D columns[4];
     };
     typedef std::vector<obj::Model> ModelVec;
     typedef std::vector<Transform>  TransformVec;
