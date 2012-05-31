@@ -65,10 +65,6 @@ void Window::set_current () {
     glutSetWindow(id_);
 }
 
-void Window::register_keyevent (unsigned char key, Window::KeyEvent event) {
-  key_events_[key] = event;
-}
-
 Window::Ptr Window::current_window () {
   return windows_[glutGetWindow()];
 }
@@ -133,8 +129,7 @@ void Window::keyboard (unsigned char key, int x, int y) {
   // Get the current window.
   Ptr win = current_window();
   // Activate registered event.
-  if (win->key_events_[key])
-    win->key_events_[key] (x,y);
+  win->currentscene()->check_keyevent(key, x, y);
   // Default events.
   switch (key) {
     case '\t':
