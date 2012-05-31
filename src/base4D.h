@@ -13,10 +13,10 @@ class Base4D {
      ** @param y Y-coordinate
      ** @param z Z-coordinate
      ** @param a Alpha-coordinate */
-    explicit Base4D ( double x, 
-                      double y, 
-                      double z,
-                      double a) :
+    explicit Base4D ( double x = 0.0, 
+                      double y = 0.0, 
+                      double z = 0.0,
+                      double a = 1.0) :
       x_(x), y_(y), z_(z), a_(a) {} 
     /// Construcor.
     /** @param val Arrays of double with size 3 containing the vector
