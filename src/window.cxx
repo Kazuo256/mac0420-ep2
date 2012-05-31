@@ -18,17 +18,15 @@ unordered_map<int, Window::Ptr> Window::windows_;
 
 Window::Window (const std::string& caption) :
   width_ (init_width_), height_(init_height_),
-  stop_(1),
-  mouse_pos_(0, 0),
-  key_events_(256, KeyEvent()) {
+  mouse_pos_(0, 0) {
   id_ = glutCreateWindow(caption.c_str());
   buttons_[0] = buttons_[1] = buttons_[2] = false;
 }
 
 /// Initializes OpenGL stuff.
-static void init_opengl (Camera& camera, double ratio) {
+static void init_opengl (double ratio) {
   glEnable(GL_DEPTH_TEST);
-  camera.set_perspective(ratio);
+  //camera.set_perspective(ratio);
   glMatrixMode(GL_MODELVIEW);
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glLineWidth(2.0);
@@ -36,17 +34,16 @@ static void init_opengl (Camera& camera, double ratio) {
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void Window::init (double w, double h, double d) {
+void Window::init () {
   glutSetWindow(id_);
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
   glutMouseFunc(mouse);
   glutMotionFunc(motion);
   glutKeyboardFunc(keyboard);
-  camera_.set_view(w, h, d);
-  init_opengl(camera_, ratio());
-  //camera_.enframe(Vec4D());
-  if (!stop_)
+  //camera_.set_view(w, h, d);
+  init_opengl(ratio());
+  if (currentscene()->active())
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
 
@@ -76,7 +73,7 @@ void Window::reshape(int w, int h) {
   win->width_ = w;
   win->height_ = h;
   // Adjust camera and viewport.
-  win->camera_.adjust(win->ratio());
+  win->currentscene()->camera().adjust(win->ratio());
   glViewport((GLint)0, (GLint)0, (GLint)w, (GLint)h); 
   // Display changes.
   glutPostRedisplay();
@@ -133,11 +130,11 @@ void Window::keyboard (unsigned char key, int x, int y) {
   // Default events.
   switch (key) {
     case '\t':
-      win->camera_.toggle_projection(win->ratio());
+      win->currentscene()->camera().toggle_projection(win->ratio());
       break;
     case 'q':
-      win->stop_ = !win->stop_;
-      if (win->stop_ == 0)  glutTimerFunc(WIN_REFRESH, timer_func, 1);
+      //win->stop_ = !win->stop_;
+      //if (win->stop_ == 0)  glutTimerFunc(WIN_REFRESH, timer_func, 1);
       break;
     default: break;
   }
@@ -153,7 +150,7 @@ void Window::display () {
   glLoadIdentity();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   // Place the camera.
-  win->camera_.place();
+    win->currentscene()->camera().place();
   // Swap buffers to display result.
   glutSwapBuffers();
 }
@@ -164,7 +161,7 @@ void Window::timer_func (int value) {
   // Update all objects.
   win->currentscene()->updatetasks();
   // Prepare for next update, if needed.
-  if (win->stop_ == 0)
+  //if (win->stop_ == 0)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
   // Display changes.
   glutPostRedisplay(); 

@@ -27,6 +27,10 @@ class Scene {
     /// Gets a reference to the window's camera.
     /** @return Camera& A reference to the window's camera. */
     Camera& camera() { return camera_; }
+    ///
+    bool active () const { return active_; }
+    ///
+    void set_active (bool active = true) { active_ = active; }
     /// Add a new task to this scene.
     void pushtask (const Task& task);
     /// Update all tasks of this scene.
@@ -43,17 +47,19 @@ class Scene {
     }
   private:
     /// The root of the transforms Tree.
-    Root    root_;
+    Root                  root_;
     /// Vector of tasks.
-    Tasks   tasks_;
+    Tasks                 tasks_;
     // The scene's camera.
-    Camera  camera_;
+    Camera                camera_;
     // Whether the scene is active or not.
-    bool    active_;
+    bool                  active_;
     // Keyboard events.
-    std::vector<KeyEvent>     key_events_;
+    std::vector<KeyEvent> key_events_;
      
-    explicit Scene () {}
+    explicit Scene () :
+      active_(true),
+      key_events_(256, KeyEvent()) {}
 };
 
 

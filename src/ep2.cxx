@@ -24,8 +24,8 @@ void init (int argc, char **argv) {
   // Create a window.
   win = Window::create("MAC0420 - EP2");
   // TODO: check correct view size.
-  win->init(10, 10, 10);
   win->pushscene(make_scene());
+  win->init();
 }
 
 void run () {
@@ -37,6 +37,7 @@ static Scene::Ptr make_scene () {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
     return Scene::Ptr();
+  scene->camera().set_view(10.0, 10.0, 10.0);
   return scene;
 }
 
