@@ -57,7 +57,7 @@ void Window::init_size (int w, int h) {
 }
 
 void Window::pushscene (const Scene& scene) {
-  scenes_.push_back(scene);
+  scenestack_.push(scene);
 }
 
 void Window::set_current () {
@@ -167,9 +167,7 @@ void Window::timer_func (int value) {
   // Get the current window.
   Ptr win = current_window();
   // Update all objects.
-  Scenes::iterator it;
-  for (it = win->scenes_.begin(); it != win->scenes_.end(); ++it)
-    it->updatetasks();
+  win->currentscene().updatetasks();
   // Prepare for next update, if needed.
   if (win->stop_ == 0)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
