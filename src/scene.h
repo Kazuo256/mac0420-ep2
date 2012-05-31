@@ -19,8 +19,8 @@ class Scene {
     /// Root that point ot the tree of the scene.
     typedef Transform                   Root;
     
-    static Ptr create(const Transform& root) {
-      return Ptr(new Scene(root)); 
+    static Ptr create() {
+      return Ptr(new Scene); 
     }
     
     void pushtask (const Task& task);
@@ -30,8 +30,7 @@ class Scene {
     Root  root_;
     Tasks tasks_;
 
-    explicit Scene (const Transform& root = Transform()) :
-      root_(root) {}
+    explicit Scene () {}
 };
 
 } //namespace ep2
