@@ -118,11 +118,11 @@ void Window::motion (int x, int y) {
     -(y - win->mouse_pos_.second)
   );
   // Left button -> rotate camera.
-  if (win->buttons_[0])
-    win->camera_.move(movement);
+  //if (win->buttons_[0])
+  //  win->camera_.move(movement);
   // Right button -> zoom camera.
-  else if (win->buttons_[2])
-    win->camera_.zoom(movement.y()*0.1);
+  //else if (win->buttons_[2])
+  //  win->camera_.zoom(movement.y()*0.1);
   // Record last mouse active position.
   win->mouse_pos_ = std::make_pair(x, y);
   // Display changes.

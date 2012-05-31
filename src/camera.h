@@ -3,6 +3,8 @@
 #define EP2_CAMERA_H_
 
 #include "vec4D.h"
+#include "point4D.h"
+#include "transform.h"
 
 namespace ep2 {
 
@@ -11,16 +13,13 @@ class Camera {
   public:
     /// Constructor.
     Camera () :
-      sphere_pos_(0.0, 0.0, 1.0),
       perspective_(false) {}
-    /// Sets the new camera's target.
+    /// Sets the new camera's position.
     /** @param target The new target.  */
-    void set_target (const Vec4D& target) { target_ = target; }
+    void set_position (const Point4D& position);
     /// Moves the camera around the target.
     /** @param delta Camera movement in sphere coordinates. */
-    void move (const Vec4D& delta) {
-      sphere_pos_ += Vec4D::X()*delta.x() + Vec4D::Y()*delta.y();
-    }
+    void move (const Vec4D& movement);
     /// Sets the camera's view volume.
     /** @param width  Volume's width.
      ** @param height Volume's height.
@@ -49,9 +48,8 @@ class Camera {
     /// Places the camera in the 3D scene.
     void place () const;
   private:
-    Vec4D view_;
-    Vec4D sphere_pos_;
-    Vec4D target_;
+    Base4D    view_;
+    Transform transform_;
     bool  perspective_;
 };
 

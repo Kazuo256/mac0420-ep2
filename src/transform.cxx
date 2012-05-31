@@ -15,6 +15,18 @@ Transform::Matrix::Matrix (const Vec4D& xaxis,
   columns[3] = origin;
 }
 
+void Transform::set_identity () {
+  matrix_ = Matrix();
+}
+
+void Transform::set_position (const Point4D& position) {
+  matrix_[3] = position-Point4D();
+}
+
+void Transform::translate (const Vec4D& translation) {
+  matrix_[3] += translation;
+}
+
 void Transform::composition (const Matrix& matrix) {
     Matrix comp;
     for (int i = 0; i < 4; i++) {

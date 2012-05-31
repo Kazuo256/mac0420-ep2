@@ -66,6 +66,8 @@ class Base4D {
     /** @param rhs Another vector.
      ** @return bool True if they are the same, false otherwise. */
     bool operator == (const Base4D& rhs) const;
+    /// Unary minus.
+    Base4D operator - () const;
     /// Calculates the length of this vector.
     /** @return double The length of this vector. */
     double length () const;
@@ -95,6 +97,10 @@ inline bool Base4D::operator == (const Base4D& rhs) const {
          y_ == rhs.y_ &&
          z_ == rhs.z_ &&
          a_ == rhs.a_;
+}
+
+inline Base4D Base4D::operator - () const {
+  return Base4D(-x_, -y_, -z_, -a_);
 }
 
 } //namespace ep2

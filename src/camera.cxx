@@ -8,13 +8,21 @@
 
 namespace ep2 {
 
+void Camera::set_position (const Point4D& position) {
+  transform_.set_position(position.operator-());
+}
+
+void Camera::move (const Vec4D& movement) {
+  transform_.translate(-movement);
+}
+
 void Camera::enframe (const Vec4D& target) {
-  sphere_pos_.set(0.0, 0.0, 2.0*view_.z());
-  target_ = target;
+  //sphere_pos_.set(0.0, 0.0, 2.0*view_.z());
+  //target_ = target;
 }
 
 void Camera::zoom (double d) {
-  sphere_pos_.set_z(sphere_pos_.z()*(1.0/pow(2.0, d)));
+  //sphere_pos_.set_z(sphere_pos_.z()*(1.0/pow(2.0, d)));
 }
 
 void Camera::set_ortho (double ratio) {
@@ -69,13 +77,13 @@ void Camera::adjust (double ratio) {
 
 void Camera::place () const {
   // Adjusts camera zoom.
-  glTranslated(0.0, 0.0, -sphere_pos_.z());
+  //glTranslated(0.0, 0.0, -sphere_pos_.z());
   // Signs here are kind of arbitrary. It depends on how you want the camera to
   // move.
-  glRotated(-sphere_pos_.y(), 1.0, 0.0, 0.0);
-  glRotated(sphere_pos_.x(), 0.0, 1.0, 0.0);
+  //glRotated(-sphere_pos_.y(), 1.0, 0.0, 0.0);
+  //glRotated(sphere_pos_.x(), 0.0, 1.0, 0.0);
   // Moves to the camera's target.
-  glTranslated(-target_.x(), -target_.y(), -target_.z());
+  //glTranslated(-target_.x(), -target_.y(), -target_.z());
 }
 
 } // namespace ep1

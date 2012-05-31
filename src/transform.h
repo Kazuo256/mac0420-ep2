@@ -3,6 +3,7 @@
 #define EP2_TRANSFORM_H_
 
 #include "vec4D.h"
+#include "point4D.h"
 #include "obj/model.h"
 
 #include <cstring>
@@ -30,6 +31,9 @@ class Transform {
     typedef std::vector<Transform>  TransformVec;
     Transform (const Matrix& matrix = Matrix()) :
       matrix_(matrix) {}
+    void set_identity ();
+    void set_position (const Point4D& position);
+    void translate (const Vec4D& translation);
     void composition (const Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
