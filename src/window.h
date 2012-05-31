@@ -27,7 +27,7 @@ class Window {
     /// Keyboard event handler.
     typedef std::tr1::function<void (int, int)> KeyEvent;
     /// Scene vector.
-    typedef std::stack<Scene>                   SceneStack;
+    typedef std::stack<Scene::Ptr>              SceneStack;
     /// Initializes the window.
     /** Even if created, a window is only displayed if it has been initialized
      ** before. */
@@ -47,11 +47,11 @@ class Window {
     /// Defines the initial window size.
     static void init_size(int w, int h);
     /// Get the current scene
-    Scene currentscene () { return scenestack_.top(); }
+    Scene::Ptr currentscene () { return scenestack_.top(); }
     /// Pop the head of the scene stack.
     void popscene () { scenestack_.pop(); }
     /// Add a new scene to the actual window
-    void pushscene (const Scene& scene);
+    void pushscene (const Scene::Ptr& scene);
     /// Update the current Scene
     void update ();
     /// Creates a new window object.

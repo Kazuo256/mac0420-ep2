@@ -1,11 +1,16 @@
 
-#include "ep2.h"
 #include "getglut.h"
+
+#include "ep2.h"
 #include "window.h"
+#include "scene.h"
 
 namespace ep2 {
 
 Window::Ptr win;
+
+static Scene::Ptr make_scene ();
+static bool load_models (Scene::Ptr scene);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -18,12 +23,25 @@ void init (int argc, char **argv) {
   Window::init_size(800, 600);
   // Create a window.
   win = Window::create("MAC0420 - EP2");
+  // TODO: check correct view size.
   win->init(10, 10, 10);
+  win->pushscene(make_scene());
 }
 
 void run () {
   // Leave it to GLUT.
   glutMainLoop();
+}
+
+static Scene::Ptr make_scene () {
+  Scene::Ptr scene = Scene::create();
+  if (!load_models(scene))
+    return Scene::Ptr();
+  return scene;
+}
+
+static bool load_models (Scene::Ptr scene) {
+  return true;
 }
 
 }

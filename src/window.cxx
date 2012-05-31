@@ -28,7 +28,7 @@ Window::Window (const std::string& caption) :
 /// Initializes OpenGL stuff.
 static void init_opengl (Camera& camera, double ratio) {
   glEnable(GL_DEPTH_TEST);
-  camera.set_ortho(ratio);
+  camera.set_perspective(ratio);
   glMatrixMode(GL_MODELVIEW);
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glLineWidth(2.0);
@@ -56,7 +56,7 @@ void Window::init_size (int w, int h) {
   glutInitWindowSize(w, h);
 }
 
-void Window::pushscene (const Scene& scene) {
+void Window::pushscene (const Scene::Ptr& scene) {
   scenestack_.push(scene);
 }
 
@@ -167,7 +167,7 @@ void Window::timer_func (int value) {
   // Get the current window.
   Ptr win = current_window();
   // Update all objects.
-  win->currentscene().updatetasks();
+  win->currentscene()->updatetasks();
   // Prepare for next update, if needed.
   if (win->stop_ == 0)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
