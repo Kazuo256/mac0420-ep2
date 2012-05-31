@@ -27,9 +27,6 @@ class Camera {
     void set_view (double width, double height, double depth) {
       view_ = Vec4D(width, height, depth);
     }
-    /// Enframes the camera to the given target.
-    /** @param target The reference target to enframe the camera. */
-    void enframe (const Vec4D& target);
     /// Zooms the camera by the given variation.
     /** @param delta The zoom variation. */
     void zoom (double delta);
@@ -49,6 +46,7 @@ class Camera {
     void place () const;
   private:
     Base4D    view_;
+    double    zoom_;
     Transform transform_;
     bool  perspective_;
 };

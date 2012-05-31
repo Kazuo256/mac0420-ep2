@@ -45,7 +45,7 @@ void Window::init (double w, double h, double d) {
   glutKeyboardFunc(keyboard);
   camera_.set_view(w, h, d);
   init_opengl(camera_, ratio());
-  camera_.enframe(Vec4D());
+  //camera_.enframe(Vec4D());
   if (!stop_)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }

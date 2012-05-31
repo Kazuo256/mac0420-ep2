@@ -16,13 +16,8 @@ void Camera::move (const Vec4D& movement) {
   transform_.translate(-movement);
 }
 
-void Camera::enframe (const Vec4D& target) {
-  //sphere_pos_.set(0.0, 0.0, 2.0*view_.z());
-  //target_ = target;
-}
-
 void Camera::zoom (double d) {
-  //sphere_pos_.set_z(sphere_pos_.z()*(1.0/pow(2.0, d)));
+  zoom_ *= (1.0/pow(2.0, d));
 }
 
 void Camera::set_ortho (double ratio) {
@@ -77,7 +72,7 @@ void Camera::adjust (double ratio) {
 
 void Camera::place () const {
   // Adjusts camera zoom.
-  //glTranslated(0.0, 0.0, -sphere_pos_.z());
+  glTranslated(0.0, 0.0, -zoom_);
   // Signs here are kind of arbitrary. It depends on how you want the camera to
   // move.
   //glRotated(-sphere_pos_.y(), 1.0, 0.0, 0.0);
