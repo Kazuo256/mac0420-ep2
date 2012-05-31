@@ -9,7 +9,7 @@
 namespace ep2 {
 
 void Camera::set_position (const Point4D& position) {
-  transform_.set_position(position.operator-());
+  transform_.set_position(-position);
 }
 
 void Camera::move (const Vec4D& movement) {

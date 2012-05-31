@@ -24,7 +24,7 @@ class Vec4D : public Base4D {
       Base4D(val[0], val[1], val[2], 0.0) {}
     /// Downcast constructor.
     Vec4D (const Base4D& base) :
-      Base4D(base) { a_ = 0.0; }
+      Base4D(base) { w_ = 0.0; }
     /// Unary minus.
     using Base4D::operator-;
     /// Addition.
@@ -48,18 +48,6 @@ class Vec4D : public Base4D {
     /// Makes a normalized version of this vector.
     /** @return Vec4D Normalized version of this vector. */
     Vec4D normalized () const;
-    /// X-axis canonical vector.
-    /** @return Vec4D The (1,0,0) vector. */
-    static Vec4D X () { return Vec4D(1.0, 0.0, 0.0); }
-    /// Y-axis canonical vector.
-    /** @return Vec4D The (0,1,0) vector. */
-    static Vec4D Y () { return Vec4D(0.0, 1.0, 0.0); }
-    /// Z-axis canonical vector.
-    /** @return Vec4D The (0,0,1) vector. */
-    static Vec4D Z () { return Vec4D(0.0, 0.0, 1.0); }
-    /// Z-axis canonical vector.
-    /** @return Vec4D The (0,0,1) vector. */
-    static Vec4D A () { return Vec4D(0.0, 0.0, 1.0); }
     /// Makes a vector in the yaw-pitch-roll format.
     /** These can be used to define an ep1::Object transformation.
      ** @param yaw Yaw angle.

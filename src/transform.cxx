@@ -30,10 +30,10 @@ void Transform::translate (const Vec4D& translation) {
 void Transform::composition (const Matrix& matrix) {
     Matrix comp;
     for (int i = 0; i < 4; i++) {
-      comp[i] = (Vec4D(matrix[0])*matrix_[i].x())+
-                (Vec4D(matrix[1])*matrix_[i].y())+
-                (Vec4D(matrix[2])*matrix_[i].z())+
-                (Vec4D(matrix[3])*matrix_[i].a());
+      comp[i] = (matrix[0]*matrix_[i].x())+
+                (matrix[1]*matrix_[i].y())+
+                (matrix[2]*matrix_[i].z())+
+                (matrix[3]*matrix_[i].w());
     }
     matrix_ = comp;
 }

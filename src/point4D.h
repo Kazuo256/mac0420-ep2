@@ -24,7 +24,7 @@ class Point4D : public Base4D {
       Base4D(val[0], val[1], val[2], 1.0) {}
     /// Downcast constructor.
     Point4D (const Base4D& base) :
-      Base4D(base) { a_ == 0.0 ? (a_ = 1.0): 0; }
+      Base4D(base) { w_ == 0.0 ? (w_ = 1.0): 0; }
     /// Unary minus.
     Point4D operator - () const;
     /// Subtraction.
