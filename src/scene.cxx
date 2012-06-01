@@ -20,11 +20,11 @@ void drawaux (Transform tform) {
   tform.matrix().makematrix(matrix);
   glMultMatrixd(matrix);
   
-  Transform::ModelVec::iterator it;
+  Transform::ModelVec::const_iterator it;
   for (it = tform.modelvec().begin(); it < tform.modelvec().end(); it++ )
     it->render();
   
-  Transform::TransformVec::iterator ite;
+  Transform::TransformVec::const_iterator ite;
   for (ite = tform.transformvec().begin(); ite < tform.transformvec().end(); ite++ )
     drawaux((*ite));
 
@@ -32,6 +32,8 @@ void drawaux (Transform tform) {
 }
 
 void Scene::draw () {
+  //glTranslated(0.0, 0.0, -5.0);
+  //glutSolidCube(1.0);
   drawaux(root_);
 }
 

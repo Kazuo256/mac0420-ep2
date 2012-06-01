@@ -26,7 +26,7 @@ class Model {
     }
     /// Renders this object.
     /** Must be called whithin a glut display callback. */
-    void render ();
+    void render () const;
   private:
     // Visibility flag.
     bool      visible_;

@@ -15,7 +15,7 @@ Transform::Matrix::Matrix (const Base4D& xaxis,
   columns[3] = origin;
 }
 
-void Transform::Matrix::makematrix (double* matrix) {
+void Transform::Matrix::makematrix (double* matrix) const {
 
   for ( int j = 0; j < 16; j+=4 ) 
     for ( int i = 0; i < 4; i++ )
@@ -52,6 +52,13 @@ void Transform::pushmodel (const obj::Model& model) {
 
 void Transform::pushtransform (const Transform& transform) {
   transformvec_.push_back(transform);
+}
+
+void Transform::dump () const {
+  matrix_[0].dump();
+  matrix_[1].dump();
+  matrix_[2].dump();
+  matrix_[3].dump();
 }
 
 Transform Transform::identity () {

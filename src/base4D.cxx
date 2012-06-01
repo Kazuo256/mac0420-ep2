@@ -43,7 +43,7 @@ Base4D Base4D::vec_ceil () const {
 }
 
 void Base4D::dump () const {
-  printf("<%f, %f, %f>\n", x_, y_, z_);
+  printf("<%f, %f, %f, %f>\n", x_, y_, z_, w_);
 }
 
 } //namespace ep2

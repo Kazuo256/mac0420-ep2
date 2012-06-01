@@ -72,13 +72,17 @@ void Camera::adjust (double ratio) {
 
 void Camera::place () const {
   // Adjusts camera zoom.
-  glTranslated(0.0, 0.0, -zoom_);
+  //glTranslated(0.0, 0.0, -zoom_);
   // Signs here are kind of arbitrary. It depends on how you want the camera to
   // move.
   //glRotated(-sphere_pos_.y(), 1.0, 0.0, 0.0);
   //glRotated(sphere_pos_.x(), 0.0, 1.0, 0.0);
   // Moves to the camera's target.
-  //glTranslated(-target_.x(), -target_.y(), -target_.z());
+  glTranslated(
+    transform_.matrix()[3].x(),
+    transform_.matrix()[3].y(),
+    transform_.matrix()[3].z()
+  );
 }
 
 } // namespace ep1

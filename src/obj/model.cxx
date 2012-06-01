@@ -7,8 +7,8 @@
 namespace ep2 {
 namespace obj {
 
-void Model::render () {
-  if (!visible_) return;
+void Model::render () const {
+  if (visible_ == false) return;
   renderer_();
 }
 
