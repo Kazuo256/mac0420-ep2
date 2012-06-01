@@ -56,15 +56,15 @@ static Scene::Ptr make_scene () {
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
-  scene->camera().move(Vec4D(0.0, 0.0, 5.0));
+  scene->camera().move(Vec4D(0.0, 3.0, 7.0));
   scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
   //scene->camera().zoom(-5);
   return scene;
 }
 
 static bool load_models (Scene::Ptr scene) {
-  //Model model = Loader().load("wall00-00");
-  Model model = Model(Model::Renderer(draw_cube));
+  Model model = Loader().load("wall00-00");
+  //Model model = Model(Model::Renderer(draw_cube));
   scene->root().pushmodel(model);
   scene->root().dump();
   return true;
