@@ -13,10 +13,26 @@ void Scene::updatetasks () {
     it->update();
 }
 
-void Scene::draw () {
+void drawaux (Transform tform) {
+  double* matrix[16];
+
   glPushMatrix();
-  //glMultMatrixd(root_.matrix()());
+  tform.matrix().makematrix(matrix);
+  glMultMatrixd((*matrix));
+  
+  Transform::ModelVec::iterator it;
+  for (it = tform.modelvec().begin(); it < tform.modelvec().end(); it++ )
+    it->render();
+  
+  Transform::TransformVec::iterator ite;
+  for (ite = tform.transformvec().begin(); ite < tform.transformvec().end(); ite++ )
+    drawaux((*ite));
+
   glPopMatrix();
+}
+
+void Scene::draw () {
+  drawaux(root_);
 }
 
 void Scene::register_keyevent (unsigned char key, KeyEvent event) {

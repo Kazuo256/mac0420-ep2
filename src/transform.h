@@ -23,6 +23,7 @@ class Transform {
                 const Base4D& yaxis = Base4D::Y(),
                 const Base4D& zaxis = Base4D::Z(),
                 const Base4D& origin = Base4D::W());
+        void makematrix (double** matrix); 
         Base4D& operator [] (unsigned i) { return columns[i]; }
         Base4D operator [] (unsigned i) const { return columns[i]; }
       private:
@@ -39,6 +40,8 @@ class Transform {
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
     Matrix matrix() { return matrix_; }  
+    ModelVec modelvec () { return modelvec_; }
+    TransformVec transformvec () { return transformvec_; }
     static Transform identity ();
   private:
     Matrix        matrix_;
