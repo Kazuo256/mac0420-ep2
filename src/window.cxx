@@ -159,6 +159,8 @@ void Window::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   // Place the camera.
   win->camera_.place();
+  // Call the draw from the current scene.
+  win->current_scene().draw();
   // Swap buffers to display result.
   glutSwapBuffers();
 }
@@ -167,7 +169,7 @@ void Window::timer_func (int value) {
   // Get the current window.
   Ptr win = current_window();
   // Update all objects.
-  win->currentscene().updatetasks();
+  win->current_scene().updatetasks();
   // Prepare for next update, if needed.
   if (win->stop_ == 0)
     glutTimerFunc(WIN_REFRESH, timer_func, 1);

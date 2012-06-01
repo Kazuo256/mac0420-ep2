@@ -23,6 +23,7 @@ class Transform {
                 const Vec4D& origin = Vec4D::A());
         Vec4D& operator [] (unsigned i) { return columns[i]; }
         Vec4D operator [] (unsigned i) const { return columns[i]; }
+        double* operator () ();
       private:
         Vec4D columns[4];
     };
@@ -33,6 +34,7 @@ class Transform {
     void composition (const Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
+    Matrix matrix() { return matrix_; }  
     static Transform identity ();
   private:
     Matrix        matrix_;

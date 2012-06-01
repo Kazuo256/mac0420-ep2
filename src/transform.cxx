@@ -15,6 +15,20 @@ Transform::Matrix::Matrix (const Vec4D& xaxis,
   columns[3] = origin;
 }
 
+double* Transform::Matrix::operator() () {
+  double* matrix;
+  int i, j;
+
+  for (i = 0, j = 0; i < 4; i++, j+=4) {
+    matrix[j] = columns[i].x();
+    matrix[j+1] = columns[i].y();
+    matrix[j+2] = columns[i].z();
+    matrix[j+3] = columns[i].a();
+  }
+
+  return matrix;
+}
+
 void Transform::composition (const Matrix& matrix) {
     Matrix comp;
     for (int i = 0; i < 4; i++) {

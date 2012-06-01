@@ -4,6 +4,7 @@
 
 #include "task.h"
 #include "transform.h"
+#include "getglut.h"
 
 #include <vector>
 #include <tr1/memory>
@@ -26,6 +27,8 @@ class Scene {
     void pushtask (const Task& task);
     /// Update all tasks of this scene.
     void updatetasks ();
+    /// Draw the models.
+    void draw ();
     /// Return the root of this scene.
     Root& root () { return root_; }
   private:
@@ -33,7 +36,9 @@ class Scene {
     Root  root_;
     /// Vector of tasks.
     Tasks tasks_;
-     
+    
+    void recursivedraw (Transform transform);
+
     explicit Scene () {}
 };
 

@@ -47,13 +47,11 @@ class Window {
     /// Defines the initial window size.
     static void init_size(int w, int h);
     /// Get the current scene
-    Scene currentscene () { return scenestack_.top(); }
+    Scene current_scene () { return scenestack_.top(); }
     /// Pop the head of the scene stack.
     void popscene () { scenestack_.pop(); }
     /// Add a new scene to the actual window
     void pushscene (const Scene& scene);
-    /// Update the current Scene
-    void update ();
     /// Creates a new window object.
     /** @param caption - The window's caption. */
     static Ptr create (const std::string& caption) {

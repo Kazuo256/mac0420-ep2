@@ -14,4 +14,21 @@ void Scene::updatetasks () {
     it->update();
 }
 
+void Scene::draw () {
+  glPushMatrix();
+  glMultMatrixd(root_.matrix()());
+  recursivedraw(root_);
+  glPopMatrix();
+}
+
+void Scene::recursivedraw (Transform transform) {
+  glPushMatrix();
+  glMultMatrixd(transform.matrix()());
+
+  ModelVec::iterator it
+
+  for (it = transform.
+
+}
+
 } //namespace ep2
