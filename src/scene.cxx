@@ -15,8 +15,7 @@ void Scene::updatetasks () {
 
 void Scene::draw () {
   glPushMatrix();
-  glMultMatrixd(root_.matrix()());
-  recursivedraw(root_);
+  //glMultMatrixd(root_.matrix()());
   glPopMatrix();
 }
 

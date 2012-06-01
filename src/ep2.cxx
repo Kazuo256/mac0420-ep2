@@ -37,7 +37,7 @@ static Scene::Ptr make_scene () {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
     return Scene::Ptr();
-  scene->camera().set_perspective();
+  scene->camera().set_perspective(1.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
   return scene;
 }

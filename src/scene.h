@@ -23,8 +23,6 @@ class Scene {
     typedef Transform                           Root;
     /// Keyboard event handler.
     typedef std::tr1::function<void (int, int)> KeyEvent;
-    /// Return the root of this scene.
-    Root& root () { return root_; }
     /// Gets a reference to the window's camera.
     /** @return Camera& A reference to the window's camera. */
     Camera& camera() { return camera_; }

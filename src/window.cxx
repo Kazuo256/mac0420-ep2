@@ -60,11 +60,6 @@ void Window::pushscene (const Scene::Ptr& scene) {
   if (currentscene() && currentscene()->active())
     glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
-void Window::pushscene (const Scene::Ptr& scene) {
-  scenestack_.push(scene);
-  if (currentscene() && currentscene()->active())
-    glutTimerFunc(WIN_REFRESH, timer_func, 1);
-}
 
 void Window::set_current () {
   if (glutGetWindow() != id_)
@@ -134,7 +129,7 @@ void Window::display () {
   // Place the camera.
   win->currentscene()->camera().place();
   // Call the draw from the current scene.
-  win->current_scene().draw();
+  win->currentscene()->draw();
   // Swap buffers to display result.
   glutSwapBuffers();
 }
