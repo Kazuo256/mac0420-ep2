@@ -9,7 +9,6 @@ void Scene::pushtask (const Task& task) {
 
 void Scene::updatetasks () {
   Tasks::iterator it;
-
   for (it=tasks_.begin(); it < tasks_.end(); it++)
     it->update();
 }

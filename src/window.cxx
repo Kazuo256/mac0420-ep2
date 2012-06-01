@@ -41,8 +41,6 @@ void Window::init () {
   glutKeyboardFunc(keyboard);
   //camera_.set_view(w, h, d);
   init_opengl(ratio());
-  if (currentscene()->active())
-    glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
 
 void Window::init_size (int w, int h) {
@@ -51,8 +49,21 @@ void Window::init_size (int w, int h) {
   glutInitWindowSize(w, h);
 }
 
+void Window::popscene () {
+  scenestack_.pop();
+  if (currentscene() && currentscene()->active())
+    glutTimerFunc(WIN_REFRESH, timer_func, 1);
+}
+
 void Window::pushscene (const Scene::Ptr& scene) {
   scenestack_.push(scene);
+  if (currentscene() && currentscene()->active())
+    glutTimerFunc(WIN_REFRESH, timer_func, 1);
+}
+void Window::pushscene (const Scene::Ptr& scene) {
+  scenestack_.push(scene);
+  if (currentscene() && currentscene()->active())
+    glutTimerFunc(WIN_REFRESH, timer_func, 1);
 }
 
 void Window::set_current () {

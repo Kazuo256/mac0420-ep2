@@ -39,8 +39,6 @@ class Window {
     static void init_size(int w, int h);
     /// Get the current scene
     Scene::Ptr currentscene () { return scenestack_.top(); }
-    /// Pop the head of the scene stack.
-    void popscene () { scenestack_.pop(); }
     /// Add a new scene to the actual window
     void pushscene (const Scene::Ptr& scene);
     /// Update the current Scene
@@ -69,6 +67,8 @@ class Window {
     static std::tr1::unordered_map<int, Ptr> windows_;
     /// Constructor. See Window::create.
     explicit Window (const std::string& caption);
+    /// Pop the head of the scene stack.
+    void popscene ();
     /// Retrieves the current window.
     /** @return Window::Ptr Smart-pointer to the current window. */
     static Ptr current_window();
