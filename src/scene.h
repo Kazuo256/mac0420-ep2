@@ -56,7 +56,6 @@ class Scene {
     bool                  active_;
     // Keyboard events.
     std::vector<KeyEvent> key_events_;
-     
     explicit Scene () :
       active_(true),
       key_events_(256, KeyEvent()) {}

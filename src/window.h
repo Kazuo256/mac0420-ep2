@@ -12,6 +12,7 @@
 
 #include "window.h"
 #include "scene.h"
+#include "control/mouse.h"
 
 #define WIN_REFRESH 16 /* more or less 60 fps */
 #define MILI 1e-3
@@ -58,12 +59,10 @@ class Window {
     int                       width_;
     // Viewport height.
     int                       height_;
+    // Mouse
+    control::Mouse            mouse_;
     // Scenes vector
     SceneStack                scenestack_;
-    // Indicates which mouse buttons are currently pressed.
-    bool                      buttons_[3];
-    // Last mouse position detected.
-    std::pair<int,int>        mouse_pos_;
     // Initial window size.
     static int                init_width_, init_height_;
     // Reference base for all created windows.

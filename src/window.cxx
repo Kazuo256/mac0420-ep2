@@ -17,10 +17,8 @@ int                             Window::init_width_,
 unordered_map<int, Window::Ptr> Window::windows_;
 
 Window::Window (const std::string& caption) :
-  width_ (init_width_), height_(init_height_),
-  mouse_pos_(0, 0) {
+  width_ (init_width_), height_(init_height_) {
   id_ = glutCreateWindow(caption.c_str());
-  buttons_[0] = buttons_[1] = buttons_[2] = false;
 }
 
 /// Initializes OpenGL stuff.
@@ -83,21 +81,8 @@ void Window::mouse (int btn, int state, int x, int y) {
   // Get the current window. 
   Ptr win = current_window();
   // Update mouse buttons' state.
-  bool new_state = (state == GLUT_DOWN);
-  switch (btn) {
-    case GLUT_LEFT_BUTTON:
-      win->buttons_[0] = new_state;
-      break;
-    case GLUT_MIDDLE_BUTTON:
-      win->buttons_[1] = new_state;
-      break;
-    case GLUT_RIGHT_BUTTON:
-      win->buttons_[2] = new_state;
-      break;
-    default: break;
-  }
-  // Record last mouse active position.
-  win->mouse_pos_ = std::make_pair(x, y);
+  win->mouse_.change_state(btn, state);
+  win->mouse_.move(x, y);
   // Display changes.
   glutPostRedisplay();
 }
@@ -106,18 +91,7 @@ void Window::motion (int x, int y) {
   // Get the current window.
   Ptr win = current_window();
   // Calculate mouse motion.
-  Vec4D movement(
-    x - win->mouse_pos_.first,
-    -(y - win->mouse_pos_.second)
-  );
-  // Left button -> rotate camera.
-  //if (win->buttons_[0])
-  //  win->camera_.move(movement);
-  // Right button -> zoom camera.
-  //else if (win->buttons_[2])
-  //  win->camera_.zoom(movement.y()*0.1);
-  // Record last mouse active position.
-  win->mouse_pos_ = std::make_pair(x, y);
+  win->mouse_.move(x, y);
   // Display changes.
   glutPostRedisplay();
 }
@@ -129,9 +103,6 @@ void Window::keyboard (unsigned char key, int x, int y) {
   win->currentscene()->check_keyevent(key, x, y);
   // Default events.
   switch (key) {
-    case '\t':
-      win->currentscene()->camera().toggle_projection(win->ratio());
-      break;
     case 'q':
       //win->stop_ = !win->stop_;
       //if (win->stop_ == 0)  glutTimerFunc(WIN_REFRESH, timer_func, 1);
