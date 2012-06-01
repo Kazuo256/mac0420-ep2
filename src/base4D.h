@@ -17,12 +17,12 @@ class Base4D {
                       double y = 0.0, 
                       double z = 0.0,
                       double a = 1.0) :
-      x_(x), y_(y), z_(z), a_(a) {} 
+      x_(x), y_(y), z_(z), w_(a) {} 
     /// Construcor.
     /** @param val Arrays of double with size 3 containing the vector
      **            coordinates. */
     Base4D (const double val[4]) :
-      x_(val[0]), y_(val[1]), z_(val[2]), a_(val[3]) {}
+      x_(val[0]), y_(val[1]), z_(val[2]), w_(val[3]) {}
     /// Gets the x-coordinate of the vector.
     /** @return double The x-coordinate of the vector. */
     double x () const { return x_; }
@@ -34,7 +34,7 @@ class Base4D {
     double z () const { return z_; }
     /// Gets the alpha-coordinate of the vector.
     /** @return double The z-coordinate of the vector. */
-    double a () const { return a_; }
+    double w () const { return w_; }
     /// Gets a read-only array of the vector's coordinates.
     /** @return const double[4] Read-only array of the vector's coordinates. */
     const double* val () const { return val_; }
@@ -49,7 +49,7 @@ class Base4D {
     void set_z (double z) { z_ = z; }
     /// Sets the alpha-coordinate of the vector.
     /** @param a The new alpha-coordinate of the vector. */
-    void set_a (double a) { a_ = a; }
+    void set_a (double w) { w_ = w; }
     /// Sets the alpha-coordinate of the vector.
     /** @param z The new z-coordinate of the vector. */
     void set_val (const double val[4]) {
@@ -59,13 +59,21 @@ class Base4D {
     /** @param x The new x-coordinate of the vector.
      ** @param y The new y-coordinate of the vector.
      ** @param z The new z-coordinate of the vector. */
-    void set (double x, double y, double z, double a = 1.0) {
-      x_ = x; y_ = y; z_ = z; a_ = a;
+    void set (double x, double y, double z, double w = 1.0) {
+      x_ = x; y_ = y; z_ = z; w_ = w;
     }
     /// Checks if two vectors are the same.
     /** @param rhs Another vector.
      ** @return bool True if they are the same, false otherwise. */
     bool operator == (const Base4D& rhs) const;
+    /// Unary minus.
+    Base4D operator - () const;
+    /// Addition.
+    Base4D operator + (const Base4D& rhs) const;
+    /// Product with scalar.
+    Base4D operator * (double rhs) const;
+    /// Division by scalar.
+    Base4D operator / (double rhs) const;
     /// Calculates the length of this vector.
     /** @return double The length of this vector. */
     double length () const;
@@ -83,9 +91,21 @@ class Base4D {
     Base4D vec_ceil () const;
     /// Dumps vector's information.
     void dump() const;
-    private:
+    /// Canonical x-axis.
+    /** @return Base4D The (1,0,0,0) vector. */
+    static Base4D X () { return Base4D(1.0, 0.0, 0.0, 0.0); }
+    /// Canonical y-axis.
+    /** @return Base4D The (0,1,0,0) vector. */
+    static Base4D Y () { return Base4D(0.0, 1.0, 0.0, 0.0); }
+    /// Canonical z-axis.
+    /** @return Base4D The (0,0,1,0) vector. */
+    static Base4D Z () { return Base4D(0.0, 0.0, 1.0, 0.0); }
+    /// Canonical w-axis.
+    /** @return Base4D The (0,0,0,1) vector. */
+    static Base4D W () { return Base4D(0.0, 0.0, 0.0, 1.0); }
+  protected:
     union {
-      struct { double x_, y_, z_, a_; };
+      struct { double x_, y_, z_, w_; };
       struct { double val_[4]; };
     };
 };
@@ -94,7 +114,23 @@ inline bool Base4D::operator == (const Base4D& rhs) const {
   return x_ == rhs.x_ &&
          y_ == rhs.y_ &&
          z_ == rhs.z_ &&
-         a_ == rhs.a_;
+         w_ == rhs.w_;
+}
+
+inline Base4D Base4D::operator - () const {
+  return Base4D(-x_, -y_, -z_, -w_);
+}
+
+inline Base4D Base4D::operator + (const Base4D& rhs) const {
+  return Base4D(x_ + rhs.x_, y_ + rhs.y_, z_ + rhs.z_, w_ + rhs.w_);
+}
+
+inline Base4D Base4D::operator * (double rhs) const {
+  return Base4D(x_*rhs, y_*rhs, z_*rhs, w_*rhs);
+}
+
+inline Base4D Base4D::operator / (double rhs) const {
+  return Base4D(x_/rhs, y_/rhs, z_/rhs, w_/rhs);
 }
 
 } //namespace ep2

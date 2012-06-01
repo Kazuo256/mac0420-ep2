@@ -9,7 +9,6 @@ void Scene::pushtask (const Task& task) {
 
 void Scene::updatetasks () {
   Tasks::iterator it;
-
   for (it=tasks_.begin(); it < tasks_.end(); it++)
     it->update();
 }
@@ -21,14 +20,13 @@ void Scene::draw () {
   glPopMatrix();
 }
 
-void Scene::recursivedraw (Transform transform) {
-  glPushMatrix();
-  glMultMatrixd(transform.matrix()());
+void Scene::register_keyevent (unsigned char key, KeyEvent event) {
+  key_events_[key] = event;
+}
 
-  ModelVec::iterator it
-
-  for (it = transform.
-
+void Scene::check_keyevent (unsigned char key, int x, int y) {
+  if (key_events_[key])
+    key_events_[key] (x,y);
 }
 
 } //namespace ep2

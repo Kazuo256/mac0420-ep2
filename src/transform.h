@@ -2,7 +2,9 @@
 #ifndef EP2_TRANSFORM_H_
 #define EP2_TRANSFORM_H_
 
+#include "base4D.h"
 #include "vec4D.h"
+#include "point4D.h"
 #include "obj/model.h"
 
 #include <cstring>
@@ -17,20 +19,22 @@ class Transform {
      ** coluna da matriz */ 
     class Matrix {
       public:
-        Matrix (const Vec4D& xaxis = Vec4D::X(),
-                const Vec4D& yaxis = Vec4D::Y(),
-                const Vec4D& zaxis = Vec4D::Z(),
-                const Vec4D& origin = Vec4D::A());
-        Vec4D& operator [] (unsigned i) { return columns[i]; }
-        Vec4D operator [] (unsigned i) const { return columns[i]; }
-        double* operator () ();
+        Matrix (const Base4D& xaxis = Base4D::X(),
+                const Base4D& yaxis = Base4D::Y(),
+                const Base4D& zaxis = Base4D::Z(),
+                const Base4D& origin = Base4D::W());
+        Base4D& operator [] (unsigned i) { return columns[i]; }
+        Base4D operator [] (unsigned i) const { return columns[i]; }
       private:
-        Vec4D columns[4];
+        Base4D columns[4];
     };
     typedef std::vector<obj::Model> ModelVec;
     typedef std::vector<Transform>  TransformVec;
     Transform (const Matrix& matrix = Matrix()) :
       matrix_(matrix) {}
+    void set_identity ();
+    void set_position (const Point4D& position);
+    void translate (const Vec4D& translation);
     void composition (const Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);

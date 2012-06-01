@@ -22,6 +22,11 @@ class Point4D : public Base4D {
      **            coordinates. */
     Point4D (const double val[3]) :
       Base4D(val[0], val[1], val[2], 1.0) {}
+    /// Downcast constructor.
+    Point4D (const Base4D& base) :
+      Base4D(base) { w_ == 0.0 ? (w_ = 1.0): 0; }
+    /// Unary minus.
+    Point4D operator - () const;
     /// Subtraction.
     Vec4D operator - (const Point4D& rhs) const;
     /// Product with scalar.
@@ -29,6 +34,10 @@ class Point4D : public Base4D {
     /// Add a vector to the point.
     Point4D operator + (const Vec4D rhs) const;
 };
+
+inline Point4D Point4D::operator - () const {
+  return Point4D(-x_, -y_, -z_);
+}
 
 } //namespace ep2
 

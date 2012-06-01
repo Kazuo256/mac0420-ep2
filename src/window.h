@@ -10,9 +10,9 @@
 #include <tr1/memory>
 #include <tr1/functional>
 
-#include "camera.h"
 #include "window.h"
 #include "scene.h"
+#include "control/mouse.h"
 
 #define WIN_REFRESH 16 /* more or less 60 fps */
 #define MILI 1e-3
@@ -24,30 +24,21 @@ class Window {
   public:
     /// Reference-counting smart pointer for window objects.
     typedef std::tr1::shared_ptr<Window>        Ptr;
-    /// Keyboard event handler.
-    typedef std::tr1::function<void (int, int)> KeyEvent;
     /// Scene vector.
-    typedef std::stack<Scene>                   SceneStack;
+    typedef std::stack<Scene::Ptr>              SceneStack;
     /// Initializes the window.
     /** Even if created, a window is only displayed if it has been initialized
      ** before. */
-    void init (double w, double h, double d);
+    void init ();
     /// Gets the window's resolution ratio.
     /** @return double The window's resolution ratio. */
     double ratio () const { return 1.0*width_/height_; }
-    /// Gets a reference to the window's camera.
-    /** @return Camera& A reference to the window's camera. */
-    Camera& camera() { return camera_; }
     /// Sets this window as the current one, if needed.
     void set_current ();
-    /// Adds an event to a keyboard input.
-    /** @param key    Character key associated to the given event.
-     ** @param event  The event that happens when the given key is pressed. */
-    void register_keyevent (unsigned char key, KeyEvent event);
     /// Defines the initial window size.
     static void init_size(int w, int h);
     /// Get the current scene
-    Scene current_scene () { return scenestack_.top(); }
+    Scene::Ptr currentscene () { return scenestack_.top(); }
     /// Pop the head of the scene stack.
     void popscene () { scenestack_.pop(); }
     /// Add a new scene to the actual window
@@ -66,24 +57,18 @@ class Window {
     int                       width_;
     // Viewport height.
     int                       height_;
-    // Stop the timerfunc
-    int                       stop_;
-    // The window's camera into the scene.
-    Camera                    camera_;
+    // Mouse
+    control::Mouse            mouse_;
     // Scenes vector
     SceneStack                scenestack_;
-    // Indicates which mouse buttons are currently pressed.
-    bool                      buttons_[3];
-    // Last mouse position detected.
-    std::pair<int,int>        mouse_pos_;
-    // Keyboard events.
-    std::vector<KeyEvent>     key_events_;
     // Initial window size.
     static int                init_width_, init_height_;
     // Reference base for all created windows.
     static std::tr1::unordered_map<int, Ptr> windows_;
     /// Constructor. See Window::create.
     explicit Window (const std::string& caption);
+    /// Pop the head of the scene stack.
+    void popscene ();
     /// Retrieves the current window.
     /** @return Window::Ptr Smart-pointer to the current window. */
     static Ptr current_window();

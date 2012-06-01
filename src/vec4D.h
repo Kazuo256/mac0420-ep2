@@ -22,8 +22,11 @@ class Vec4D : public Base4D {
      **            coordinates. */
     Vec4D (const double val[4]) :
       Base4D(val[0], val[1], val[2], 0.0) {}
+    /// Downcast constructor.
+    Vec4D (const Base4D& base) :
+      Base4D(base) { w_ = 0.0; }
     /// Unary minus.
-    Vec4D operator - () const;
+    using Base4D::operator-;
     /// Addition.
     Vec4D operator + (const Vec4D& rhs) const;
     /// In-place addition.
@@ -45,18 +48,6 @@ class Vec4D : public Base4D {
     /// Makes a normalized version of this vector.
     /** @return Vec4D Normalized version of this vector. */
     Vec4D normalized () const;
-    /// X-axis canonical vector.
-    /** @return Vec4D The (1,0,0) vector. */
-    static Vec4D X () { return Vec4D(1.0, 0.0, 0.0); }
-    /// Y-axis canonical vector.
-    /** @return Vec4D The (0,1,0) vector. */
-    static Vec4D Y () { return Vec4D(0.0, 1.0, 0.0); }
-    /// Z-axis canonical vector.
-    /** @return Vec4D The (0,0,1) vector. */
-    static Vec4D Z () { return Vec4D(0.0, 0.0, 1.0); }
-    /// Z-axis canonical vector.
-    /** @return Vec4D The (0,0,1) vector. */
-    static Vec4D A () { return Vec4D(0.0, 0.0, 1.0); }
     /// Makes a vector in the yaw-pitch-roll format.
     /** These can be used to define an ep1::Object transformation.
      ** @param yaw Yaw angle.
@@ -72,16 +63,7 @@ class Vec4D : public Base4D {
      ** @return Vec4D Corresponding rotation vector in the yaw-pitch-woll
      **               format. */
     static Vec4D dir (const Vec4D& v, const Vec4D& up = Vec4D::Y()); 
-  private:
-    union {
-      struct { double x_, y_, z_, a_; };
-      struct { double val_[4]; };
-    };
 };
-
-inline Vec4D Vec4D::operator - () const {
-  return Vec4D(-x_, -y_, -z_);
-}
 
 inline Vec4D Vec4D::operator + (const Vec4D& rhs) const {
   return Vec4D(x_ + rhs.x_, y_ + rhs.y_, z_ + rhs.z_);
