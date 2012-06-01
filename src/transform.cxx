@@ -15,11 +15,11 @@ Transform::Matrix::Matrix (const Base4D& xaxis,
   columns[3] = origin;
 }
 
-void Transform::Matrix::makematrix (double** matrix) {
+void Transform::Matrix::makematrix (double* matrix) {
 
   for ( int j = 0; j < 16; j+=4 ) 
     for ( int i = 0; i < 4; i++ )
-      (*matrix[j+i]) = (*this)[j/4].val()[i];
+      matrix[j+i] = (*this)[j/4].val()[i];
 
 }
 

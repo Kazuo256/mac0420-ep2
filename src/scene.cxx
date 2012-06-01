@@ -14,11 +14,11 @@ void Scene::updatetasks () {
 }
 
 void drawaux (Transform tform) {
-  double* matrix[16];
+  double matrix[16];
 
   glPushMatrix();
   tform.matrix().makematrix(matrix);
-  glMultMatrixd((*matrix));
+  glMultMatrixd(matrix);
   
   Transform::ModelVec::iterator it;
   for (it = tform.modelvec().begin(); it < tform.modelvec().end(); it++ )
