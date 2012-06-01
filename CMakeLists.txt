@@ -37,5 +37,5 @@ add_executable (ep2
   src/control/mouse.cxx
 )
 target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
-set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O2 -g")
+set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O0 -g")
 message(${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})

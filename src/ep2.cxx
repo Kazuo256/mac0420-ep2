@@ -4,8 +4,14 @@
 #include "ep2.h"
 #include "window.h"
 #include "scene.h"
+#include "transform.h"
+#include "obj/model.h"
+#include "obj/loader.h"
 
 namespace ep2 {
+
+using obj::Model;
+using obj::Loader;
 
 Window::Ptr win;
 
@@ -37,12 +43,14 @@ static Scene::Ptr make_scene () {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
     return Scene::Ptr();
-  scene->camera().set_perspective(1.0);
+  scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
   return scene;
 }
 
 static bool load_models (Scene::Ptr scene) {
+  Model model = Loader().load("wall00-00");
+  scene->root().pushmodel(model);
   return true;
 }
 
