@@ -50,6 +50,12 @@ void Transform::translate (const Vec4D& translation) {
   matrix_[3] = Point4D(matrix_[3]) + translation;
 }
 
+void Transform::scale (const Vec4D& scale) {
+  matrix_[0] = matrix_[0]*scale.x();
+  matrix_[1] = matrix_[1]*scale.y();
+  matrix_[2] = matrix_[2]*scale.x();
+}
+
 void Transform::rotatez (const double ang) {
   Matrix rotate;
   double rad = -ang*PI/180;

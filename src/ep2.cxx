@@ -53,7 +53,7 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveW (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(0.0, 0.0, -0.1));
+  scene->camera().move(Vec4D(0.0, 0.0, -1));
 }
 
 
@@ -62,11 +62,53 @@ static void moveA (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(0.0, 0.0, 0.1));
+  scene->camera().move(Vec4D(0.0, 0.0, 1));
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
+}
+
+void skybox () {
+  glBegin(GL_QUADS);
+    // FRENTE
+    glColor3d(1.0, 0.0, 0.0);
+    glVertex3d(1.0, 0.0, 1.0);
+    glVertex3d(1.0, 1.0, 1.0);
+    glVertex3d(0.0, 1.0, 1.0);
+    glVertex3d(0.0, 0.0, 1.0);
+    //ATRAS
+    glColor3d(0.0, 1.0, 0.0);
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(0.0, 1.0, 0.0);
+    glVertex3d(1.0, 1.0, 0.0);
+    glVertex3d(1.0, 0.0, 0.0);
+    //TOPO
+    glColor3d(1.0, 1.0, 0.0);   
+    glVertex3d(0.0, 1.0, 0.0);
+    glVertex3d(1.0, 1.0, 0.0);
+    glVertex3d(1.0, 1.0, 1.0);
+    glVertex3d(0.0, 1.0, 1.0);
+    //BAIXO
+    glColor3d(1.0, 0.0, 1.0);   
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(0.0, 0.0, 1.0);
+    glVertex3d(1.0, 0.0, 1.0);
+    glVertex3d(1.0, 0.0, 0.0);
+    //ESQ
+    glColor3d(0.0, 1.0, 1.0);   
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(0.0, 1.0, 0.0);
+    glVertex3d(0.0, 1.0, 1.0);
+    glVertex3d(0.0, 0.0, 1.0);
+    //DIR
+    glColor3d(0.0, 0.0, 1.0);   
+    glVertex3d(1.0, 0.0, 0.0);
+    glVertex3d(1.0, 0.0, 1.0);
+    glVertex3d(1.0, 1.0, 1.0);
+    glVertex3d(1.0, 1.0, 0.0);
+  glEnd();
+  glColor3d(1.0, 1.0, 1.0);
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
@@ -87,14 +129,19 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 }
 
 static bool load_models (Scene::Ptr scene) {
-  for (int i = 0; i < 10; i++) {
+  /*for (int i = 0; i < 10; i++) {
     Model model = Loader().load("wall00-00");
     Transform tform;
     tform.translate(Vec4D(2.0*i, 0.0, 0.0));
     tform.pushmodel(model);
     scene->root().pushtransform(tform);
-  }
-  //Model model = Model(Model::Renderer(draw_cube));
+  }*/
+  Model chao = Model(Model::Renderer(skybox));
+  Transform trans;
+  trans.pushmodel(chao);
+  trans.scale(Vec4D(10.0, 10.0, 10.0));
+  trans.translate(Vec4D(-5.0 -5.0, -5.0));
+  scene->root().pushtransform(trans);
   scene->root().dump();
   return true;
 }
