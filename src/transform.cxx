@@ -3,6 +3,7 @@
 #include "transform.h"
 #include "obj/model.h"
 #include <cmath>
+#include <cstdio>
 
 #define PI 3.14159265
 
@@ -26,6 +27,17 @@ void Transform::Matrix::makematrix (double* matrix) const {
 
 }
 
+Transform::Matrix Transform::Matrix::operator * (Matrix& rhs) {
+  Matrix comp;
+  for (int i = 0; i < 4; i++) {
+      comp[i] = (columns[0]*rhs[i].x())+
+                (columns[1]*rhs[i].y())+
+                (columns[2]*rhs[i].z())+
+                (columns[3]*rhs[i].w());
+  }
+  return comp;
+}
+
 void Transform::set_identity () {
   matrix_ = Matrix();
 }
@@ -40,33 +52,32 @@ void Transform::translate (const Vec4D& translation) {
 
 void Transform::rotatez (const double ang) {
   Matrix rotate;
-  double rad = ang*PI/180;
+  double rad = -ang*PI/180;
   rotate[0] = Base4D(cos(rad), sin(rad), 0.0, 0.0);
   rotate[1] = Base4D(-sin(rad), cos(rad), 0.0, 0.0);
   rotate[2] = Base4D(0.0, 0.0, 1.0, 0.0);
   rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
-  this->composition(rotate);
+ 
+  matrix_ = rotate * matrix_;
 }
 
 void Transform::rotatey (const double ang) {
   Matrix rotate;
-  double rad = ang*PI/180;
+  double rad = -ang*PI/180;
   rotate[0] = Base4D(cos(rad), 0.0, sin(rad), 0.0);
   rotate[1] = Base4D(0.0, 1.0, 0.0, 0.0);
   rotate[2] = Base4D(-sin(rad), 0.0, cos(rad), 0.0);
   rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
-  this->composition(rotate);
+
+  puts("ANTES");
+  dump();
+  puts("DEPOIS");
+  matrix_ = rotate * matrix_;
+  dump();
 }
 
-void Transform::composition (const Matrix& matrix) {
-    Matrix comp;
-    for (int i = 0; i < 4; i++) {
-      comp[i] = (matrix[0]*matrix_[i].x())+
-                (matrix[1]*matrix_[i].y())+
-                (matrix[2]*matrix_[i].z())+
-                (matrix[3]*matrix_[i].w());
-    }
-    matrix_ = comp;
+void Transform::composition (Matrix& matrix) {
+  matrix_ = matrix * matrix_;
 }
 
 void Transform::pushmodel (const obj::Model& model) {

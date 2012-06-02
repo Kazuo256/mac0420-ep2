@@ -58,7 +58,7 @@ static void moveW (Scene::Ptr scene, int x, int y) {
 
 
 static void moveA (Scene::Ptr scene, int x, int y) {
-  scene->camera().rotatey(-2.0);
+  scene->camera().rotatey(-15.0);
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
@@ -66,7 +66,7 @@ static void moveS (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
-  scene->camera().rotatey(2.0);
+  scene->camera().rotatey(15.0);
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
@@ -87,9 +87,14 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 }
 
 static bool load_models (Scene::Ptr scene) {
-  Model model = Loader().load("wall00-00");
+  for (int i = 0; i < 10; i++) {
+    Model model = Loader().load("wall00-00");
+    Transform tform;
+    tform.translate(Vec4D(2.0*i, 0.0, 0.0));
+    tform.pushmodel(model);
+    scene->root().pushtransform(tform);
+  }
   //Model model = Model(Model::Renderer(draw_cube));
-  scene->root().pushmodel(model);
   scene->root().dump();
   return true;
 }

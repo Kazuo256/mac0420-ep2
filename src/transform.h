@@ -26,6 +26,7 @@ class Transform {
         void makematrix (double* matrix) const; 
         Base4D& operator [] (unsigned i) { return columns[i]; }
         Base4D operator [] (unsigned i) const { return columns[i]; }
+        Matrix operator * (Matrix& rhs);
       private:
         Base4D columns[4];
     };
@@ -38,7 +39,7 @@ class Transform {
     void translate (const Vec4D& translation);
     void rotatez (const double ang);
     void rotatey (const double ang);
-    void composition (const Matrix& matrix);
+    void composition (Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
     const Matrix& matrix() const { return matrix_; }  
