@@ -71,37 +71,37 @@ static void moveD (Scene::Ptr scene, int x, int y) {
 
 void skybox () {
   glBegin(GL_QUADS);
-    // FRENTE
+    // FRENTE = RED
     glColor3d(1.0, 0.0, 0.0);
     glVertex3d(1.0, 0.0, 1.0);
     glVertex3d(1.0, 1.0, 1.0);
     glVertex3d(0.0, 1.0, 1.0);
     glVertex3d(0.0, 0.0, 1.0);
-    //ATRAS
+    //ATRAS = GREEN
     glColor3d(0.0, 1.0, 0.0);
     glVertex3d(0.0, 0.0, 0.0);
     glVertex3d(0.0, 1.0, 0.0);
     glVertex3d(1.0, 1.0, 0.0);
     glVertex3d(1.0, 0.0, 0.0);
-    //TOPO
+    //TOPO = AMA
     glColor3d(1.0, 1.0, 0.0);   
     glVertex3d(0.0, 1.0, 0.0);
     glVertex3d(1.0, 1.0, 0.0);
     glVertex3d(1.0, 1.0, 1.0);
     glVertex3d(0.0, 1.0, 1.0);
-    //BAIXO
+    //BAIXO = ROXO
     glColor3d(1.0, 0.0, 1.0);   
     glVertex3d(0.0, 0.0, 0.0);
     glVertex3d(0.0, 0.0, 1.0);
     glVertex3d(1.0, 0.0, 1.0);
     glVertex3d(1.0, 0.0, 0.0);
-    //ESQ
+    //ESQ = PISCINA
     glColor3d(0.0, 1.0, 1.0);   
     glVertex3d(0.0, 0.0, 0.0);
     glVertex3d(0.0, 1.0, 0.0);
     glVertex3d(0.0, 1.0, 1.0);
     glVertex3d(0.0, 0.0, 1.0);
-    //DIR
+    //DIR = BLUE
     glColor3d(0.0, 0.0, 1.0);   
     glVertex3d(1.0, 0.0, 0.0);
     glVertex3d(1.0, 0.0, 1.0);
@@ -129,18 +129,17 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 }
 
 static bool load_models (Scene::Ptr scene) {
-  /*for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 10; i++) {
     Model model = Loader().load("wall00-00");
     Transform tform;
     tform.translate(Vec4D(2.0*i, 0.0, 0.0));
     tform.pushmodel(model);
     scene->root().pushtransform(tform);
-  }*/
+  }
   Model chao = Model(Model::Renderer(skybox));
   Transform trans;
   trans.pushmodel(chao);
-  trans.scale(Vec4D(10.0, 10.0, 10.0));
-  trans.translate(Vec4D(-5.0 -5.0, -5.0));
+  trans.scale(Vec4D(100.0, 100.0, 100.0));
   scene->root().pushtransform(trans);
   scene->root().dump();
   return true;
