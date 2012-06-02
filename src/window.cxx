@@ -146,5 +146,5 @@ void Window::timer_func (int value) {
   glutPostRedisplay(); 
 }
 
-} // namespace ep1
+} // namespace ep2
 

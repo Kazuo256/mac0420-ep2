@@ -13,6 +13,7 @@
 namespace ep2 {
 
 using std::tr1::bind;
+using namespace std::tr1::placeholders;
 using obj::Model;
 using obj::Loader;
 
@@ -50,6 +51,10 @@ static void camera_task (Scene::Ptr scene) {
   scene->camera().move(Vec4D(0.1, 0.0, 0.0));
 }
 
+static void pausescene (Scene::Ptr scene, int x, int y) {
+  scene->toggle_active();
+}
+
 static Scene::Ptr make_scene () {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
@@ -58,6 +63,7 @@ static Scene::Ptr make_scene () {
   scene->camera().set_view(10.0, 10.0, 10.0);
   scene->camera().move(Vec4D(0.0, 3.0, 7.0));
   scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
+  scene->register_keyevent('q',Scene::KeyEvent(bind(pausescene, scene, _1, _2))); 
   //scene->camera().zoom(-5);
   return scene;
 }
