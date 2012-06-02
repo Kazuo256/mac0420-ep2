@@ -2,6 +2,9 @@
 
 #include "transform.h"
 #include "obj/model.h"
+#include <cmath>
+
+#define PI 3.14159265
 
 namespace ep2 {
 
@@ -33,6 +36,26 @@ void Transform::set_position (const Point4D& position) {
 
 void Transform::translate (const Vec4D& translation) {
   matrix_[3] = Point4D(matrix_[3]) + translation;
+}
+
+void Transform::rotatez (const double ang) {
+  Matrix rotate;
+  double rad = ang*PI/180;
+  rotate[0] = Base4D(cos(rad), sin(rad), 0.0, 0.0);
+  rotate[1] = Base4D(-sin(rad), cos(rad), 0.0, 0.0);
+  rotate[2] = Base4D(0.0, 0.0, 1.0, 0.0);
+  rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
+  this->composition(rotate);
+}
+
+void Transform::rotatey (const double ang) {
+  Matrix rotate;
+  double rad = ang*PI/180;
+  rotate[0] = Base4D(cos(rad), 0.0, sin(rad), 0.0);
+  rotate[1] = Base4D(0.0, 1.0, 0.0, 0.0);
+  rotate[2] = Base4D(-sin(rad), 0.0, cos(rad), 0.0);
+  rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
+  this->composition(rotate);
 }
 
 void Transform::composition (const Matrix& matrix) {

@@ -48,7 +48,7 @@ class Scene {
     void check_keyevent (unsigned char key, int x, int y);
     /// Creates a new scene object.
     static Ptr create() {
-      return Ptr(new Scene); 
+      return Ptr(new Scene()); 
     }
   private:
     /// The root of the transforms Tree.

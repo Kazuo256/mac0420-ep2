@@ -19,7 +19,7 @@ using obj::Loader;
 
 Window::Ptr win;
 
-static Scene::Ptr make_scene ();
+static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene);
 
 void init (int argc, char **argv) {
@@ -34,7 +34,7 @@ void init (int argc, char **argv) {
   // Create a window.
   win = Window::create("MAC0420 - EP2");
   // TODO: check correct view size.
-  win->pushscene(make_scene());
+  win->pushscene(make_scene(win));
   win->init();
 }
 
@@ -43,12 +43,9 @@ void run () {
   glutMainLoop();
 }
 
-static void draw_cube () {
-  glutSolidCube(1.0);
-}
-
-static void camera_task (Scene::Ptr scene) {
-  scene->camera().move(Vec4D(0.1, 0.0, 0.0));
+static void camera_task (Scene::Ptr scene, Window::Ptr win) {
+  double x = win->mouse().movement().x();
+  scene->camera().rotatey(x);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -61,7 +58,7 @@ static void moveW (Scene::Ptr scene, int x, int y) {
 
 
 static void moveA (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(-0.1, 0.0, 0.0));
+  scene->camera().rotatey(-2.0);
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
@@ -69,17 +66,17 @@ static void moveS (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(0.1, 0.0, 0.0));
+  scene->camera().rotatey(2.0);
 }
 
-static Scene::Ptr make_scene () {
+static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
   scene->camera().move(Vec4D(0.0, 3.0, 7.0));
-  //scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
+  //scene->pushtask(Task(Task::Updater(bind(camera_task, scene, win))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));

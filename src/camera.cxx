@@ -20,6 +20,14 @@ void Camera::zoom (double d) {
   zoom_ *= (1.0/pow(2.0, d));
 }
 
+void Camera::rotatez (double ang) {
+  transform_.rotatez(ang);
+}
+
+void Camera::rotatey (double ang) {
+  transform_.rotatey(ang);
+}
+
 void Camera::set_ortho (double ratio) {
   perspective_ = false;
   glMatrixMode(GL_PROJECTION);
