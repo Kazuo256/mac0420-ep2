@@ -55,6 +55,23 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
   scene->toggle_active();
 }
 
+static void moveW (Scene::Ptr scene, int x, int y) {
+  scene->camera().move(Vec4D(0.0, 0.0, -0.1));
+}
+
+
+static void moveA (Scene::Ptr scene, int x, int y) {
+  scene->camera().move(Vec4D(-0.1, 0.0, 0.0));
+}
+
+static void moveS (Scene::Ptr scene, int x, int y) {
+  scene->camera().move(Vec4D(0.0, 0.0, 0.1));
+}
+
+static void moveD (Scene::Ptr scene, int x, int y) {
+  scene->camera().move(Vec4D(0.1, 0.0, 0.0));
+}
+
 static Scene::Ptr make_scene () {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene))
@@ -62,8 +79,12 @@ static Scene::Ptr make_scene () {
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
   scene->camera().move(Vec4D(0.0, 3.0, 7.0));
-  scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
-  scene->register_keyevent('q',Scene::KeyEvent(bind(pausescene, scene, _1, _2))); 
+  //scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
+  scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
+  scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
+  scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));
+  scene->register_keyevent('s', Scene::KeyEvent(bind(moveS, scene, _1, _2)));
+  scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
   //scene->camera().zoom(-5);
   return scene;
 }
