@@ -30,6 +30,8 @@ class Scene {
     bool active () const { return active_; }
     ///
     void set_active (bool active = true) { active_ = active; }
+    ///
+    void toggle_active () { active_ = !active_; }
     /// Add a new task to this scene.
     void pushtask (const Task& task);
     /// Update all tasks of this scene.
@@ -46,7 +48,7 @@ class Scene {
     void check_keyevent (unsigned char key, int x, int y);
     /// Creates a new scene object.
     static Ptr create() {
-      return Ptr(new Scene); 
+      return Ptr(new Scene()); 
     }
   private:
     /// The root of the transforms Tree.

@@ -36,7 +36,7 @@ void Window::init () {
   glutSetWindow(id_);
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
-  glutMouseFunc(mouse);
+  glutMouseFunc(mousefunc);
   glutMotionFunc(motion);
   glutKeyboardFunc(keyboard);
   //camera_.set_view(w, h, d);
@@ -83,7 +83,7 @@ void Window::reshape(int w, int h) {
   glutPostRedisplay();
 }
 
-void Window::mouse (int btn, int state, int x, int y) {
+void Window::mousefunc (int btn, int state, int x, int y) {
   // Get the current window. 
   Ptr win = current_window();
   // Update mouse buttons' state.
@@ -146,5 +146,5 @@ void Window::timer_func (int value) {
   glutPostRedisplay(); 
 }
 
-} // namespace ep1
+} // namespace ep2
 

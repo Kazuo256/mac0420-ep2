@@ -30,6 +30,10 @@ class Camera {
     /// Zooms the camera by the given variation.
     /** @param delta The zoom variation. */
     void zoom (double delta);
+    ///
+    void rotatez (double ang);
+    ///
+    void rotatey (double ang);
     /// Sets an orthogonal projection with the given ratio.
     /** @param ratio Orthogonal projection aspect ratio. */
     void set_ortho (double ratio);

@@ -33,6 +33,8 @@ class Window {
     /// Gets the window's resolution ratio.
     /** @return double The window's resolution ratio. */
     double ratio () const { return 1.0*width_/height_; }
+    ///
+    const control::Mouse& mouse () const { return mouse_; }
     /// Sets this window as the current one, if needed.
     void set_current ();
     /// Defines the initial window size.
@@ -81,7 +83,7 @@ class Window {
     static void reshape (int w, int h);
     /// Mouse callback function for all windows.
     /** Signature follows GLUT specifications. */
-    static void mouse (int btn, int state, int x, int y);
+    static void mousefunc (int btn, int state, int x, int y);
     /// Mouse motion callback function for all windows.
     /** Signature follows GLUT specifications. */
     static void motion (int x, int y);
