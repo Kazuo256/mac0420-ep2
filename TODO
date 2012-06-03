@@ -1,12 +1,15 @@
 
 == Coisas gerais do enunciado:
 
+Carregar cenário (a partir de um arquivo)
 Colisão com paredes.
 Colisão com limites do cenário.
 Materiais e texturas.
 Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 Iluminação (tonalização)
 Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
+Mostrar framerate
+Escrever LEIAME.
 
 == Coisas específicas de implemetação:
 
