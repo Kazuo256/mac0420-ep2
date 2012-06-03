@@ -1,5 +1,22 @@
-Scenes    -> Colocar um vetor de tasks
-          -> O update da window vai chamar esses tasks.
 
-Window    -> Vetor de scenes.
+== Coisas gerais do enunciado:
+
+Colisão com paredes.
+Colisão com limites do cenário.
+Materiais e texturas.
+Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
+Iluminação (tonalização)
+Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
+
+== Coisas específicas de implemetação:
+
+Scenes    -> [DONE] Colocar um vetor de tasks.  
+          -> [DONE] O update da window vai chamar esses tasks.
+          -> Implementar estado "finished" para remover a cena
+
+Window    -> [DONE] Vetor de scenes.
+          -> Reconhecer uma cena finzalizada e desempilhá-la.
+          -> Encerrar o programa quando não houver mais cenas.
+
 Transform -> Fazer funções para gerar matrizes tipo Identidade, Rotação, Afins da vida e do role...
+
