@@ -43,9 +43,9 @@ void run () {
   glutMainLoop();
 }
 
-static void camera_task (Scene::Ptr scene, Window::Ptr win) {
-  double x = win->mouse().movement().x();
-  scene->camera().rotatey(x);
+static void movement_task (Scene::Ptr scene, Window::Ptr win) {
+  //double x = win->mouse().movement().x();
+  //scene->camera().rotatey(x);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -55,7 +55,6 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
 static void moveW (Scene::Ptr scene, int x, int y) {
   scene->camera().move(Vec4D(0.0, 0.0, -1));
 }
-
 
 static void moveA (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(-15.0);
@@ -136,9 +135,9 @@ static bool load_models (Scene::Ptr scene) {
     tform.pushmodel(model);
     scene->root().pushtransform(tform);
   }
-  Model chao = Model(Model::Renderer(skybox));
+  Model floor = Model(Model::Renderer(skybox));
   Transform trans;
-  trans.pushmodel(chao);
+  trans.pushmodel(floor);
   trans.scale(Vec4D(100.0, 100.0, 100.0));
   scene->root().pushtransform(trans);
   scene->root().dump();
