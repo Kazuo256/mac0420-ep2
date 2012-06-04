@@ -1,5 +1,6 @@
 
 #include <tr1/functional>
+#include <string>
 
 #include "getglut.h"
 
@@ -9,6 +10,7 @@
 #include "transform.h"
 #include "obj/model.h"
 #include "obj/loader.h"
+#include "obj/worldloader.h"
 
 namespace ep2 {
 
@@ -20,7 +22,7 @@ using obj::Loader;
 Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
-static bool load_models (Scene::Ptr scene);
+static bool load_models (Scene::Ptr scene, std::string fname);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -68,7 +70,7 @@ static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
 }
 
-void skybox () {
+void render_skybox () {
   glBegin(GL_QUADS);
     // FRENTE = RED
     glColor3d(1.0, 0.0, 0.0);
@@ -112,7 +114,7 @@ void skybox () {
 
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
-  if (!load_models(scene))
+  if (!load_models(scene, "ime.scene"))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
@@ -127,17 +129,20 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   return scene;
 }
 
-static bool load_models (Scene::Ptr scene) {
-  for (int i = 0; i < 10; i++) {
+static bool load_models (Scene::Ptr scene, std::string fname) {
+  WorldLoader wl = WorldLoader(fname);
+  wl.loadworld(scene);
+  printf("OI\n");
+  /*for (int i = 0; i < 10; i++) {
     Model model = Loader().load("wall00-00");
     Transform tform;
     tform.translate(Vec4D(2.0*i, 0.0, 0.0));
     tform.pushmodel(model);
     scene->root().pushtransform(tform);
-  }
-  Model floor = Model(Model::Renderer(skybox));
+  }*/
+  Model skybox = Model(Model::Renderer(render_skybox));
   Transform trans;
-  trans.pushmodel(floor);
+  trans.pushmodel(skybox);
   trans.scale(Vec4D(100.0, 100.0, 100.0));
   scene->root().pushtransform(trans);
   scene->root().dump();

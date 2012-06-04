@@ -26,6 +26,7 @@ add_executable (ep2
   src/obj/modelrenderer.cxx
   src/obj/parser.cxx
   src/obj/loader.cxx
+  src/obj/worldloader.cxx
   src/task.cxx
   src/vec4D.cxx
   src/point4D.cxx
