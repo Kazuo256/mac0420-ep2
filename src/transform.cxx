@@ -75,11 +75,7 @@ void Transform::rotatey (const double ang) {
   rotate[2] = Base4D(-sin(rad), 0.0, cos(rad), 0.0);
   rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
 
-  puts("ANTES");
-  dump();
-  puts("DEPOIS");
   matrix_ = rotate * matrix_;
-  dump();
 }
 
 void Transform::composition (Matrix& matrix) {
