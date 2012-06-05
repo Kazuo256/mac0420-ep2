@@ -25,15 +25,18 @@ class Loader {
     typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
     Loader ();
     Model load_model (const std::string& modelname);
-    MaterialLib load_materiallib (const std::string& libname);
+    // OBJ handlers
     DECLARE_HANDLER(objname);
     DECLARE_HANDLER(vertex);
     DECLARE_HANDLER(face);
     DECLARE_HANDLER(materialimport);
     DECLARE_HANDLER(materialusage);
+    // MTL handlers
+    DECLARE_HANDLER(newmaterial);
   private:
     HandlerTable obj_handlers_,
                  mtl_handlers_;
+    void load_materiallib (ModelData::Ptr& data, const std::string& libname);
 };
 
 #undef DECLARE_HANDLER

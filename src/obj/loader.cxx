@@ -20,7 +20,7 @@ using namespace std::tr1::placeholders;
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
 #define OBJ_HANDLERTABLE_SIZE 5
-#define MTL_HANDLERTABLE_SIZE 0
+#define MTL_HANDLERTABLE_SIZE 1
 #define GET_HANDLER(name) &Loader::handle_##name
 
 struct RawHandlerTable {
@@ -37,6 +37,7 @@ static RawHandlerTable obj_handlers_table[OBJ_HANDLERTABLE_SIZE] = {
 };
 
 static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
+  {"newmtl", GET_HANDLER(newmaterial) }
 };
 
 Loader::Loader () {
@@ -64,9 +65,25 @@ Model Loader::load_model (const string& modelname) {
   return Model(ModelRenderer(data));
 }
 
+void Loader::load_materiallib (ModelData::Ptr& data, const string& libname) {
+  Parser parser("models/"+libname);
+  while (true) {
+    Command cmd;
+    if (!parser.parse_command(cmd)) break;
+    HandlerTable::iterator handler = mtl_handlers_.find(cmd.front());
+    if (handler != mtl_handlers_.end())
+      handler->second(data, cmd);
+    else
+      printf("Ignoring unsuported MTL instruction '%s'.\n",
+             cmd.front().c_str());
+  }
+}
+
 #define DEFINE_HANDLER(name) \
   void Loader::handle_##name (ModelData::Ptr data, \
                               const Command& cmd)
+
+// OBJ handlers
 
 DEFINE_HANDLER(objname) {
   // TODO: fix?
@@ -90,11 +107,18 @@ DEFINE_HANDLER(face) {
 }
 
 DEFINE_HANDLER(materialimport) {
-  // ignored for now
+  string libname = cmd[1];
+  load_materiallib(data, libname);
 }
 
 DEFINE_HANDLER(materialusage) {
   data->add_material_index(cmd[1]);
+}
+
+// MTL handlers
+
+DEFINE_HANDLER(newmaterial) {
+  // TODO
 }
 
 #undef DEFINE_HANDLER
