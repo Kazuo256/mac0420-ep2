@@ -23,13 +23,16 @@ struct VertexData {
 
 typedef std::vector<unsigned> Face;
 struct Material {
-  unsigned  begin;
-  Base4D    ambient,        // Ka
-            diffuse,        // Kd
-            specular,       // Ks
-            emission;       // Tf
-  double    spec_exponent,  // Ns
+  float     ambient[4],     // Ka
+            diffuse[4],     // Kd
+            specular[4],    // Ks
+            emission[4],    // Tf
+            spec_exponent,  // Ns
             opacy;          // d
+};
+struct MaterialIndex {
+  unsigned  material_id,
+            begin;
 };
 
 class ModelData {
@@ -40,6 +43,7 @@ class ModelData {
     void add_vertex (const Base4D& vertex);
     void add_face (const Face& face);
     void add_material (const Material& material);
+    void add_material_index (unsigned material_id);
     const std::vector<Base4D>& vertices () const {
       return vertices_;
     }
@@ -49,17 +53,21 @@ class ModelData {
     const std::vector<Material>& materials () const {
       return materials_;
     }
+    const std::vector<MaterialIndex>& material_indexes () const {
+      return material_indexes_;
+    }
     static Ptr create () {
       return ModelData::Ptr(new ModelData);
     }
   private:
     ModelData () {}
-    std::string           name_;
-    std::vector<Base4D>   vertices_;
+    std::string                 name_;
+    std::vector<Base4D>         vertices_;
     //std::vector<Base4D>   texture_vertices_;
     //std::vector<Vec4D>    normals_;
-    std::vector<Face>     faces_;
-    std::vector<Material> materials_;
+    std::vector<Face>           faces_;
+    std::vector<Material>       materials_;
+    std::vector<MaterialIndex>  material_indexes_;
 };
 
 } // namespace obj

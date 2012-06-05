@@ -17,7 +17,12 @@ void ModelData::add_face (const Face& face) {
 
 void ModelData::add_material (const Material& material) {
   materials_.push_back(material);
-  materials_.back().begin = faces_.size();
+}
+
+void ModelData::add_material_index (unsigned material_id) {
+  MaterialIndex index;
+  index.material_id = material_id;
+  index.begin = faces_.size();
 }
 
 } // namespace obj
