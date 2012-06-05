@@ -24,6 +24,7 @@ Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
+static Collidable imeguy(2.0, 2.0);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -56,7 +57,8 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveW (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(0.0, 0.0, -1));
+  if ( imeguy.willmove('w') == true )
+    scene->camera().move(Vec4D(0.0, 0.0, -1));
 }
 
 static void moveA (Scene::Ptr scene, int x, int y) {
@@ -64,7 +66,8 @@ static void moveA (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
-  scene->camera().move(Vec4D(0.0, 0.0, 1));
+  if ( imeguy.willmove('s') == true )
+    scene->camera().move(Vec4D(0.0, 0.0, 1));
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
@@ -113,6 +116,14 @@ void render_skybox () {
   glColor3d(1.0, 1.0, 1.0);
 }
 
+static void createimeguy (Scene::Ptr scene) {
+  scene->insertcolltype("imeguy", imeguy);
+  Scene::CollTypes::iterator it;
+  imeguy.pushtransform(scene->camera().transform());
+  for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
+    imeguy.pushcollidable(it->second);
+}
+
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
   if (!load_models(scene, "ime.scene", "ime.collidables"))
@@ -127,6 +138,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('s', Scene::KeyEvent(bind(moveS, scene, _1, _2)));
   scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
   //scene->camera().zoom(-5);
+  createimeguy(scene);
   return scene;
 }
 

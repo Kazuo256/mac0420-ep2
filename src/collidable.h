@@ -2,6 +2,7 @@
 #ifndef EP2_COLLIDABLE_H_
 #define EP2_COLLIDABLE_H_
 
+#include <cstdio>
 #include <vector>
 #include "point4D.h"
 #include "vec4D.h"

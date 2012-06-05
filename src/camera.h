@@ -48,6 +48,8 @@ class Camera {
     void adjust (double ratio);
     /// Places the camera in the 3D scene.
     void place () const;
+    ///
+    Transform transform () { return transform_; }
   private:
     Base4D    view_;
     double    zoom_;
