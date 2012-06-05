@@ -32,15 +32,15 @@ bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
   Pos::iterator it;
   for ( it = coll.pos_.begin(); it < coll.pos_.end(); it++ ) {
     double x = it->x();
-    double y = it->y();
+    double z = it->z();
     // See if coll will collide with "this". 
-    if (   (((newpos).x()-length_/2) - (x+coll.length_/2) <= 0.0 ) // Coll on the left.
-        || ((x-coll.length_/2) - ((newpos).x()+length_/2) <= 0.0 ) // Coll on the right.
-        || (((newpos).y()-width_/2) - (y+coll.width_/2) <= 0.0 )  // Coll on bottom.
-        || ((y+coll.width_/2) - ((newpos).y()-width_/2) <= 0.0 ) )// Coll on top
-            return true;
+    if (   (((newpos).x()-length_/2) > (x+coll.length_/2))  // Coll on the left.
+        || ((x-coll.length_/2) > ((newpos).x()+length_/2))  // Coll on the right.
+        || (((newpos).z()-width_/2) > (z+coll.width_/2))    // Coll on bottom.
+        || ((z-coll.width_/2) > ((newpos).z()+width_/2))  )// Coll on top
+            return false;
   }
-  return false;
+  return true;
 }
 
 }
