@@ -20,7 +20,7 @@ void WorldLoader::loadcollidables (Scene::Ptr scene) {
     fscanf(pcfile, "%lf %lf", &length, &width);
     Collidable coll(width, length);
     std::string collname = objname;
-    scene->insertcolltype (collname, coll);
+    scene->insertcolltype(collname, coll);
   }
 }
 

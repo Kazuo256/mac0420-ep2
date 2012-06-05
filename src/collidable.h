@@ -19,7 +19,10 @@ class Collidable {
       length_(length) {}
     bool willmove (char key);
     void pushcollidable (Collidable collidable);
-    void pushpos (Point4D pos); 
+    void pushpos (Point4D pos);
+    double width () { return width_; }
+    double length () { return length_; }
+    Pos pos () { return pos_; }
   private:
     double        width_, length_;
     Collidables   collidables_;

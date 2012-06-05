@@ -54,7 +54,7 @@ class Scene {
     ///
     void insertcolltype (std::string key, Collidable coll);
     ///
-    Collidable findcoll (std::string key);
+    Collidable& findcoll (std::string key);
     /// Creates a new scene object.
     CollTypes colltypes () { return colltypes_; }
     static Ptr create() {

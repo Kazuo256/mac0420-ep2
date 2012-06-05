@@ -20,11 +20,9 @@ bool Collidable::willmove (char key) {
   Collidables::iterator it;
   /*  See if "this" is colliding with all the collidables class 
       he can collide. */
-  for ( it = collidables_.begin(); it < collidables_.end(); it++ ) {
-    printf("w =%lf\nl = %lf\n", it->width_, it->length_);
+  for ( it = collidables_.begin(); it < collidables_.end(); it++ )
     if ( iscolliding((*it), dir) == true )
       return false;
-  }
   pos_[0] = pos_[0] + dir;
   return true;
 }
