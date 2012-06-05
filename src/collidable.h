@@ -22,7 +22,7 @@ class Collidable {
   private:
     double                    width_, length_;
     Collidables               collidables_;
-    Transform::TransformVec   tformvec;
+    Transform::TransformVec   tformvec_;
     /// See if this is colliding with all models in coll.
     bool iscolliding (Collidable coll, Vec4D dir);
 };

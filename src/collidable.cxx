@@ -8,7 +8,7 @@ void Collidable::pushcollidable (Collidable collidable) {
 }
 
 void Collidable::pushtransform (Transform tform) {
-  tformvec.push_back(tform);
+  tformvec_.push_back(tform);
 }
 
 bool Collidable::willmove (char key) {
@@ -27,9 +27,9 @@ bool Collidable::willmove (char key) {
 }
 
 bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
-  Point4D newpos = tformvec[0].matrix()[3]+dir;
+  Point4D newpos = tformvec_[0].matrix()[3]+dir;
   Transform::TransformVec::iterator it;
-  for ( it = coll.tformvec.begin(); it < coll.tformvec.end(); it++ ) {
+  for ( it = coll.tformvec_.begin(); it < coll.tformvec_.end(); it++ ) {
     double x = it->matrix()[3].x();
     double y = it->matrix()[3].y();
     // Se if coll will collide with "this". 
