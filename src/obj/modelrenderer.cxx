@@ -46,8 +46,7 @@ void ModelRenderer::operator () () {
   for (fit = data_->faces().begin(); fit < data_->faces().end(); fit++) {
     if (mit < data_->material_indexes().end() &&
         fit - (data_->faces().begin()) == mit->begin) {
-      unordered_map<string,Material>::const_iterator m;
-      m = data_->materials().find(mit->name);
+      MaterialLib::const_iterator m = data_->materials().find(mit->name);
       if (m != data_->materials().end())
         setup_material(m->second);
       mit++;

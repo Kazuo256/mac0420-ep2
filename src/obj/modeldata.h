@@ -23,6 +23,7 @@ struct VertexData {
 */
 
 typedef std::vector<unsigned> Face;
+
 struct Material {
   float     ambient[4],     // Ka
             diffuse[4],     // Kd
@@ -31,6 +32,9 @@ struct Material {
             spec_exponent,  // Ns
             opacy;          // d
 };
+
+typedef std::tr1::unordered_map<std::string,Material> MaterialLib;
+
 struct MaterialIndex {
   unsigned    begin;
   std::string name;
@@ -51,7 +55,7 @@ class ModelData {
     const std::vector<Face>& faces () const {
       return faces_;
     }
-    const std::tr1::unordered_map<std::string,Material>& materials () const {
+    const MaterialLib& materials () const {
       return materials_;
     }
     const std::vector<MaterialIndex>& material_indexes () const {
@@ -62,13 +66,13 @@ class ModelData {
     }
   private:
     ModelData () {}
-    std::string                                   name_;
-    std::vector<Base4D>                           vertices_;
+    std::string                 name_;
+    std::vector<Base4D>         vertices_;
     //std::vector<Base4D>   texture_vertices_;
     //std::vector<Vec4D>    normals_;
-    std::vector<Face>                             faces_;
-    std::tr1::unordered_map<std::string,Material> materials_;
-    std::vector<MaterialIndex>                    material_indexes_;
+    std::vector<Face>           faces_;
+    MaterialLib                 materials_;
+    std::vector<MaterialIndex>  material_indexes_;
 };
 
 } // namespace obj
