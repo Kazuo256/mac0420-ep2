@@ -8,6 +8,7 @@
 #include "window.h"
 #include "scene.h"
 #include "transform.h"
+#include "collidable.h"
 #include "obj/model.h"
 #include "obj/loader.h"
 #include "obj/worldloader.h"

@@ -35,6 +35,7 @@ add_executable (ep2
   src/scene.cxx
   src/window.cxx
   src/camera.cxx
+  src/collidable.cxx
   src/control/mouse.cxx
   src/external/objload.cxx
 )

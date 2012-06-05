@@ -1,9 +1,9 @@
 
 == Coisas gerais do enunciado:
 
-Carregar cenário (a partir de um arquivo)
-Colisão com paredes.
-Colisão com limites do cenário.
+[DONE]Carregar cenário (a partir de um arquivo)
+[GOROBA]Colisão com paredes.
+[GOROBA]Colisão com limites do cenário.
 Materiais e texturas.
 Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 Iluminação (tonalização)
