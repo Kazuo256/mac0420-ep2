@@ -50,6 +50,7 @@ void Scene::check_keyevent (unsigned char key, int x, int y) {
 Collidable Scene::findcoll (std::string key) {
   CollTypes::iterator it;
   it = colltypes_.find(key);
+  if ( it == colltypes_.end() ) printf("Erro\n");
   return it->second;
 }
 
