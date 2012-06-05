@@ -10,10 +10,12 @@
 namespace ep2 {
 namespace obj {
 
+using std::string;
 using std::vector;
 using std::for_each;
 using std::tr1::bind;
 using std::tr1::placeholders::_1;
+using std::tr1::unordered_map;
 
 static void setup_material (const Material& material) {
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material.specular);
@@ -44,7 +46,9 @@ void ModelRenderer::operator () () {
   for (fit = data_->faces().begin(); fit < data_->faces().end(); fit++) {
     if (mit < data_->material_indexes().end() &&
         fit - (data_->faces().begin()) == mit->begin) {
-      setup_material(data_->materials().find(mit->name)->second);
+      MaterialLib::const_iterator m = data_->materials().find(mit->name);
+      if (m != data_->materials().end())
+        setup_material(m->second);
       mit++;
     }
     render_face(*fit);

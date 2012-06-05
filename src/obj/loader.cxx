@@ -85,7 +85,7 @@ DEFINE_HANDLER(materialimport) {
 }
 
 DEFINE_HANDLER(materialusage) {
-  // ignored for now
+  data->add_material_index(cmd[1]);
 }
 
 #undef DEFINE_HANDLER
