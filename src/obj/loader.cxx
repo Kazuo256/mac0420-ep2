@@ -19,13 +19,16 @@ using namespace std::tr1::placeholders;
 
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
-#define HANDLERTABLE_SIZE 5
+#define OBJ_HANDLERTABLE_SIZE 5
+#define MTL_HANDLERTABLE_SIZE 0
 #define GET_HANDLER(name) &Loader::handle_##name
 
-static struct RawHandlerTable {
+struct RawHandlerTable {
   const char* tag;
   Handler     handler;
-} handlers_table[HANDLERTABLE_SIZE] = {
+};
+
+static RawHandlerTable obj_handlers_table[OBJ_HANDLERTABLE_SIZE] = {
   {"o", GET_HANDLER(objname) },
   {"v", GET_HANDLER(vertex) },
   {"f", GET_HANDLER(face) },
@@ -33,20 +36,26 @@ static struct RawHandlerTable {
   {"usemtl", GET_HANDLER(materialusage) }
 };
 
+static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
+};
+
 Loader::Loader () {
-  for (unsigned i = 0; i < HANDLERTABLE_SIZE; i++)
-    handlers_[handlers_table[i].tag] =
-      bind(handlers_table[i].handler, this, _1, _2);
+  for (unsigned i = 0; i < OBJ_HANDLERTABLE_SIZE; i++)
+    obj_handlers_[obj_handlers_table[i].tag] =
+      bind(obj_handlers_table[i].handler, this, _1, _2);
+  for (unsigned i = 0; i < MTL_HANDLERTABLE_SIZE; i++)
+    mtl_handlers_[mtl_handlers_table[i].tag] =
+      bind(mtl_handlers_table[i].handler, this, _1, _2);
 }
 
-Model Loader::load (const string& modelname) {
+Model Loader::load_model (const string& modelname) {
   Parser parser("models/"+modelname+".obj");
   ModelData::Ptr data = ModelData::create();
   while (true) {
     Command cmd;
     if (!parser.parse_command(cmd)) break;
-    HandlerTable::iterator handler = handlers_.find(cmd.front());
-    if (handler != handlers_.end())
+    HandlerTable::iterator handler = obj_handlers_.find(cmd.front());
+    if (handler != obj_handlers_.end())
       handler->second(data, cmd);
     else
       printf("Ignoring unsuported OBJ instruction '%s'.\n",

@@ -28,7 +28,7 @@ void WorldLoader::loadcollidables (Scene::Ptr scene) {
 void WorldLoader::loadmodels (Scene::Ptr scene) {
   char objname[64];
   while ( fscanf(pmfile, "%s", objname) != EOF ) {
-    Model model = Loader().load(objname);
+    Model model = Loader().load_model(objname);
     Transform tform;
     tform.pushmodel(model);
     
