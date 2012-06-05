@@ -53,6 +53,8 @@ class Scene {
     void check_keyevent (unsigned char key, int x, int y);
     ///
     void insertcolltype (std::string key, Collidable coll);
+    ///
+    Collidable findcoll (std::string key);
     /// Creates a new scene object.
     static Ptr create() {
       return Ptr(new Scene()); 

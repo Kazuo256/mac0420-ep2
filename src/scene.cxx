@@ -47,6 +47,12 @@ void Scene::check_keyevent (unsigned char key, int x, int y) {
     key_events_[key] (x,y);
 }
 
+Collidable Scene::findcoll (std::string key) {
+  CollTypes::iterator it;
+  it = colltypes_.find(key);
+  return it->second;
+}
+
 void Scene::insertcolltype (std::string key, Collidable coll) {
   colltypes_.insert( std::pair<std::string, Collidable>(key, coll) );
 }

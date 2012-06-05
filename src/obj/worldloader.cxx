@@ -41,6 +41,8 @@ void WorldLoader::loadmodels (Scene::Ptr scene) {
       }
       matrix[j].set_val(buffer);
     }
+    std::string name = objname;
+    scene->findcoll(name).pushtransform(tform);
     tform.composition(matrix);
     scene->root().pushtransform(tform);
   }
