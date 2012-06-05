@@ -47,4 +47,8 @@ void Scene::check_keyevent (unsigned char key, int x, int y) {
     key_events_[key] (x,y);
 }
 
+void Scene::insertcolltype (std::string key, Collidable coll) {
+  colltypes_.insert( std::pair<std::string, Collidable>(key, coll) );
+}
+
 } //namespace ep2

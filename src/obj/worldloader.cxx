@@ -9,7 +9,20 @@ using obj::Loader;
 
 void WorldLoader::loadworld (Scene::Ptr scene) {
   loadfiles();
+  loadcollidables(scene);
   loadmodels(scene);
+}
+
+void WorldLoader::loadcollidables (Scene::Ptr scene) {
+  char objname[64];
+  while ( fscanf(pcfile, "%s", objname) != EOF ) {
+    double length, width;
+    fscanf(pcfile, "%lf %lf", &length, &width);
+    Collidable coll(width, length);
+    std::string collname = objname;
+    scene->insertcolltype (collname, coll);
+  }
+
 }
 
 void WorldLoader::loadmodels (Scene::Ptr scene) {

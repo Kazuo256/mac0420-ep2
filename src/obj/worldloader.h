@@ -7,6 +7,7 @@
 
 #include "../scene.h"
 #include "../transform.h"
+#include "../collidable.h"
 #include "model.h"
 #include "loader.h"
 
@@ -23,6 +24,7 @@ class WorldLoader {
                 collidefile_;
     FILE        *pmfile,
                 *pcfile;
+    void loadcollidables (Scene::Ptr scene);
     void loadmodels (Scene::Ptr scene);
     void loadfiles ();
 };
