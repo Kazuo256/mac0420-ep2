@@ -14,13 +14,17 @@ namespace ep2 {
 
 class WorldLoader {
   public:
-    WorldLoader (std::string filename) :
-    filename_(filename)  {}
-  void loadworld (Scene::Ptr scene);
+    WorldLoader (std::string modelfile, std::string collidefile) :
+    modelfile_(modelfile),
+    collidefile_(collidefile) {}
+    void loadworld (Scene::Ptr scene);
   private:
-    std::string filename_;
-    FILE        *infile;
-    void loadfile();
+    std::string modelfile_,
+                collidefile_;
+    FILE        *pmfile,
+                *pcfile;
+    void loadmodels (Scene::Ptr scene);
+    void loadfiles ();
 };
 
 
