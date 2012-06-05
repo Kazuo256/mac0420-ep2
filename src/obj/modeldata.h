@@ -46,6 +46,9 @@ class ModelData {
     const std::vector<Face>& faces () const {
       return faces_;
     }
+    const std::vector<Material>& materials () const {
+      return materials_;
+    }
     static Ptr create () {
       return ModelData::Ptr(new ModelData);
     }
