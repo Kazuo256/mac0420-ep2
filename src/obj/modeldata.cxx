@@ -41,6 +41,7 @@ void ModelData::add_material_index (const string& name) {
   MaterialIndex index;
   index.name = name;
   index.begin = faces_.size();
+  material_indexes_.push_back(index);
 }
 
 } // namespace obj

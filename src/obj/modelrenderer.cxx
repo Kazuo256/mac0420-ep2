@@ -1,11 +1,11 @@
 
-#include <algorithm>
+#include "obj/modelrenderer.h"
 
+#include <cstdio>
+#include <algorithm>
 #include <tr1/functional>
 
 #include "getglut.h"
-
-#include "obj/modelrenderer.h"
 
 namespace ep2 {
 namespace obj {

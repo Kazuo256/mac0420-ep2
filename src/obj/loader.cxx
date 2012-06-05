@@ -109,6 +109,11 @@ DEFINE_HANDLER(face) {
 DEFINE_HANDLER(materialimport) {
   string libname = cmd[1];
   load_materiallib(data, libname);
+  if (!current_mtlname_.empty()) {
+    data->add_material(current_mtlname_, current_material_);
+    current_mtlname_.clear();
+    current_material_.clear();
+  }
 }
 
 DEFINE_HANDLER(materialusage) {
@@ -118,7 +123,10 @@ DEFINE_HANDLER(materialusage) {
 // MTL handlers
 
 DEFINE_HANDLER(newmaterial) {
-  // TODO
+  if (!current_mtlname_.empty())
+    data->add_material(current_mtlname_, current_material_);
+  current_material_.clear();
+  current_mtlname_ = cmd[1];
 }
 
 #undef DEFINE_HANDLER
