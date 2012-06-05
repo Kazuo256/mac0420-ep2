@@ -24,7 +24,7 @@ Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
-static Collidable imeguy(0.1, 0.1);
+static Collidable imeguy(0.5, 0.5);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -119,7 +119,7 @@ void render_skybox () {
 static void createimeguy (Scene::Ptr scene) {
   scene->insertcolltype("imeguy", imeguy);
   Scene::CollTypes::iterator it;
-  imeguy.pushpos(scene->camera().transform().matrix()[3]);
+  imeguy.pushpos(Point4D(0.0, 3.0, 7.0));
   for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
     imeguy.pushcollidable(it->second);
 }
