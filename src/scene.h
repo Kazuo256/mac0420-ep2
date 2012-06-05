@@ -6,8 +6,11 @@
 #include "transform.h"
 #include "getglut.h"
 #include "camera.h"
+#include "collidable.h"
 
 #include <vector>
+#include <string>
+#include <map>
 #include <tr1/memory>
 #include <tr1/functional>
 
@@ -23,6 +26,8 @@ class Scene {
     typedef Transform                           Root;
     /// Keyboard event handler.
     typedef std::tr1::function<void (int, int)> KeyEvent;
+    /// Collidables map.
+    typedef std::map<std::string, Collidable>   CollTypes;
     /// Gets a reference to the window's camera.
     /** @return Camera& A reference to the window's camera. */
     Camera& camera() { return camera_; }
@@ -46,6 +51,10 @@ class Scene {
     void register_keyevent (unsigned char key, KeyEvent event);
     ///
     void check_keyevent (unsigned char key, int x, int y);
+    ///
+    void insertcolltype (std::string key, Collidable coll);
+    ///
+    Collidable findcoll (std::string key);
     /// Creates a new scene object.
     static Ptr create() {
       return Ptr(new Scene()); 
@@ -59,6 +68,8 @@ class Scene {
     Camera                camera_;
     // Whether the scene is active or not.
     bool                  active_;
+    // Collidables types.
+    CollTypes             colltypes_;
     // Keyboard events.
     std::vector<KeyEvent> key_events_;
     explicit Scene () :
