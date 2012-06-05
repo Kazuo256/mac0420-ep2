@@ -29,6 +29,10 @@ static void init_opengl (double ratio) {
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glLineWidth(2.0);
   glEnable(GL_BLEND);
+  glShadeModel(GL_SMOOTH);
+  glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
