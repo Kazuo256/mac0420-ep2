@@ -23,7 +23,7 @@ using obj::Loader;
 Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
-static bool load_models (Scene::Ptr scene, std::string fname);
+static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -115,7 +115,7 @@ void render_skybox () {
 
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
-  if (!load_models(scene, "ime.scene"))
+  if (!load_models(scene, "ime.scene", "ime.collidables"))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
@@ -130,10 +130,9 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   return scene;
 }
 
-static bool load_models (Scene::Ptr scene, std::string fname) {
-  WorldLoader wl = WorldLoader(fname);
+static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
+  WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  printf("OI\n");
   /*for (int i = 0; i < 10; i++) {
     Model model = Loader().load("wall00-00");
     Transform tform;
