@@ -31,6 +31,7 @@ struct Material {
             emission[4],    // Tf
             spec_exponent,  // Ns
             opacy;          // d
+  void clear();
 };
 
 typedef std::tr1::unordered_map<std::string,Material> MaterialLib;
