@@ -24,7 +24,7 @@ Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
-static Collidable imeguy(0.5, 0.5);
+static Collidable imeguy(0.1, 0.1);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.

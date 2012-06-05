@@ -33,14 +33,13 @@ bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
   for ( it = coll.pos_.begin(); it < coll.pos_.end(); it++ ) {
     double x = it->x();
     double y = it->y();
-    // Se if coll will collide with "this". 
-    if (((newpos).x()-length_/2) - (x+coll.length_/2) >= 0.0 ) // Coll on the left.
-      if ((x-coll.length_/2) - ((newpos).x()+length_/2) >= 0.0 ) // Coll on the right.
-        if (((newpos).y()-width_/2) - (y+coll.width_/2) >= 0.0 )  // Coll on bottom.
-          if ((y+coll.width_/2) - ((newpos).y()-width_/2) >= 0.0 ) // Coll on top
+    // See if coll will collide with "this". 
+    if (   (((newpos).x()-length_/2) - (x+coll.length_/2) >= 0.0 ) // Coll on the left.
+        || ((x-coll.length_/2) - ((newpos).x()+length_/2) >= 0.0 ) // Coll on the right.
+        || (((newpos).y()-width_/2) - (y+coll.width_/2) >= 0.0 )  // Coll on bottom.
+        || ((y+coll.width_/2) - ((newpos).y()-width_/2) >= 0.0 ) )// Coll on top
             return false;
   }
-  printf("Corre n\n");
   return true;
 }
 
