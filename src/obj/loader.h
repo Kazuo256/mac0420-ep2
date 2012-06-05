@@ -34,8 +34,10 @@ class Loader {
     // MTL handlers
     DECLARE_HANDLER(newmaterial);
   private:
-    HandlerTable obj_handlers_,
-                 mtl_handlers_;
+    HandlerTable  obj_handlers_,
+                  mtl_handlers_;
+    std::string   current_mtlname_;
+    Material      current_material_;
     void load_materiallib (ModelData::Ptr& data, const std::string& libname);
 };
 
