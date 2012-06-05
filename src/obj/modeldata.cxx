@@ -15,6 +15,16 @@ void ModelData::add_face (const Face& face) {
   faces_.push_back(face);
 }
 
+void ModelData::add_material (const string& name, const Material& material) {
+  materials_[name] = material;
+}
+
+void ModelData::add_material_index (const string& name) {
+  MaterialIndex index;
+  index.name = name;
+  index.begin = faces_.size();
+}
+
 } // namespace obj
 } // namespace ep2
 
