@@ -7,8 +7,8 @@ void Collidable::pushcollidable (Collidable collidable) {
   collidables_.push_back(collidable);
 }
 
-void Collidable::pushtransform (Transform tform) {
-  tformvec_.push_back(tform);
+void Collidable::pushpos (Point4D pos) {
+  pos_.push_back(pos);
 }
 
 bool Collidable::willmove (char key) {
@@ -20,18 +20,21 @@ bool Collidable::willmove (char key) {
   Collidables::iterator it;
   /*  See if "this" is colliding with all the collidables class 
       he can collide. */
-  for ( it = collidables_.begin(); it < collidables_.end(); it++ )
+  for ( it = collidables_.begin(); it < collidables_.end(); it++ ) {
+    printf("w =%lf\nl = %lf\n", it->width_, it->length_);
     if ( iscolliding((*it), dir) == true )
       return false;
+  }
+  pos_[0] = pos_[0] + dir;
   return true;
 }
 
 bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
-  Point4D newpos = tformvec_[0].matrix()[3]+dir;
-  Transform::TransformVec::iterator it;
-  for ( it = coll.tformvec_.begin(); it < coll.tformvec_.end(); it++ ) {
-    double x = it->matrix()[3].x();
-    double y = it->matrix()[3].y();
+  Point4D newpos = pos_[0]+dir;
+  Pos::iterator it;
+  for ( it = coll.pos_.begin(); it < coll.pos_.end(); it++ ) {
+    double x = it->x();
+    double y = it->y();
     // Se if coll will collide with "this". 
     if (((newpos).x()-length_/2) - (x+coll.length_/2) >= 0.0 ) // Coll on the left.
       if ((x-coll.length_/2) - ((newpos).x()+length_/2) >= 0.0 ) // Coll on the right.

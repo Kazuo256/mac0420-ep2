@@ -12,17 +12,18 @@ namespace ep2 {
 
 class Collidable {
   public:
-    typedef std::vector<Collidable>  Collidables;
+    typedef std::vector<Point4D>      Pos;
+    typedef std::vector<Collidable>   Collidables;
     Collidable (double width, double length) :
       width_(width),
       length_(length) {}
     bool willmove (char key);
     void pushcollidable (Collidable collidable);
-    void pushtransform (Transform tfrom); 
+    void pushpos (Point4D pos); 
   private:
-    double                    width_, length_;
-    Collidables               collidables_;
-    Transform::TransformVec   tformvec_;
+    double        width_, length_;
+    Collidables   collidables_;
+    Pos           pos_;
     /// See if this is colliding with all models in coll.
     bool iscolliding (Collidable coll, Vec4D dir);
 };
