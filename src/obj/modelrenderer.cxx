@@ -44,7 +44,7 @@ void ModelRenderer::operator () () {
   for (fit = data_->faces().begin(); fit < data_->faces().end(); fit++) {
     if (mit < data_->material_indexes().end() &&
         fit - (data_->faces().begin()) == mit->begin) {
-      setup_material(data_->materials()[mit->material_id]);
+      setup_material(data_->materials().find(mit->name)->second);
       mit++;
     }
     render_face(*fit);

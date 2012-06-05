@@ -15,13 +15,13 @@ void ModelData::add_face (const Face& face) {
   faces_.push_back(face);
 }
 
-void ModelData::add_material (const Material& material) {
-  materials_.push_back(material);
+void ModelData::add_material (const string& name, const Material& material) {
+  materials_[name] = material;
 }
 
-void ModelData::add_material_index (unsigned material_id) {
+void ModelData::add_material_index (const string& name) {
   MaterialIndex index;
-  index.material_id = material_id;
+  index.name = name;
   index.begin = faces_.size();
 }
 
