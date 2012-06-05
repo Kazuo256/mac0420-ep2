@@ -39,6 +39,7 @@ bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
           if ((y+coll.width_/2) - ((newpos).y()-width_/2) >= 0.0 ) // Coll on top
             return false;
   }
+  printf("Corre n\n");
   return true;
 }
 

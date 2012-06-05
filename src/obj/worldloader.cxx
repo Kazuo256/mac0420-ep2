@@ -22,7 +22,6 @@ void WorldLoader::loadcollidables (Scene::Ptr scene) {
     std::string collname = objname;
     scene->insertcolltype (collname, coll);
   }
-
 }
 
 void WorldLoader::loadmodels (Scene::Ptr scene) {
