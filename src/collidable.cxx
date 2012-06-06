@@ -34,9 +34,9 @@ bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
     double x = it->x();
     double z = it->z();
     // See if coll will collide with "this". 
-    if (   (((newpos).x()-length_/2) > (x+coll.length_/2))  // Coll on the left.
-        || ((x-coll.length_/2) > ((newpos).x()+length_/2))  // Coll on the right.
-        || (((newpos).z()-width_/2) > (z+coll.width_/2))    // Coll on bottom.
+    if (   ((newpos.x()-length_/2) > (x+coll.length_/2))  // Coll on the left.
+        || ((x-coll.length_/2) > (newpos.x()+length_/2))  // Coll on the right.
+        || ((newpos.z()-width_/2) > (z+coll.width_/2))    // Coll on bottom.
         || ((z-coll.width_/2) > ((newpos).z()+width_/2))  )// Coll on top
             return false;
   }
