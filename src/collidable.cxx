@@ -22,7 +22,7 @@ bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
   for ( it = collidables_.begin(); it < collidables_.end(); it++ )
     if ( iscolliding((*it), dir) == true )
       return false;
-  tformvec_[0].matrix()[3] = tformvec_[0].matrix()[3] + dir;
+  tformvec_[0].translate(dir);
   scene->camera().set_position(tformvec_[0].matrix()[3]);
   return true;
 }
