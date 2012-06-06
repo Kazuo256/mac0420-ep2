@@ -12,6 +12,7 @@
 #include "obj/model.h"
 #include "obj/loader.h"
 #include "obj/worldloader.h"
+#include "obj/modelrenderer.h"
 
 namespace ep2 {
 
@@ -75,6 +76,7 @@ static void moveD (Scene::Ptr scene, int x, int y) {
 }
 
 void render_skybox () {
+  obj::ModelRenderer::default_material();
   glBegin(GL_QUADS);
     // FRENTE = RED
     glColor3d(1.0, 0.0, 0.0);

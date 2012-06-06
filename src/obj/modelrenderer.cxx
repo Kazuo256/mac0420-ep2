@@ -18,8 +18,15 @@ using std::tr1::placeholders::_1;
 using std::tr1::unordered_map;
 
 static void setup_material (const Material& material) {
+  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material.ambient);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material.diffuse);
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material.specular);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, material.emission);
   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.spec_exponent);
+}
+
+void ModelRenderer::default_material () {
+  setup_material(Material());
 }
 
 void ModelRenderer::vertex (unsigned i) {

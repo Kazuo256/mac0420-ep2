@@ -26,13 +26,17 @@ class Loader {
     Loader ();
     Model load_model (const std::string& modelname);
     // OBJ handlers
-    DECLARE_HANDLER(objname);
-    DECLARE_HANDLER(vertex);
-    DECLARE_HANDLER(face);
-    DECLARE_HANDLER(materialimport);
-    DECLARE_HANDLER(materialusage);
+    DECLARE_HANDLER (objname);
+    DECLARE_HANDLER (vertex);
+    DECLARE_HANDLER (face);
+    DECLARE_HANDLER (materialimport);
+    DECLARE_HANDLER (materialusage);
     // MTL handlers
-    DECLARE_HANDLER(newmaterial);
+    DECLARE_HANDLER (newmaterial);
+    DECLARE_HANDLER (ambient);
+    DECLARE_HANDLER (diffuse);
+    DECLARE_HANDLER (specular);
+    DECLARE_HANDLER (emission);
   private:
     HandlerTable  obj_handlers_,
                   mtl_handlers_;

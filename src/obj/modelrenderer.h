@@ -15,6 +15,7 @@ class ModelRenderer {
   public:
     explicit ModelRenderer (const ModelData::Ptr& data) : data_(data) {}
     void operator () ();
+    static void default_material ();
   private:
     ModelData::Ptr data_;
     void render_face (const Face& face);

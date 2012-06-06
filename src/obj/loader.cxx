@@ -20,7 +20,7 @@ using namespace std::tr1::placeholders;
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
 #define OBJ_HANDLERTABLE_SIZE 5
-#define MTL_HANDLERTABLE_SIZE 1
+#define MTL_HANDLERTABLE_SIZE 5
 #define GET_HANDLER(name) &Loader::handle_##name
 
 struct RawHandlerTable {
@@ -37,7 +37,11 @@ static RawHandlerTable obj_handlers_table[OBJ_HANDLERTABLE_SIZE] = {
 };
 
 static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
-  {"newmtl", GET_HANDLER(newmaterial) }
+  {"newmtl", GET_HANDLER(newmaterial) },
+  {"Ka", GET_HANDLER(ambient) },
+  {"Kd", GET_HANDLER(diffuse) },
+  {"Ks", GET_HANDLER(specular) },
+  {"Tf", GET_HANDLER(emission) }
 };
 
 Loader::Loader () {
@@ -128,6 +132,25 @@ DEFINE_HANDLER(newmaterial) {
   current_material_.clear();
   current_mtlname_ = cmd[1];
 }
+
+#define MATERIAL_COLORS(action) \
+  action(ambient) \
+  action(diffuse) \
+  action(specular) \
+  action(emission)
+
+#define DEFINE_COLORHANDLER(color) \
+  DEFINE_HANDLER(color) { \
+    if (current_mtlname_.empty()) \
+      return; /* TODO: warning */ \
+    for (unsigned i = 1; i < cmd.size() && i <= 4; ++i) \
+      current_material_.color[i-1] = atof(cmd[i].c_str()); \
+  }
+
+MATERIAL_COLORS(DEFINE_COLORHANDLER)
+
+#undef DEFINE_COLORHANDLER
+#undef MATERIAL_COLORS
 
 #undef DEFINE_HANDLER
 
