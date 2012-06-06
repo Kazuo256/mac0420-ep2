@@ -27,7 +27,14 @@ void Transform::Matrix::makematrix (double* matrix) const {
 
 }
 
-Transform::Matrix Transform::Matrix::operator * (Matrix& rhs) {
+void Transform::Matrix::dump () const {
+  columns[0].dump();
+  columns[1].dump();
+  columns[2].dump();
+  columns[3].dump();
+}
+
+Transform::Matrix Transform::Matrix::operator * (const Matrix& rhs) const {
   Matrix comp;
   for (int i = 0; i < 4; i++) {
       comp[i] = (columns[0]*rhs[i].x())+
@@ -38,12 +45,21 @@ Transform::Matrix Transform::Matrix::operator * (Matrix& rhs) {
   return comp;
 }
 
+Base4D Transform::Matrix::operator * (const Base4D& rhs) const {
+  Base4D comp;
+  comp = (columns[0]*rhs.x())+
+         (columns[1]*rhs.y())+
+         (columns[2]*rhs.z())+
+         (columns[3]*rhs.w());
+  return comp;
+}
+
 void Transform::set_identity () {
   matrix_ = Matrix();
 }
 
 void Transform::set_position (const Point4D& position) {
-  matrix_[3] = position-Point4D();
+  matrix_[3] = position;
 }
 
 void Transform::translate (const Vec4D& translation) {
@@ -91,10 +107,7 @@ void Transform::pushtransform (const Transform& transform) {
 }
 
 void Transform::dump () const {
-  matrix_[0].dump();
-  matrix_[1].dump();
-  matrix_[2].dump();
-  matrix_[3].dump();
+  matrix_.dump();
 }
 
 Transform Transform::identity () {

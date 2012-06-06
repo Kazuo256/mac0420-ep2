@@ -4,7 +4,7 @@
 namespace ep2 {
 
 Vec4D Point4D::operator - (const Point4D& rhs) const {
-  Vec4D ret(rhs.x_-x_, rhs.y_-y_, rhs.z_-z_);
+  Vec4D ret(x_-rhs.x_, y_-rhs.y_, z_-rhs.z_);
   return ret;
 }
 

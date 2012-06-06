@@ -11,7 +11,7 @@ void Collidable::pushtransform (Transform tform) {
   tformvec_.push_back(tform);
 }
 
-bool Collidable::willmove (char key) {
+bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
   Vec4D dir = tformvec_[0].matrix()[2];
   if ( key == 'w' )
     dir = -dir;
@@ -23,12 +23,14 @@ bool Collidable::willmove (char key) {
     if ( iscolliding((*it), dir) == true )
       return false;
   tformvec_[0].matrix()[3] = tformvec_[0].matrix()[3] + dir;
+  scene->camera().set_position(tformvec_[0].matrix()[3]);
   return true;
 }
 
 bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
   Point4D newpos = tformvec_[0].matrix()[3]+dir;
   Transform::TransformVec::iterator it;
+  if (coll.tformvec_.empty()) return false;
   for ( it = coll.tformvec_.begin(); it < coll.tformvec_.end(); it++ ) {
     double x = it->matrix()[3].x();
     double z = it->matrix()[3].z();

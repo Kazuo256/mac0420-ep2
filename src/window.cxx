@@ -4,8 +4,9 @@
 #include <algorithm>
 
 #include "getglut.h"
-#include "vec4D.h"
 #include "window.h"
+#include "vec4D.h"
+#include "collidable.h"
 
 namespace ep2 {
 

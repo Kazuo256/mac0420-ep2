@@ -1,5 +1,6 @@
 
 #include "scene.h"
+#include "collidable.h"
 
 namespace ep2 {
 

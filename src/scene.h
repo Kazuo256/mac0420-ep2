@@ -6,7 +6,6 @@
 #include "transform.h"
 #include "getglut.h"
 #include "camera.h"
-#include "collidable.h"
 
 #include <vector>
 #include <string>
@@ -15,6 +14,8 @@
 #include <tr1/functional>
 
 namespace ep2 {
+
+class Collidable;
 
 class Scene {
   public:

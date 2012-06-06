@@ -24,9 +24,11 @@ class Transform {
                 const Base4D& zaxis = Base4D::Z(),
                 const Base4D& origin = Base4D::W());
         void makematrix (double* matrix) const; 
+        void dump () const;
         Base4D& operator [] (unsigned i) { return columns[i]; }
         Base4D operator [] (unsigned i) const { return columns[i]; }
-        Matrix operator * (Matrix& rhs);
+        Matrix operator * (const Matrix& rhs) const;
+        Base4D operator * (const Base4D& rhs) const;
       private:
         Base4D columns[4];
     };

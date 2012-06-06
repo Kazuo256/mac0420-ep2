@@ -1,5 +1,6 @@
 
 #include <cmath>
+#include <cstdio>
 
 #include <algorithm>
 
@@ -9,11 +10,18 @@
 namespace ep2 {
 
 void Camera::set_position (const Point4D& position) {
-  transform_.set_position(-position);
+  transform_.set_position(Point4D());
+  puts("");
+  (position-Point4D()).dump();
+  move(position-Point4D());
 }
 
 void Camera::move (const Vec4D& movement) {
-  transform_.translate(-movement);
+  Transform rot = transform_;
+  rot.set_position(Base4D());
+  transform_.translate(-(rot.matrix()*movement));
+  puts("Camera new pos:");
+  transform_.matrix().dump();
 }
 
 void Camera::zoom (double d) {
@@ -33,11 +41,6 @@ void Camera::set_ortho (double ratio) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   double max_dimension = std::max(view_.x(), view_.y());
-  // I say it in portuguese to make it clear.
-  // Eu perguntei no PACA se era ou não pra ajustar o tamanho dos objetos
-  // quando ocorresse zoom na visão ortogonal. Como o monitor não respondeu,
-  // deixei exatamente como o enunciado pediu: apenas mudo a distância da
-  // camera.
   if (ratio >= 1.0)
     glOrtho(
       -ratio*0.75*max_dimension, ratio*0.75*max_dimension,

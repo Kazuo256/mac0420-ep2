@@ -48,9 +48,8 @@ void run () {
   glutMainLoop();
 }
 
-static void movement_task (Scene::Ptr scene, Window::Ptr win) {
-  //double x = win->mouse().movement().x();
-  //scene->camera().rotatey(x);
+static void camera_task (Scene::Ptr scene) {
+  //scene->camera().set_position(imeguy.tformvec()[0].matrix()[3]);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -58,8 +57,8 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveW (Scene::Ptr scene, int x, int y) {
-  if ( imeguy.willmove('w') == true )
-    scene->camera().move(Vec4D(0.0, 0.0, -1));
+  if ( imeguy.willmove(scene, 'w') == true );
+    //scene->camera().move(Vec4D(0.0, 0.0, -1));
 }
 
 static void moveA (Scene::Ptr scene, int x, int y) {
@@ -67,8 +66,8 @@ static void moveA (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
-  if ( imeguy.willmove('s') == true )
-    scene->camera().move(Vec4D(0.0, 0.0, 1));
+  if ( imeguy.willmove(scene, 's') == true );
+    //scene->camera().move(Vec4D(0.0, 0.0, 1));
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
@@ -132,8 +131,9 @@ static Scene::Ptr make_scene (Window::Ptr win) {
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
-  scene->camera().move(Vec4D(0.0, 3.0, 7.0));
-  //scene->pushtask(Task(Task::Updater(bind(camera_task, scene, win))));
+  //scene->camera().move(Vec4D(0.0, 3.0, 7.0));
+  scene->camera().set_position(Point4D(0.0, 3.0, 7.0));
+  scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));
@@ -159,7 +159,6 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   trans.pushmodel(skybox);
   trans.scale(Vec4D(100.0, 100.0, 100.0));
   scene->root().pushtransform(trans);
-  scene->root().dump();
   return true;
 }
 
