@@ -12,10 +12,9 @@ void Collidable::pushtransform (Transform tform) {
 }
 
 bool Collidable::willmove (char key) {
-  Vec4D dir;
+  Vec4D dir = tformvec_[0].matrix()[2];
   if ( key == 'w' )
-    dir = Vec4D(0.0, 0.0, -1);
-  else dir = Vec4D(0.0, 0.0, 1);
+    dir = -dir;
   
   Collidables::iterator it;
   /*  See if "this" is colliding with all the collidables class 
