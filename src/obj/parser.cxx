@@ -10,6 +10,7 @@ using std::string;
 
 Parser::Parser (const string& filename) : objfile(NULL) {
   objfile = fopen(filename.c_str(), "r");
+  if (!objfile) puts("WARNING!"); // TODO
 }
 
 bool Parser::parse_command (Command& cmd) {

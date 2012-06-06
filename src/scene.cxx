@@ -3,6 +3,8 @@
 
 namespace ep2 {
 
+using std::string;
+
 void Scene::pushtask (const Task& task) {
   tasks_.push_back(task);
 }
@@ -47,13 +49,13 @@ void Scene::check_keyevent (unsigned char key, int x, int y) {
     key_events_[key] (x,y);
 }
 
-Collidable& Scene::findcoll (std::string key) {
-  CollTypes::iterator it;
-  it = colltypes_.find(key);
-  return it->second;
+void Scene::add_collidable_obj (const string& coll_name, const Point4D& pos) {
+  if (colltypes_.find(coll_name) == colltypes_.end())
+    return; // TODO: warning
+  colltypes_[coll_name].pushpos(pos);
 }
 
-void Scene::insertcolltype (std::string key, Collidable coll) {
+void Scene::insertcolltype (const string& key, Collidable coll) {
   colltypes_.insert( std::pair<std::string, Collidable>(key, coll) );
 }
 

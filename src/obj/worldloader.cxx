@@ -42,7 +42,7 @@ void WorldLoader::loadmodels (Scene::Ptr scene) {
     }
     std::string name = objname;
     tform.composition(matrix);
-    scene->findcoll(name).pushpos(tform.matrix()[3]);
+    scene->add_collidable_obj(name, tform.matrix()[3]);
     scene->root().pushtransform(tform);
   }
 }

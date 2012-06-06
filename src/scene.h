@@ -52,9 +52,9 @@ class Scene {
     ///
     void check_keyevent (unsigned char key, int x, int y);
     ///
-    void insertcolltype (std::string key, Collidable coll);
+    void insertcolltype (const std::string& key, Collidable coll);
     ///
-    Collidable& findcoll (std::string key);
+    void add_collidable_obj (const std::string& coll_name, const Point4D& pos);
     /// Creates a new scene object.
     CollTypes colltypes () { return colltypes_; }
     static Ptr create() {

@@ -14,7 +14,7 @@ class Collidable {
   public:
     typedef std::vector<Point4D>      Pos;
     typedef std::vector<Collidable>   Collidables;
-    Collidable (double width, double length) :
+    Collidable (double width = 0.0, double length = 0.0) :
       width_(width),
       length_(length) {}
     bool willmove (char key);
