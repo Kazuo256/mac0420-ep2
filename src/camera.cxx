@@ -11,8 +11,6 @@ namespace ep2 {
 
 void Camera::set_position (const Point4D& position) {
   transform_.set_position(Point4D());
-  puts("");
-  (position-Point4D()).dump();
   move(position-Point4D());
 }
 
@@ -20,8 +18,6 @@ void Camera::move (const Vec4D& movement) {
   Transform rot = transform_;
   rot.set_position(Base4D());
   transform_.translate(-(rot.matrix()*movement));
-  puts("Camera new pos:");
-  transform_.matrix().dump();
 }
 
 void Camera::zoom (double d) {
