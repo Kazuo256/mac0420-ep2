@@ -54,7 +54,7 @@ class Scene {
     ///
     void insertcolltype (const std::string& key, Collidable coll);
     ///
-    void add_collidable_obj (const std::string& coll_name, const Point4D& pos);
+    void add_collidable_obj (const std::string& coll_name, const Transform tform);
     /// Creates a new scene object.
     CollTypes colltypes () { return colltypes_; }
     static Ptr create() {

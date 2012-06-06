@@ -19,14 +19,14 @@ class Collidable {
       length_(length) {}
     bool willmove (char key);
     void pushcollidable (Collidable collidable);
-    void pushpos (Point4D pos);
+    void pushtransform (Transform tform);
     double width () { return width_; }
     double length () { return length_; }
-    Pos pos () { return pos_; }
+    Transform::TransformVec tformvec() { return tformvec_; }
   private:
     double        width_, length_;
     Collidables   collidables_;
-    Pos           pos_;
+    Transform::TransformVec  tformvec_;
     /// See if this is colliding with all models in coll.
     bool iscolliding (Collidable coll, Vec4D dir);
 };
