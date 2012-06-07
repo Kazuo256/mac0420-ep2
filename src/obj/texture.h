@@ -16,6 +16,7 @@ class Texture {
     typedef std::tr1::shared_ptr<Texture>             Ptr;
     typedef std::tr1::unordered_map<std::string, Ptr> Cache;
     ~Texture ();
+    GLuint name () const { return texname_; }
     static Ptr get (const std::string& filepath);
   private:
     GLuint texname_;

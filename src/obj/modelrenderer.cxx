@@ -6,6 +6,7 @@
 #include <tr1/functional>
 
 #include "getglut.h"
+#include "obj/texture.h"
 
 namespace ep2 {
 namespace obj {
@@ -23,6 +24,10 @@ static void setup_material (const Material& material) {
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material.specular);
   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, material.emission);
   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.spec_exponent);
+  if (material.texture) {
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, material.texture->name());
+  }
 }
 
 void ModelRenderer::default_material () {
@@ -31,8 +36,8 @@ void ModelRenderer::default_material () {
 
 void ModelRenderer::vertex (const VertexData& v) {
   if (v.tex) {
-    //Base4D vt = data_->texture_vertices()[v.tex-1];
-    //glTexCoord2d(vt.x(), vt.y());
+    Base4D vt = data_->texture_vertices()[v.tex-1];
+    glTexCoord2d(vt.x(), vt.y());
   }
   glVertex4dv(data_->vertices()[v.vtx-1].val());
 }

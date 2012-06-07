@@ -112,11 +112,25 @@ DEFINE_HANDLER(texcoord) {
   data->add_texcoord(Base4D(raw_vertex));
 }
 
+static void parse_vtx (Face& face, const string& vtx) {
+  size_t begin = 0, pos;
+  VertexData vtxdata = VertexData(0, 0, 0);
+  pos = vtx.find("/", begin);
+  if (pos == string::npos) {
+    vtxdata.vtx = strtoul(vtx.c_str(), NULL, 0);
+  } else {
+    vtxdata.vtx =
+      strtoul(vtx.substr(begin, pos-begin).c_str(), NULL, 0);
+    vtxdata.tex = strtoul(vtx.substr(pos+1).c_str(), NULL, 0);
+  }
+  face.push_back(vtxdata);
+}
+
 DEFINE_HANDLER(face) {
   Face                    face;
   Command::const_iterator it;
   for (it = cmd.begin()+1; it != cmd.end(); it++)
-    face.push_back(strtoul(it->c_str(), NULL, 0));
+    parse_vtx(face, *it);
   data->add_face(face);
 }
 
