@@ -3,12 +3,26 @@
 
 #include <cstdio>
 
+#include <il.h>
+#include <ilut.h>
+
 namespace ep2 {
 namespace obj {
 
 using std::string;
 
+static void init_devil () {
+  static bool check = false;
+  if (!check) {
+    ilInit();
+    ilutRenderer(ILUT_OPENGL);
+    ilutEnable(ILUT_OPENGL_CONV);
+    check = true;
+  }
+}
+
 Texture::Ptr Texture::load (const string& filepath) {
+  init_devil();
   return Ptr();
 }
 
