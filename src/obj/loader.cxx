@@ -7,6 +7,7 @@
 #include "obj/model.h"
 #include "obj/modeldata.h"
 #include "obj/modelrenderer.h"
+#include "obj/texture.h"
 
 namespace ep2 {
 namespace obj {
@@ -20,7 +21,7 @@ using namespace std::tr1::placeholders;
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
 #define OBJ_HANDLERTABLE_SIZE 5
-#define MTL_HANDLERTABLE_SIZE 5
+#define MTL_HANDLERTABLE_SIZE 6
 #define GET_HANDLER(name) &Loader::handle_##name
 
 struct RawHandlerTable {
@@ -41,7 +42,8 @@ static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
   {"Ka", GET_HANDLER(ambient) },
   {"Kd", GET_HANDLER(diffuse) },
   {"Ks", GET_HANDLER(specular) },
-  {"Tf", GET_HANDLER(emission) }
+  {"Tf", GET_HANDLER(emission) },
+  {"map_Kd", GET_HANDLER(texture) }
 };
 
 Loader::Loader () {
@@ -151,6 +153,12 @@ MATERIAL_COLORS(DEFINE_COLORHANDLER)
 
 #undef DEFINE_COLORHANDLER
 #undef MATERIAL_COLORS
+
+DEFINE_HANDLER(texture) {
+  if (current_mtlname_.empty())
+    return; /* TODO: warning */
+  current_material_.texture = Texture::get(cmd[1]);
+}
 
 #undef DEFINE_HANDLER
 

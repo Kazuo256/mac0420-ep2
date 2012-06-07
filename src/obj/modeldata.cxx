@@ -23,6 +23,7 @@ void Material::clear () {
   memcpy(emission, DEFAULT_MTL_EMISSION, 4*sizeof(float));
   spec_exponent = DEFAULT_MTL_SPEC_EXPONENT;
   opacy = DEFAULT_MTL_OPACY;
+  texture = TexPtr();
 }
 
 void ModelData::add_vertex (const Base4D& vertex) {

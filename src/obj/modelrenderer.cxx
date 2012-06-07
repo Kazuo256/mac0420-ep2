@@ -39,9 +39,9 @@ void ModelRenderer::render_face (const Face& face) {
   {
     Face::const_iterator it;
     for (it = face.begin()+1; it+1 !=face.end(); it++) {
-      vertex(face.front());
-      vertex(*it);
-      vertex(*(it+1));
+      vertex(face.front().vtx);
+      vertex(it->vtx);
+      vertex((it+1)->vtx);
     }
   }
   glEnd();

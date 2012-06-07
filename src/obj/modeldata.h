@@ -13,16 +13,14 @@
 namespace ep2 {
 namespace obj {
 
-// This is overkill for now.
-/*
 struct VertexData {
   unsigned vtx, tex, norm;
-  explicit VertexData (unsigned v, unsigned t = 0, unsigned n = 0) :
+  VertexData (unsigned v, unsigned t = 0, unsigned n = 0) :
     vtx(v), tex(t), norm(n) {}
 };
-*/
-
-typedef std::vector<unsigned> Face;
+class Texture;
+typedef std::tr1::shared_ptr<Texture> TexPtr;
+typedef std::vector<VertexData> Face;
 
 struct Material {
   float     ambient[4],     // Ka
@@ -31,6 +29,7 @@ struct Material {
             emission[4],    // Tf
             spec_exponent,  // Ns
             opacy;          // d
+  TexPtr    texture;
   void clear();
 };
 

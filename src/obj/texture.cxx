@@ -49,6 +49,7 @@ Texture::Ptr Texture::load (const string& filepath) {
   Ptr texture = Ptr(new Texture(texname));
   cache_[filepath] = texture;
   ilDeleteImages(1, &imgname);
+  printf("Loaded texture '%s'\n", filepath.c_str());
   return texture;
 }
 

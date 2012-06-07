@@ -37,6 +37,7 @@ class Loader {
     DECLARE_HANDLER (diffuse);
     DECLARE_HANDLER (specular);
     DECLARE_HANDLER (emission);
+    DECLARE_HANDLER (texture);
   private:
     HandlerTable  obj_handlers_,
                   mtl_handlers_;
