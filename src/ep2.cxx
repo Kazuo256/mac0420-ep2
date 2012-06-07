@@ -121,9 +121,10 @@ void render_skybox () {
 
 static void createimeguy (Scene::Ptr scene) {
   imeguy->pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
-  Scene::CollTypes::iterator it;
+  Scene::CollTypes::const_iterator it;
   for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
-    imeguy->pushcollidable(it->second);
+    if (it->second)
+      imeguy->pushcollidable(it->second);
   scene->insertcolltype("imeguy", imeguy);
 }
 
