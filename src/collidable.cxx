@@ -28,20 +28,32 @@ bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
 }
 
 bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
-  Point4D newpos = tformvec_[0].matrix()[3]+dir;
   Transform::TransformVec::iterator it;
   if (coll.tformvec_.empty()) return false;
   for ( it = coll.tformvec_.begin(); it < coll.tformvec_.end(); it++ ) {
-    double x = it->matrix()[3].x();
-    double z = it->matrix()[3].z();
-    // See if coll will collide with "this". 
-    if (   ((newpos.x()-length_/2) > (x+coll.length_/2))  // Coll on the left.
-        || ((x-coll.length_/2) > (newpos.x()+length_/2))  // Coll on the right.
-        || ((newpos.z()-width_/2) > (z+coll.width_/2))    // Coll on bottom.
-        || ((z-coll.width_/2) > ((newpos).z()+width_/2))  )// Coll on top
-            return false;
+    if ( iscollidingwithmodel ( coll.width_, 
+                                coll.length_, 
+                                it->matrix()[3], 
+                                dir) )
+      return true;
   }
-  return true;
+  return false;
+}
+
+bool Collidable::iscollidingwithmodel ( double w, 
+                                        double l, 
+                                        Base4D point, 
+                                        Vec4D dir) {
+    double x = point.x();
+    double z = point.z();
+    Point4D newpos = tformvec_[0].matrix()[3]+dir;
+    // See if coll will collide with "this". 
+    if (   ((newpos.x()-length_/2) > (x+l/2))  // Coll on the left.
+        || ((x-l/2) > (newpos.x()+length_/2))  // Coll on the right.
+        || ((newpos.z()-width_/2) > (z+w/2))    // Coll on bottom.
+        || ((z-w/2) > ((newpos).z()+width_/2))  )// Coll on top
+            return false;
+    return true;
 }
 
 }
