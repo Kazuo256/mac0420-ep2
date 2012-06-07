@@ -63,6 +63,7 @@ static void moveW (Scene::Ptr scene, int x, int y) {
 
 static void moveA (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(-15.0);
+  imeguy.rotate(15.0);
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
@@ -72,6 +73,7 @@ static void moveS (Scene::Ptr scene, int x, int y) {
 
 static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
+  imeguy.rotate(-15.0);
 }
 
 void render_skybox () {

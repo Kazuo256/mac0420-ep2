@@ -11,6 +11,16 @@ void Collidable::pushtransform (Transform tform) {
   tformvec_.push_back(tform);
 }
 
+void Collidable::rotate (double ang) {
+  Transform::TransformVec::iterator it;
+  for ( it = tformvec_.begin(); it < tformvec_.end(); it++ ) {
+    Base4D oldpos = it->matrix()[3];
+    it->set_position(Point4D());
+    it->rotatey(ang);
+    it->set_position(oldpos);
+  }
+}
+
 bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
   Vec4D dir = tformvec_[0].matrix()[2];
   if ( key == 'w' )

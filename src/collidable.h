@@ -21,6 +21,7 @@ class Collidable {
     bool willmove (Scene::Ptr scene, unsigned char key);
     void pushcollidable (Collidable collidable);
     void pushtransform (Transform tform);
+    void rotate (double ang);
     double width () { return width_; }
     double length () { return length_; }
     Transform::TransformVec tformvec() { return tformvec_; }
