@@ -21,7 +21,7 @@ using namespace std::tr1::placeholders;
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
 #define OBJ_HANDLERTABLE_SIZE 6
-#define MTL_HANDLERTABLE_SIZE 6
+#define MTL_HANDLERTABLE_SIZE 8
 #define GET_HANDLER(name) &Loader::handle_##name
 
 struct RawHandlerTable {
@@ -44,6 +44,8 @@ static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
   {"Kd", GET_HANDLER(diffuse) },
   {"Ks", GET_HANDLER(specular) },
   {"Tf", GET_HANDLER(emission) },
+  {"Ns", GET_HANDLER(shininess) },
+  {"d", GET_HANDLER(dissolve) },
   {"map_Kd", GET_HANDLER(texture) }
 };
 
@@ -176,6 +178,18 @@ MATERIAL_COLORS(DEFINE_COLORHANDLER)
 
 #undef DEFINE_COLORHANDLER
 #undef MATERIAL_COLORS
+
+DEFINE_HANDLER(shininess) {
+  if (current_mtlname_.empty())
+    return; /* TODO: warning */
+  current_material_.spec_exponent = atof(cmd[1].c_str());
+}
+
+DEFINE_HANDLER(dissolve) {
+  if (current_mtlname_.empty())
+    return; /* TODO: warning */
+  current_material_.opacy = atof(cmd[1].c_str());
+}
 
 DEFINE_HANDLER(texture) {
   if (current_mtlname_.empty())

@@ -38,6 +38,8 @@ class Loader {
     DECLARE_HANDLER (diffuse);
     DECLARE_HANDLER (specular);
     DECLARE_HANDLER (emission);
+    DECLARE_HANDLER (shininess);
+    DECLARE_HANDLER (dissolve);
     DECLARE_HANDLER (texture);
   private:
     HandlerTable  obj_handlers_,
