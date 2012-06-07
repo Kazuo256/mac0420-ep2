@@ -2,13 +2,13 @@
 == Coisas gerais do enunciado:
 
 [DONE]Carregar cenário (a partir de um arquivo)
-[GOROBA]Colisão com paredes.
-[GOROBA]Colisão com limites do cenário.
+[DONE]Colisão com paredes.
+[DONE]Colisão com limites do cenário.
 [WIL]Materiais e texturas.
 Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 Iluminação (tonalização)
 Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
-Mostrar framerate
+[GOROBA]Mostrar framerate
 Escrever LEIAME.
 
 == Coisas específicas de implemetação:
