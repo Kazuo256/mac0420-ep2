@@ -14,13 +14,15 @@ namespace obj {
 class Texture {
   public:
     typedef std::tr1::shared_ptr<Texture>             Ptr;
-    typedef std::tr1::unordered_map<std::string, Ptr> TexCache;
-    static Ptr load (const std::string& filepath);
+    typedef std::tr1::unordered_map<std::string, Ptr> Cache;
+    ~Texture ();
+    static Ptr get (const std::string& filepath);
   private:
     GLuint texname_;
-    static TexCache cache_;
-    Texture ();
-    ~Texture ();
+    static Cache cache_;
+    Texture (GLuint texname) :
+      texname_(texname) {}
+    static Ptr load (const std::string& filepath);
 };
 
 } // namespace obj
