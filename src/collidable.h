@@ -30,6 +30,7 @@ class Collidable {
     Transform::TransformVec  tformvec_;
     /// See if this is colliding with all models in coll.
     bool iscolliding (Collidable coll, Vec4D dir);
+    bool iscollidingwithmodel (double w, double l, Base4D point, Vec4D dir);
 };
 
 }//namespace ep2
