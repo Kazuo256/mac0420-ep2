@@ -52,6 +52,9 @@ class ModelData {
     const std::vector<Base4D>& vertices () const {
       return vertices_;
     }
+    const std::vector<Base4D>& texture_vertices () const {
+      return texture_vertices_;
+    }
     const std::vector<Face>& faces () const {
       return faces_;
     }
@@ -68,7 +71,7 @@ class ModelData {
     ModelData () {}
     std::string                 name_;
     std::vector<Base4D>         vertices_;
-    //std::vector<Base4D>   texture_vertices_;
+    std::vector<Base4D>         texture_vertices_;
     //std::vector<Vec4D>    normals_;
     std::vector<Face>           faces_;
     MaterialLib                 materials_;

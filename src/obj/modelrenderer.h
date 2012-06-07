@@ -19,7 +19,7 @@ class ModelRenderer {
   private:
     ModelData::Ptr data_;
     void render_face (const Face& face);
-    void vertex (unsigned i);
+    void vertex (const VertexData& v);
 };
 
 } // namespace obj

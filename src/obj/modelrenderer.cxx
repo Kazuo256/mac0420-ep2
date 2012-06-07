@@ -29,8 +29,12 @@ void ModelRenderer::default_material () {
   setup_material(Material());
 }
 
-void ModelRenderer::vertex (unsigned i) {
-  glVertex4dv(data_->vertices()[i-1].val());
+void ModelRenderer::vertex (const VertexData& v) {
+  if (v.tex) {
+    //Base4D vt = data_->texture_vertices()[v.tex-1];
+    //glTexCoord2d(vt.x(), vt.y());
+  }
+  glVertex4dv(data_->vertices()[v.vtx-1].val());
 }
 
 void ModelRenderer::render_face (const Face& face) {
@@ -39,9 +43,9 @@ void ModelRenderer::render_face (const Face& face) {
   {
     Face::const_iterator it;
     for (it = face.begin()+1; it+1 !=face.end(); it++) {
-      vertex(face.front().vtx);
-      vertex(it->vtx);
-      vertex((it+1)->vtx);
+      vertex(face.front());
+      vertex(*it);
+      vertex(*(it+1));
     }
   }
   glEnd();
