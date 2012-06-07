@@ -49,6 +49,7 @@ add_executable (ep2
   src/collidable.cxx
   src/control/mouse.cxx
 )
-target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
+
+target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY} ${IL_LIBRARIES} ${ILUT_LIBRARIES})
 set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O0 -g")
-message(${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY})
+
