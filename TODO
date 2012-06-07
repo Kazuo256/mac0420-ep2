@@ -4,7 +4,7 @@
 [DONE]Carregar cenário (a partir de um arquivo)
 [DONE]Colisão com paredes.
 [DONE]Colisão com limites do cenário.
-[WIL]Materiais e texturas.
+[DONE]Materiais e texturas.
 Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 Iluminação (tonalização)
 Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)

@@ -124,6 +124,7 @@ static void parse_vtx (Face& face, const string& vtx) {
     vtxdata.tex = strtoul(vtx.substr(pos+1).c_str(), NULL, 0);
   }
   face.push_back(vtxdata);
+  // TODO: cleanup + normals?
 }
 
 DEFINE_HANDLER(face) {
