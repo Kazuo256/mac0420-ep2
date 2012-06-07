@@ -30,6 +30,10 @@ void ModelData::add_vertex (const Base4D& vertex) {
   vertices_.push_back(vertex);
 }
 
+void ModelData::add_texcoord (const Base4D& texcoord) {
+  texture_vertices_.push_back(texcoord);
+}
+
 void ModelData::add_face (const Face& face) {
   faces_.push_back(face);
 }

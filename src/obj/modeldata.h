@@ -46,6 +46,7 @@ class ModelData {
     typedef std::tr1::shared_ptr<ModelData> Ptr;
     void set_name (const std::string& name) { name_ = name; }
     void add_vertex (const Base4D& vertex);
+    void add_texcoord (const Base4D& texcoord);
     void add_face (const Face& face);
     void add_material (const std::string& name, const Material& material);
     void add_material_index (const std::string& name);

@@ -20,7 +20,7 @@ using namespace std::tr1::placeholders;
 
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
-#define OBJ_HANDLERTABLE_SIZE 5
+#define OBJ_HANDLERTABLE_SIZE 6
 #define MTL_HANDLERTABLE_SIZE 6
 #define GET_HANDLER(name) &Loader::handle_##name
 
@@ -34,7 +34,8 @@ static RawHandlerTable obj_handlers_table[OBJ_HANDLERTABLE_SIZE] = {
   {"v", GET_HANDLER(vertex) },
   {"f", GET_HANDLER(face) },
   {"mtllib", GET_HANDLER(materialimport) },
-  {"usemtl", GET_HANDLER(materialusage) }
+  {"usemtl", GET_HANDLER(materialusage) },
+  {"vt", GET_HANDLER(texcoord) }
 };
 
 static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
@@ -102,6 +103,13 @@ DEFINE_HANDLER(vertex) {
   for (unsigned i = 0; i < 4 && i+1 < cmd.size(); i++)
     raw_vertex[i] = atof(cmd[i+1].c_str());
   data->add_vertex(Base4D(raw_vertex));
+}
+
+DEFINE_HANDLER(texcoord) {
+  double raw_vertex[4] = { 0.0, 0.0, 0.0, 0.0 };
+  for (unsigned i = 0; i < 3 && i+1 < cmd.size(); i++)
+    raw_vertex[i] = atof(cmd[i+1].c_str());
+  data->add_texcoord(Base4D(raw_vertex));
 }
 
 DEFINE_HANDLER(face) {
