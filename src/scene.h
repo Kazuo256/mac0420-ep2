@@ -17,18 +17,19 @@ namespace ep2 {
 
 class Collidable;
 
+
 class Scene {
   public:
     /// Reference-counting smart pointer for scene objects.
-    typedef std::tr1::shared_ptr<Scene>         Ptr;
+    typedef std::tr1::shared_ptr<Scene>             Ptr;
     /// Vector to store the tasks of a scene.
-    typedef std::vector<Task>                   Tasks;
+    typedef std::vector<Task>                       Tasks;
     /// Root that point ot the tree of the scene.
-    typedef Transform                           Root;
+    typedef Transform                               Root;
     /// Keyboard event handler.
-    typedef std::tr1::function<void (int, int)> KeyEvent;
+    typedef std::tr1::function<void (int, int)>     KeyEvent;
     /// Collidables map.
-    typedef std::map<std::string, Collidable>   CollTypes;
+    typedef std::map<std::string, Collidable::Ptr>  CollTypes;
     /// Gets a reference to the window's camera.
     /** @return Camera& A reference to the window's camera. */
     Camera& camera() { return camera_; }
@@ -53,7 +54,7 @@ class Scene {
     ///
     void check_keyevent (unsigned char key, int x, int y);
     ///
-    void insertcolltype (const std::string& key, Collidable coll);
+    void insertcolltype (const std::string& key, Collidable::Ptr coll);
     ///
     void add_collidable_obj (const std::string& coll_name, const Transform tform);
     /// Creates a new scene object.

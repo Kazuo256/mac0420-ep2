@@ -56,8 +56,8 @@ void Scene::add_collidable_obj (const string& coll_name, const Transform tform) 
   colltypes_[coll_name].pushtransform(tform);
 }
 
-void Scene::insertcolltype (const string& key, Collidable coll) {
-  colltypes_.insert( std::pair<std::string, Collidable>(key, coll) );
+void Scene::insertcolltype (const string& key, Collidable::Ptr coll) {
+  colltypes_.insert( std::pair<std::string, Collidable::Ptr>(key, coll) );
 }
 
 } //namespace ep2
