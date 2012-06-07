@@ -53,11 +53,11 @@ void Scene::check_keyevent (unsigned char key, int x, int y) {
 void Scene::add_collidable_obj (const string& coll_name, const Transform tform) {
   if (colltypes_.find(coll_name) == colltypes_.end())
     return; // TODO: warning
-  colltypes_[coll_name].pushtransform(tform);
+  colltypes_[coll_name]->pushtransform(tform);
 }
 
-void Scene::insertcolltype (const string& key, Collidable coll) {
-  colltypes_.insert( std::pair<std::string, Collidable>(key, coll) );
+void Scene::insertcolltype (const string& key, Collidable::Ptr coll) {
+  colltypes_.insert( std::pair<std::string, Collidable::Ptr>(key, coll) );
 }
 
 } //namespace ep2

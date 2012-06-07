@@ -4,8 +4,8 @@
 
 namespace ep2 {
 
-void Collidable::pushcollidable (Collidable collidable) {
-  collidables_.push_back(collidable);
+void Collidable::pushcollidable (Ptr coll) {
+  collidables_.push_back(coll);
 }
 
 void Collidable::pushtransform (Transform tform) {
@@ -38,12 +38,12 @@ bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
   return true;
 }
 
-bool Collidable::iscolliding (Collidable coll, Vec4D dir) {
+bool Collidable::iscolliding (Ptr coll, Vec4D dir) {
   Transform::TransformVec::iterator it;
-  if (coll.tformvec_.empty()) return false;
-  for ( it = coll.tformvec_.begin(); it < coll.tformvec_.end(); it++ ) {
-    if ( iscollidingwithmodel ( coll.width_, 
-                                coll.length_, 
+  if (coll->tformvec_.empty()) return false;
+  for ( it = coll->tformvec_.begin(); it < coll->tformvec_.end(); it++ ) {
+    if ( iscollidingwithmodel ( coll->width_, 
+                                coll->length_, 
                                 it->matrix()[3], 
                                 dir) )
       return true;

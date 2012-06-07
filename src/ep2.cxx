@@ -25,7 +25,7 @@ Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
-static Collidable imeguy(0.5, 0.5);
+static Collidable::Ptr imeguy = Collidable::create(0.5, 0.5);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -57,23 +57,23 @@ static void pausescene (Scene::Ptr scene, int x, int y) {
 }
 
 static void moveW (Scene::Ptr scene, int x, int y) {
-  if ( imeguy.willmove(scene, 'w') == true );
+  if ( imeguy->willmove(scene, 'w') == true );
     //scene->camera().move(Vec4D(0.0, 0.0, -1));
 }
 
 static void moveA (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(-15.0);
-  imeguy.rotate(15.0);
+  imeguy->rotate(15.0);
 }
 
 static void moveS (Scene::Ptr scene, int x, int y) {
-  if ( imeguy.willmove(scene, 's') == true );
+  if ( imeguy->willmove(scene, 's') == true );
     //scene->camera().move(Vec4D(0.0, 0.0, 1));
 }
 
 static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
-  imeguy.rotate(-15.0);
+  imeguy->rotate(-15.0);
 }
 
 void render_skybox () {
@@ -120,16 +120,16 @@ void render_skybox () {
 }
 
 static void createimeguy (Scene::Ptr scene) {
-  scene->insertcolltype("imeguy", imeguy);
+  imeguy->pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
   Scene::CollTypes::iterator it;
-  imeguy.pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
   for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
-    imeguy.pushcollidable(it->second);
+    imeguy->pushcollidable(it->second);
+  scene->insertcolltype("imeguy", imeguy);
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
-  if (!load_models(scene, "ime.scene", "ime.collidables"))
+    if (!load_models(scene, "ime.scene", "ime.collidables"))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
