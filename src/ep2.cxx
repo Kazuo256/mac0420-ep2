@@ -120,16 +120,16 @@ void render_skybox () {
 }
 
 static void createimeguy (Scene::Ptr scene) {
-  scene->insertcolltype("imeguy", imeguy);
+  imeguy->pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
   Scene::CollTypes::iterator it;
-  imeguy.pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
   for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
-    imeguy.pushcollidable(it->second);
+    imeguy->pushcollidable(it->second);
+  scene->insertcolltype("imeguy", imeguy);
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
-  if (!load_models(scene, "ime.scene", "ime.collidables"))
+    if (!load_models(scene, "ime.scene", "ime.collidables"))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(10.0, 10.0, 10.0);
