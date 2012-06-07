@@ -1,15 +1,26 @@
 
 == Coisas gerais do enunciado:
 
-[DONE]Carregar cenário (a partir de um arquivo)
-[DONE]Colisão com paredes.
-[DONE]Colisão com limites do cenário.
-[DONE]Materiais e texturas.
-Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
-Iluminação (tonalização)
-Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
-[GOROBA]Mostrar framerate
-Escrever LEIAME.
+[DONE]    Carregar cenário (a partir de um arquivo)
+[WIL]     Modelar o IME.
+[DONE]    Colisão com paredes.
+[DONE]    Colisão com limites do cenário.
+[DONE]    Materiais e texturas.
+          Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
+[WIL]     Iluminação (tonalização)
+          Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
+[GOROBA]  Mostrar framerate
+          Escrever LEIAME.
+
+== Melhorias e refatorações:
+
+Física    Movimentação com forças. (!)
+          Oscilação dos passos.
+
+Cenário   Textura para SkyBox. (!!!)
+          Relevo.
+
+Input     Usar mouse.
 
 == Coisas específicas de implemetação:
 
