@@ -4,12 +4,14 @@
 
 #include <cstdio>
 #include <vector>
+#include <tr1/memory>
 #include "point4D.h"
 #include "vec4D.h"
 #include "transform.h"
-#include "scene.h"
 
 namespace ep2 {
+
+class Scene;
 
 class Collidable {
   public:
@@ -18,7 +20,7 @@ class Collidable {
     Collidable (double width = 0.0, double length = 0.0) :
       width_(width),
       length_(length) {}
-    bool willmove (Scene::Ptr scene, unsigned char key);
+    bool willmove (std::tr1::shared_ptr<Scene> scene, unsigned char key);
     void pushcollidable (Collidable collidable);
     void pushtransform (Transform tform);
     void rotate (double ang);
