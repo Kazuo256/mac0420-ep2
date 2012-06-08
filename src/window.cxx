@@ -125,8 +125,50 @@ void Window::keyboard (unsigned char key, int x, int y) {
       break;
     default: break;
   }
-  // Display changes.
+  // Display changes.in
   glutPostRedisplay();
+}
+
+void setOrthographicProjection(Window::Ptr win) {    
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glLoadIdentity();
+  gluOrtho2D(0, win->width(), 0, win->height());
+  glScalef(1, -1, 1);
+  glTranslatef(0, -win->height(), 0);
+  glMatrixMode(GL_MODELVIEW);
+}
+
+void resetPerspectiveProjection() {
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+}
+
+void renderBitmapString(float x, float y,char *string)
+{  
+  char *c;
+      
+  glRasterPos2f(x, y);
+          
+  for (c=string; *c != '\0'; c++) {
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *c);
+  }
+}
+
+void printfps (Window::Ptr win) {
+  char out[64], fps[10];
+  strcpy(out, "Current FPS:"); 
+  sprintf(fps, "%f", win->fps());
+  strcat(out, fps);
+  //glColor3d(0.0, 1.0, 1.0);
+  setOrthographicProjection(win);
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
+  glLoadIdentity();
+  renderBitmapString(30.0, 30.0, out);
+  glPopMatrix();
+  resetPerspectiveProjection();
 }
 
 void Window::display () {
@@ -138,13 +180,13 @@ void Window::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   // Call the draw from the current scene.
   win->currentscene()->draw();
+  printfps(win);
   // Swap buffers to display result.
   glutSwapBuffers();
 }
 
 void Window::idle () {
   Ptr win = current_window();
-  
   win->fpscalculator();
   glutPostRedisplay();
 }
@@ -160,7 +202,6 @@ void Window::fpscalculator () {
     fps_ = frame_count_/(timeInterval/1000.0f);
     previous_time_ = current_time;
     frame_count_ = 0;
-    printf("Current FPS = %lf\n", fps_);
   }
 }
 
