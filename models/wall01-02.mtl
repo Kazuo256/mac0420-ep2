@@ -1,0 +1,24 @@
+# Blender MTL File: 'wall01-02.blend'
+# Material Count: 2
+newmtl Blue_ConcreteBare0115_7_S.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.038069 0.032453 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/ConcreteBare0115_7_S.jpg
+
+
+newmtl White_ConcreteBare0115_7_S.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/ConcreteBare0115_7_S.jpg
+
+
