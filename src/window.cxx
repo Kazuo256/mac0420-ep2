@@ -45,6 +45,7 @@ void Window::init () {
   glutSetWindow(id_);
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
+  glutIdleFunc(idle);
   glutMouseFunc(mousefunc);
   glutMotionFunc(motion);
   glutKeyboardFunc(keyboard);
@@ -141,8 +142,26 @@ void Window::display () {
   glutSwapBuffers();
 }
 
+void Window::idle () {
+  Ptr win = current_window();
+  
+  win->fpscalculator();
+  glutPostRedisplay();
+}
+
 void Window::fpscalculator () {
   frame_count_++;
+  
+  double current_time = glutGet(GLUT_ELAPSED_TIME);
+
+  int timeInterval = current_time - previous_time_;
+
+  if ( timeInterval > 1000 ) {
+    fps_ = frame_count_/(timeInterval/1000.0f);
+    previous_time_ = current_time;
+    frame_count_ = 0;
+    printf("Current FPS = %lf\n", fps_);
+  }
 }
 
 void Window::timer_func (int value) {

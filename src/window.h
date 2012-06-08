@@ -81,7 +81,10 @@ class Window {
     /// Display callback function for all windows.
     /** Signature follows GLUT specifications. */
     static void display ();
-    /// Idle callback function for all windows.
+    // Idle callback function for all windows
+    /** Signature follows GLUT specifications. */
+    static void idle ();
+    /// Timed callback function for all windows.
     /** Signature follows GLUT specifications. */
     static void timer_func (int value);
     /// Reshape callback function for all windows.
