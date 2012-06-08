@@ -57,12 +57,18 @@ class Window {
     int                       width_;
     // Viewport height.
     int                       height_;
+    // Number os frames
+    int                       frame_count_;
     // Mouse
     control::Mouse            mouse_;
     // Scenes vector
     SceneStack                scenestack_;
     // Initial window size.
     static int                init_width_, init_height_;
+    // frames per second.
+    double                    fps_;
+    // Last time that the fps has been modified.
+    double                    previous_time_;
     // Reference base for all created windows.
     static std::tr1::unordered_map<int, Ptr> windows_;
     /// Constructor. See Window::create.
@@ -90,9 +96,11 @@ class Window {
     /// Keyboard callsback function for all windows.
     /** Signature follows GLUT specifications. */
     static void keyboard (unsigned char key, int x, int y);
+    // Calculates the actual frame rate.
+    void fpscalculator ();
 };
 
-} // namespace ep1
+} // namespace ep2
 
 #endif
 

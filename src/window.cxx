@@ -18,7 +18,11 @@ int                             Window::init_width_,
 unordered_map<int, Window::Ptr> Window::windows_;
 
 Window::Window (const std::string& caption) :
-  width_ (init_width_), height_(init_height_) {
+  width_ (init_width_), 
+  height_(init_height_),
+  frame_count_(0),
+  fps_(0.0),
+  previous_time_(0.0)  {
   id_ = glutCreateWindow(caption.c_str());
 }
 
@@ -135,6 +139,10 @@ void Window::display () {
   win->currentscene()->draw();
   // Swap buffers to display result.
   glutSwapBuffers();
+}
+
+void Window::fpscalculator () {
+  frame_count_++;
 }
 
 void Window::timer_func (int value) {
