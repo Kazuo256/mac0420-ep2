@@ -43,6 +43,12 @@ class Window {
     Scene::Ptr currentscene () { return scenestack_.top(); }
     /// Add a new scene to the actual window
     void pushscene (const Scene::Ptr& scene);
+    // Get fps
+    double fps () { return fps_; }
+    // Weight
+    double width () { return width_; }
+    // Height
+    double height () { return height_; }
     /// Creates a new window object.
     /** @param caption - The window's caption. */
     static Ptr create (const std::string& caption) {
