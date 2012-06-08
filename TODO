@@ -9,7 +9,7 @@
           Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 [DONE]    Iluminação (tonalização)
           Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
-[GOROBA]  Mostrar framerate
+[DONE]  Mostrar framerate
           Escrever LEIAME.
 
 == Melhorias e refatorações:
