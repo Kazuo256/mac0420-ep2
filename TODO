@@ -3,13 +3,16 @@
 
 [DONE]    Carregar cenário (a partir de um arquivo)
 [WIL]     Modelar o IME.
+            -> Bloco A
+            -> Bloco B [DONE]
+            -> Bloco C, C' e K.
 [DONE]    Colisão com paredes.
 [DONE]    Colisão com limites do cenário.
 [DONE]    Materiais e texturas.
           Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 [DONE]    Iluminação (tonalização)
           Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
-[DONE]  Mostrar framerate
+[DONE]    Mostrar framerate
           Escrever LEIAME.
 
 == Melhorias e refatorações:
