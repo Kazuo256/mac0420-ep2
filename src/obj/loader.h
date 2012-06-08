@@ -23,6 +23,7 @@ class Loader {
   public:
     typedef std::tr1::function<void (ModelData::Ptr, const Command&)> CmdHandler;
     typedef std::tr1::unordered_map<std::string, CmdHandler> HandlerTable;
+    typedef std::tr1::unordered_map<std::string, ModelData::Ptr> Cache;
     Loader ();
     Model load_model (const std::string& modelname);
     // OBJ handlers
@@ -46,6 +47,7 @@ class Loader {
                   mtl_handlers_;
     std::string   current_mtlname_;
     Material      current_material_;
+    static Cache  cache_;
     void load_materiallib (ModelData::Ptr& data, const std::string& libname);
 };
 

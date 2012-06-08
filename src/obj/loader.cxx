@@ -49,6 +49,8 @@ static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
   {"map_Kd", GET_HANDLER(texture) }
 };
 
+Loader::Cache Loader::cache_;
+
 Loader::Loader () {
   for (unsigned i = 0; i < OBJ_HANDLERTABLE_SIZE; i++)
     obj_handlers_[obj_handlers_table[i].tag] =
@@ -59,17 +61,21 @@ Loader::Loader () {
 }
 
 Model Loader::load_model (const string& modelname) {
-  Parser parser("models/"+modelname+".obj");
-  ModelData::Ptr data = ModelData::create();
-  while (true) {
-    Command cmd;
-    if (!parser.parse_command(cmd)) break;
-    HandlerTable::iterator handler = obj_handlers_.find(cmd.front());
-    if (handler != obj_handlers_.end())
-      handler->second(data, cmd);
-    else
-      printf("Ignoring unsuported OBJ instruction '%s'.\n",
-             cmd.front().c_str());
+  ModelData::Ptr data = cache_[modelname];
+  if (!data) {
+    Parser parser("models/"+modelname+".obj");
+    data = ModelData::create();
+    while (true) {
+      Command cmd;
+      if (!parser.parse_command(cmd)) break;
+      HandlerTable::iterator handler = obj_handlers_.find(cmd.front());
+      if (handler != obj_handlers_.end())
+        handler->second(data, cmd);
+      else
+        printf("Ignoring unsuported OBJ instruction '%s'.\n",
+               cmd.front().c_str());
+    }
+    cache_[modelname] = data;
   }
   return Model(ModelRenderer(data));
 }
