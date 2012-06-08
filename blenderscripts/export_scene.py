@@ -8,19 +8,10 @@ def write_some_data(context, filepath, use_some_setting):
         if k == "Lamp" or k == "Camera":
             continue
         f.write("%s\n" % re.split("\.", k, 1)[0])
-        for i in [0,2,1,3]:
-            if i == 2:
-                f.write("%(0)f %(1)f %(2)f %(3)f\n" %\
-                        {'0':-v.matrix_basis[0][i], '1':-v.matrix_basis[1][i],\
-                         '2':-v.matrix_basis[2][i], '3':-v.matrix_basis[3][i]})
-            else if i == 3:
-                f.write("%(0)f %(1)f %(2)f %(3)f\n" %\
-                        {'0':v.matrix_basis[0][i], '1':v.matrix_basis[2][i],\
-                         '2':-v.matrix_basis[1][i], '3':v.matrix_basis[3][i]})
-            else:
-                f.write("%(0)f %(1)f %(2)f %(3)f\n" %\
-                        {'0':v.matrix_basis[0][i], '1':v.matrix_basis[1][i],\
-                         '2':v.matrix_basis[2][i], '3':v.matrix_basis[3][i]})
+        for i in [0,1,2,3]:
+            f.write("%(0)f %(1)f %(2)f %(3)f\n" %\
+                    {'0':v.matrix_basis[0][i], '1':v.matrix_basis[2][i],\
+                     '2':-v.matrix_basis[1][i], '3':v.matrix_basis[3][i]})
     f.close()
 
     return {'FINISHED'}

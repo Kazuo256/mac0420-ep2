@@ -57,7 +57,7 @@ void Camera::set_perspective (double ratio) {
   glLoadIdentity();
   gluPerspective(
     60.0, ratio,
-    0.5 /*view_.z()*0.1*/, view_.z()*10.0
+    0.5, view_.z()*10.0
   );
   glMatrixMode(GL_MODELVIEW);
 }
