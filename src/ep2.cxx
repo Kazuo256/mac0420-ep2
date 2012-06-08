@@ -82,39 +82,39 @@ void render_skybox () {
     // FRENTE = RED
     glColor3d(1.0, 0.0, 0.0);
     glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 1.0, 1.0);
-    glVertex3d(0.0, 1.0, 1.0);
-    glVertex3d(0.0, 0.0, 1.0);
+    glVertex3d(1.0, 2.0, 1.0);
+    glVertex3d(-1.0, 2.0, 1.0);
+    glVertex3d(-1.0, 0.0, 1.0);
     //ATRAS = GREEN
     glColor3d(0.0, 1.0, 0.0);
-    glVertex3d(0.0, 0.0, 0.0);
-    glVertex3d(0.0, 1.0, 0.0);
-    glVertex3d(1.0, 1.0, 0.0);
-    glVertex3d(1.0, 0.0, 0.0);
+    glVertex3d(-1.0, 0.0, -1.0);
+    glVertex3d(-1.0, 2.0, -1.0);
+    glVertex3d(1.0, 2.0, -1.0);
+    glVertex3d(1.0, 0.0, -1.0);
     //TOPO = AMA
     glColor3d(1.0, 1.0, 0.0);   
-    glVertex3d(0.0, 1.0, 0.0);
-    glVertex3d(1.0, 1.0, 0.0);
-    glVertex3d(1.0, 1.0, 1.0);
-    glVertex3d(0.0, 1.0, 1.0);
+    glVertex3d(-1.0, 2.0, -1.0);
+    glVertex3d(1.0, 2.0, -1.0);
+    glVertex3d(1.0, 2.0, 1.0);
+    glVertex3d(-1.0, 2.0, 1.0);
     //BAIXO = ROXO
     glColor3d(1.0, 0.0, 1.0);   
-    glVertex3d(0.0, 0.0, 0.0);
-    glVertex3d(0.0, 0.0, 1.0);
+    glVertex3d(-1.0, 0.0, -1.0);
+    glVertex3d(-1.0, 0.0, 1.0);
     glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 0.0, 0.0);
+    glVertex3d(1.0, 0.0, -1.0);
     //ESQ = PISCINA
     glColor3d(0.0, 1.0, 1.0);   
-    glVertex3d(0.0, 0.0, 0.0);
-    glVertex3d(0.0, 1.0, 0.0);
-    glVertex3d(0.0, 1.0, 1.0);
-    glVertex3d(0.0, 0.0, 1.0);
+    glVertex3d(-1.0, 0.0, -1.0);
+    glVertex3d(-1.0, 2.0, -1.0);
+    glVertex3d(-1.0, 2.0, 1.0);
+    glVertex3d(-1.0, 0.0, 1.0);
     //DIR = BLUE
     glColor3d(0.0, 0.0, 1.0);   
-    glVertex3d(1.0, 0.0, 0.0);
+    glVertex3d(1.0, 0.0, -1.0);
     glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 1.0, 1.0);
-    glVertex3d(1.0, 1.0, 0.0);
+    glVertex3d(1.0, 2.0, 1.0);
+    glVertex3d(1.0, 2.0, -1.0);
   glEnd();
   glColor3d(1.0, 1.0, 1.0);
 }
@@ -133,7 +133,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
     if (!load_models(scene, "ime.scene", "ime.collidables"))
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
-  scene->camera().set_view(10.0, 10.0, 10.0);
+  scene->camera().set_view(30.0, 30.0, 30.0);
   //scene->camera().move(Vec4D(0.0, 3.0, 7.0));
   scene->camera().set_position(Point4D(0.0, 3.0, 7.0));
   scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
@@ -150,13 +150,6 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  /*for (int i = 0; i < 10; i++) {
-    Model model = Loader().load("wall00-00");
-    Transform tform;
-    tform.translate(Vec4D(2.0*i, 0.0, 0.0));
-    tform.pushmodel(model);
-    scene->root().pushtransform(tform);
-  }*/
   Model skybox = Model(Model::Renderer(render_skybox));
   Transform trans;
   trans.pushmodel(skybox);
