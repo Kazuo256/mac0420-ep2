@@ -25,7 +25,7 @@ Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
-static Collidable::Ptr imeguy = Collidable::create(0.5, 0.5);
+static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -120,7 +120,9 @@ void render_skybox () {
 }
 
 static void createimeguy (Scene::Ptr scene) {
-  imeguy->pushtransform(Transform(Transform::Matrix(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(0.0, 3.0, 7.0, 1.0))));
+  Transform tform;
+  tform.translate(Vec4D(0.0, 4.0, 7.0));
+  imeguy->pushtransform(tform);
   Scene::CollTypes::const_iterator it;
   for ( it = scene->colltypes().begin(); it != scene->colltypes().end(); it++ )
     if (it->second)
@@ -134,8 +136,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
     return Scene::Ptr();
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(30.0, 30.0, 30.0);
-  //scene->camera().move(Vec4D(0.0, 3.0, 7.0));
-  scene->camera().set_position(Point4D(0.0, 3.0, 7.0));
+  scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
   scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
