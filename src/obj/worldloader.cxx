@@ -36,7 +36,7 @@ void WorldLoader::loadmodels (Scene::Ptr scene) {
     for (int j = 0; j < 4; j++) {
       for (int i = 0; i < 4; i++) {
         fscanf(pmfile, "%lf", &buffer[i]);
-        printf("%lf-",buffer[i]);
+        //printf("%lf-",buffer[i]);
       }
       matrix[j].set_val(buffer);
     }

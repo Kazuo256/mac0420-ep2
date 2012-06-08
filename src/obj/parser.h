@@ -15,6 +15,7 @@ typedef std::vector<std::string> Command;
 class Parser {
   public:
     Parser (const std::string& filename);
+    ~Parser ();
     bool parse_command (Command& cmd);
   private:
     FILE *objfile;

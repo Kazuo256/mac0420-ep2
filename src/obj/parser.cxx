@@ -13,6 +13,11 @@ Parser::Parser (const string& filename) : objfile(NULL) {
   if (!objfile) puts("WARNING!"); // TODO
 }
 
+Parser::~Parser () {
+  if (objfile)
+    fclose(objfile);
+}
+
 bool Parser::parse_command (Command& cmd) {
   if (!objfile)
     return false;
