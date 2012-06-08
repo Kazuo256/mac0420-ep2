@@ -154,7 +154,7 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   Model skybox = Model(Model::Renderer(render_skybox));
   Transform trans;
   trans.pushmodel(skybox);
-  trans.scale(Vec4D(100.0, 100.0, 100.0));
+  trans.scale(Vec4D(120.0, 120.0, 50.0));
   scene->root().pushtransform(trans);
   return true;
 }
