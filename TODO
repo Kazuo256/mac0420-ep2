@@ -7,7 +7,7 @@
 [DONE]    Colisão com limites do cenário.
 [DONE]    Materiais e texturas.
           Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
-[WIL]     Iluminação (tonalização)
+[DONE]    Iluminação (tonalização)
           Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
 [GOROBA]  Mostrar framerate
           Escrever LEIAME.
