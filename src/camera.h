@@ -34,6 +34,8 @@ class Camera {
     void rotatez (double ang);
     ///
     void rotatey (double ang);
+    ///
+    void rotatex (double ang);
     /// Sets an orthogonal projection with the given ratio.
     /** @param ratio Orthogonal projection aspect ratio. */
     void set_ortho (double ratio);

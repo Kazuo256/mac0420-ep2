@@ -48,9 +48,13 @@ void run () {
   glutMainLoop();
 }
 
-static void camera_task (Scene::Ptr scene) {
-  //scene->camera().set_position(imeguy.tformvec()[0].matrix()[3]);
-}
+//static void camera_task (Window::Ptr win) {
+//  Point4D pos = win->mouse().position();
+//  if (pos.y() > 250) 
+//    win->currentscene()->camera().rotatex(1.0);
+//  else if (pos.y() < 350)
+//    win->currentscene()->camera().rotatex(-1.0);
+//}
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
   scene->toggle_active();
@@ -137,7 +141,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(30.0, 30.0, 30.0);
   scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
-  scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
+  //scene->pushtask(Task(Task::Updater(bind(camera_task, win))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));

@@ -94,6 +94,17 @@ void Transform::rotatey (const double ang) {
   matrix_ = rotate * matrix_;
 }
 
+void Transform::rotatex (const double ang) {
+  Matrix rotate;
+  double rad = -ang*PI/180;
+  rotate[0] = Base4D(1.0, 0.0, 0.0, 0.0);
+  rotate[1] = Base4D(0.0, cos(rad), sin(rad), 0.0);
+  rotate[2] = Base4D(0.0, -sin(rad), cos(rad), 0.0);
+  rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
+
+  matrix_ = rotate * matrix_;
+}
+
 void Transform::composition (Matrix& matrix) {
   matrix_ = matrix * matrix_;
 }
