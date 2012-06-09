@@ -167,13 +167,18 @@ void printfps (Window::Ptr win) {
   strcpy(out, "Current FPS:"); 
   sprintf(fps, "%f", win->fps());
   strcat(out, fps);
-  //glColor3d(0.0, 1.0, 1.0);
+  
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor3d(1.0, 0.0, 0.0);
+
   setOrthographicProjection(win);
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
   glLoadIdentity();
   renderBitmapString(30.0, 30.0, out);
   glPopMatrix();
+  glColor3dv(old);
   resetPerspectiveProjection();
 }
 
