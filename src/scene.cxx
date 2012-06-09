@@ -39,6 +39,14 @@ void drawaux (Transform tform) {
 void Scene::draw () {
   // Place the camera.
   camera_.place();
+  {
+    glPushMatrix();
+    float pos[4] = {0.0, 30.0, 0.0, 1.0};
+    float dir[3] = {1.0, -1.0, 0.0};
+    glLightfv(GL_LIGHT0, GL_POSITION, pos);
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+    glPopMatrix();
+  }
   drawaux(root_);
 }
 

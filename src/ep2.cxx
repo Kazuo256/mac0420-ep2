@@ -151,11 +151,11 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  Model skybox = Model(Model::Renderer(render_skybox));
-  Transform trans;
-  trans.pushmodel(skybox);
-  trans.scale(Vec4D(125.0, 125.0, 25.0));
-  scene->root().pushtransform(trans);
+  //Model skybox = Model(Model::Renderer(render_skybox));
+  //Transform trans;
+  //trans.pushmodel(skybox);
+  //trans.scale(Vec4D(125.0, 125.0, 25.0));
+  //scene->root().pushtransform(trans);
   return true;
 }
 
