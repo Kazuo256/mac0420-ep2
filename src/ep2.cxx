@@ -32,7 +32,7 @@ Window::Ptr win;
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
-static std::tr1::shared_ptr<Transform> transsun;
+static double speed_of_the_sun = 100;
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -61,10 +61,8 @@ static void camera_task (Scene::Ptr scene) {
 
 static void sun_task (Scene::Ptr scene) {
   double current_time = glutGet(GLUT_ELAPSED_TIME);
-  current_time = fmod(current_time, 360);
-  current_time *= (PI/180);
-  //scene->sun().translate(Vec4D(0.0, sin(current_time), cos(current_time)));
-  scene->sun().rotatex(current_time);
+  current_time = fmod(current_time, (PI/180));
+  scene->sun().rotatex(current_time*speed_of_the_sun);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -89,6 +87,16 @@ static void moveS (Scene::Ptr scene, int x, int y) {
 static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
   imeguy->rotate(-15.0);
+}
+
+static void increasespeed (int x, int y) {
+  speed_of_the_sun += 50.0;
+  printf("Aumentei pra : %lf\n",speed_of_the_sun);
+}
+
+static void decreasespeed (int x, int y) {
+  speed_of_the_sun -= 50.0;
+  printf("diminui pra : %lf\n",speed_of_the_sun);
 }
 
 void render_sun () {
@@ -168,6 +176,8 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));
   scene->register_keyevent('s', Scene::KeyEvent(bind(moveS, scene, _1, _2)));
   scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
+  scene->register_keyevent('1', Scene::KeyEvent(increasespeed));
+  scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
   //scene->camera().zoom(-5);
   createimeguy(scene);
   return scene;
@@ -179,8 +189,8 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   Model sun = Model(Model::Renderer(render_sun));
   Transform trans;
   trans.pushmodel(sun);
-  trans.scale(Vec4D(0.1, 0.1, 0.1));
-  trans.set_position(Point4D(0.0, 0.0, 125.0));
+  trans.scale(Vec4D(0.5, 0.5, 0.5));
+  trans.set_position(Point4D(0.0, 0.0, 70.0));
   scene->set_sun(trans);
   return true;
 }
