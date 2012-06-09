@@ -40,9 +40,9 @@ class Transform {
     void set_position (const Point4D& position);
     void translate (const Vec4D& translation);
     void scale (const Vec4D& scale);
-    void rotatex (const double ang);
     void rotatez (const double ang);
     void rotatey (const double ang);
+    void rotatex (const double ang);
     void composition (Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);

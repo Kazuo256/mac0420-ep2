@@ -39,7 +39,7 @@ static void init_opengl (double ratio) {
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT1);
   {
-    float ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f },
+    float ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f },
           diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glLightfv(GL_LIGHT1, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse);

@@ -32,6 +32,10 @@ void Camera::rotatey (double ang) {
   transform_.rotatey(ang);
 }
 
+void Camera::rotatex (double ang) {
+  transform_.rotatex(ang);
+}
+
 void Camera::set_ortho (double ratio) {
   perspective_ = false;
   glMatrixMode(GL_PROJECTION);
