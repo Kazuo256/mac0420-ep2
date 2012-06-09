@@ -45,6 +45,10 @@ class Scene {
     void draw ();
     /// Return the root of this scene.
     Root& root () { return root_; }
+    // Sun getter.
+    Transform& sun() { return sun_; }
+    // Sun setter.
+    void set_sun(Transform tform) { sun_ = tform; }
     /// Adds an event to a keyboard input.
     /** @param key    Character key associated to the given event.
      ** @param event  The event that happens when the given key is pressed. */
@@ -72,6 +76,8 @@ class Scene {
     bool                  active_;
     // Collidables types.
     CollTypes             colltypes_;
+    // Sun.
+    Transform             sun_;
     // Keyboard events.
     std::vector<KeyEvent> key_events_;
     explicit Scene () :

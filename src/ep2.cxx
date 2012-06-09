@@ -14,6 +14,12 @@
 #include "obj/worldloader.h"
 #include "obj/modelrenderer.h"
 
+#include <tr1/memory>
+#include <tr1/functional>
+#include <cmath>
+
+#define PI 3.14159265
+
 namespace ep2 {
 
 using std::tr1::bind;
@@ -26,6 +32,7 @@ Window::Ptr win;
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
+static std::tr1::shared_ptr<Transform> transsun;
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -56,6 +63,14 @@ void run () {
 //    win->currentscene()->camera().rotatex(-1.0);
 //}
 
+static void sun_task (Scene::Ptr scene) {
+  double current_time = glutGet(GLUT_ELAPSED_TIME);
+  current_time = fmod(current_time, 360);
+  current_time *= (PI/180);
+  //scene->sun().translate(Vec4D(0.0, sin(current_time), cos(current_time)));
+  scene->sun().rotatex(current_time);
+}
+
 static void pausescene (Scene::Ptr scene, int x, int y) {
   scene->toggle_active();
 }
@@ -80,6 +95,14 @@ static void moveD (Scene::Ptr scene, int x, int y) {
   imeguy->rotate(-15.0);
 }
 
+void render_sun () {
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor3d(1.0, 1.0, 0.0);
+  glutSolidSphere(2.0, 10, 10);
+  glColor3dv(old);
+}
+
 void render_skybox () {
   obj::ModelRenderer::default_material();
   glBegin(GL_QUADS);
@@ -96,6 +119,7 @@ void render_skybox () {
     glVertex3d(1.0, 2.0, -1.0);
     glVertex3d(1.0, 0.0, -1.0);
     //TOPO = AMA
+    
     glColor3d(1.0, 1.0, 0.0);   
     glVertex3d(-1.0, 2.0, -1.0);
     glVertex3d(1.0, 2.0, -1.0);
@@ -142,6 +166,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->camera().set_view(30.0, 30.0, 30.0);
   scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
   //scene->pushtask(Task(Task::Updater(bind(camera_task, win))));
+  scene->pushtask(Task(Task::Updater(bind(sun_task, scene))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));
@@ -155,11 +180,12 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  //Model skybox = Model(Model::Renderer(render_skybox));
-  //Transform trans;
-  //trans.pushmodel(skybox);
-  //trans.scale(Vec4D(125.0, 125.0, 25.0));
-  //scene->root().pushtransform(trans);
+  Model sun = Model(Model::Renderer(render_sun));
+  Transform trans;
+  trans.pushmodel(sun);
+  trans.scale(Vec4D(0.1, 0.1, 0.1));
+  trans.set_position(Point4D(0.0, 0.0, 125.0));
+  scene->set_sun(trans);
   return true;
 }
 
