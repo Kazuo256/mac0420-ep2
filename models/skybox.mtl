@@ -1,7 +1,7 @@
 # Blender MTL File: 'ime05.blend'
 # Material Count: 7
 
-newmtl Material
+newmtl Sky
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -9,9 +9,21 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd ./textures/sky01.png
 
 
-newmtl SideA_side02.png
+newmtl Ground_grass00.png
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ./textures/grass00.png
+
+
+newmtl Side_side02.png
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 1.000000 1.000000 1.000000
@@ -19,39 +31,5 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/side02.png
-
-
-newmtl SideB_side02.png
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 1.000000 1.000000 1.000000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/side02.png
-
-
-newmtl SideC_side02.png
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 1.000000 1.000000 1.000000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/side02.png
-
-
-newmtl SideD_side02.png
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 1.000000 1.000000 1.000000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/side02.png
-
+map_Kd ./textures/side02.png
 
