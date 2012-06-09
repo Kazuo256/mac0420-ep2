@@ -14,6 +14,12 @@
 #include "obj/worldloader.h"
 #include "obj/modelrenderer.h"
 
+#include <tr1/memory>
+#include <tr1/functional>
+#include <cmath>
+
+#define PI 3.14159265
+
 namespace ep2 {
 
 using std::tr1::bind;
@@ -26,6 +32,7 @@ Window::Ptr win;
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
+static std::tr1::shared_ptr<Transform> transsun;
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -50,6 +57,14 @@ void run () {
 
 static void camera_task (Scene::Ptr scene) {
   //scene->camera().set_position(imeguy.tformvec()[0].matrix()[3]);
+}
+
+static void sun_task () {
+  double current_time = glutGet(GLUT_ELAPSED_TIME);
+  current_time = fmod(current_time, 360);
+  current_time *= (PI/180);
+  transsun->translate(Vec4D(0.0, sin(current_time), cos(current_time)));
+  transsun->dump();
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -147,6 +162,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->camera().set_view(30.0, 30.0, 30.0);
   scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
   scene->pushtask(Task(Task::Updater(bind(camera_task, scene))));
+  scene->pushtask(Task(Task::Updater(sun_task)));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));
@@ -161,11 +177,13 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
   Model sun = Model(Model::Renderer(render_sun));
-  Transform trans;
-  trans.pushmodel(sun);
-  trans.scale(Vec4D(0.1, 0.1, 0.1));
-  trans.set_position(Point4D(0.0, 4.0, 5.0)); 
-  scene->root().pushtransform(trans);
+  std::tr1::shared_ptr<Transform> aux(new Transform);
+  aux->pushmodel(sun);
+  aux->scale(Vec4D(0.1, 0.1, 0.1));
+  aux->set_position(Point4D(0.0, 4.0, 5.0));
+  transsun = aux;
+  getchar();
+  scene->root().pushtransform(*aux);
   return true;
 }
 
