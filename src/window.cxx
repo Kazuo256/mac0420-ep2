@@ -37,7 +37,13 @@ static void init_opengl (double ratio) {
   glShadeModel(GL_SMOOTH);
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_LIGHTING);
-  glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHT1);
+  {
+    float ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f },
+          diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT1, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse);
+  }
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 

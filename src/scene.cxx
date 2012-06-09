@@ -40,12 +40,8 @@ void Scene::draw () {
   // Place the camera.
   camera_.place();
   {
-    glPushMatrix();
-    float pos[4] = {0.0, 30.0, 0.0, 1.0};
-    float dir[3] = {1.0, -1.0, 0.0};
-    glLightfv(GL_LIGHT0, GL_POSITION, pos);
-    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
-    glPopMatrix();
+    float pos[4] = {0.0, -1.0, 0.0, 0.0};
+    glLightfv(GL_LIGHT1, GL_POSITION, pos);
   }
   drawaux(root_);
 }
