@@ -76,6 +76,14 @@ static void moveD (Scene::Ptr scene, int x, int y) {
   imeguy->rotate(-15.0);
 }
 
+void render_sun () {
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor3d(1.0, 1.0, 0.0);
+  glutSolidSphere(2.0, 10, 10);
+  glColor3dv(old);
+}
+
 void render_skybox () {
   obj::ModelRenderer::default_material();
   glBegin(GL_QUADS);
@@ -92,6 +100,7 @@ void render_skybox () {
     glVertex3d(1.0, 2.0, -1.0);
     glVertex3d(1.0, 0.0, -1.0);
     //TOPO = AMA
+    
     glColor3d(1.0, 1.0, 0.0);   
     glVertex3d(-1.0, 2.0, -1.0);
     glVertex3d(1.0, 2.0, -1.0);
@@ -151,11 +160,12 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  //Model skybox = Model(Model::Renderer(render_skybox));
-  //Transform trans;
-  //trans.pushmodel(skybox);
-  //trans.scale(Vec4D(125.0, 125.0, 25.0));
-  //scene->root().pushtransform(trans);
+  Model sun = Model(Model::Renderer(render_sun));
+  Transform trans;
+  trans.pushmodel(sun);
+  trans.scale(Vec4D(0.1, 0.1, 0.1));
+  trans.set_position(Point4D(0.0, 4.0, 5.0)); 
+  scene->root().pushtransform(trans);
   return true;
 }
 
