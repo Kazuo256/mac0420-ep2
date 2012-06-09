@@ -72,6 +72,17 @@ void Transform::scale (const Vec4D& scale) {
   matrix_[2] = matrix_[2]*scale.x();
 }
 
+void Transform::rotatex (const double ang) {
+  Matrix rotate;
+  double rad = -ang*PI/180;
+  rotate[0] = Base4D(1.0, 0.0, 0.0, 0.0);
+  rotate[1] = Base4D(0.0, cos(rad), -sin(rad), 0.0);
+  rotate[2] = Base4D(0.0, sin(rad), cos(rad), 0.0);
+  rotate[3] = Base4D(0.0, 0.0, 0.0, 1.0);
+ 
+  matrix_ = rotate * matrix_;
+}
+
 void Transform::rotatez (const double ang) {
   Matrix rotate;
   double rad = -ang*PI/180;

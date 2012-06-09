@@ -63,7 +63,8 @@ static void sun_task (Scene::Ptr scene) {
   double current_time = glutGet(GLUT_ELAPSED_TIME);
   current_time = fmod(current_time, 360);
   current_time *= (PI/180);
-  scene->sun().translate(Vec4D(0.0, sin(current_time), cos(current_time)));
+  //scene->sun().translate(Vec4D(0.0, sin(current_time), cos(current_time)));
+  scene->sun().rotatex(current_time);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
