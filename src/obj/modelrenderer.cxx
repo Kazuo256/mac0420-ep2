@@ -6,6 +6,8 @@
 #include <tr1/functional>
 
 #include "getglut.h"
+#include "vec4D.h"
+#include "point4D.h"
 #include "obj/texture.h"
 
 namespace ep2 {
@@ -47,13 +49,23 @@ void ModelRenderer::render_face (const Face& face) {
   glBegin(GL_TRIANGLES);
   {
     Face::const_iterator it;
-    for (it = face.begin()+1; it+1 !=face.end(); it++) {
-      vertex(face.front());
-      vertex(*it);
-      vertex(*(it+1));
-    }
+    for (it = face.begin()+1; it+1 !=face.end(); it++)
+      render_triangle(face.front(), *it, *(it+1));
   }
   glEnd();
+}
+
+void ModelRenderer::render_triangle (const VertexData& v1,
+                                     const VertexData& v2,
+                                     const VertexData& v3) {
+  Point4D a = data_->vertices()[v1.vtx-1],
+          b = data_->vertices()[v2.vtx-1],
+          c = data_->vertices()[v3.vtx-1];
+  Vec4D norm = Vec4D::normal(a,b,c);
+  glNormal3d(norm.x(), norm.y(), norm.z());
+  vertex(v1);
+  vertex(v2);
+  vertex(v3);
 }
 
 void ModelRenderer::operator () () {

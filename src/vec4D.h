@@ -7,6 +7,8 @@
 
 namespace ep2 {
 
+class Point4D;
+
 class Vec4D : public Base4D {
   public:
     /// Constructor.
@@ -63,6 +65,7 @@ class Vec4D : public Base4D {
      ** @return Vec4D Corresponding rotation vector in the yaw-pitch-woll
      **               format. */
     static Vec4D dir (const Vec4D& v, const Vec4D& up = Vec4D::Y()); 
+    static Vec4D normal (const Point4D& a, const Point4D& b, const Point4D& c);
 };
 
 inline Vec4D Vec4D::operator + (const Vec4D& rhs) const {

@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "vec4D.h"
+#include "point4D.h"
 
 #define PI 3.1415926535898
 
@@ -52,6 +53,14 @@ Vec4D Vec4D::dir (const Vec4D& v, const Vec4D& up) {
   roll = aux.angle_to(y);
   
   return ypr(yaw, pitch, roll);
+}
+
+Vec4D Vec4D::normal (const Point4D& a, const Point4D& b, const Point4D& c) {
+  //puts("normal");
+  //a.dump();
+  //b.dump();
+  //c.dump();
+  return ((b-a)/(c-a)).normalized();
 }
 
 } // namespace ep1

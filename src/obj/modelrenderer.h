@@ -19,6 +19,9 @@ class ModelRenderer {
   private:
     ModelData::Ptr data_;
     void render_face (const Face& face);
+    void render_triangle (const VertexData& v1,
+                          const VertexData& v2,
+                          const VertexData& v3);
     void vertex (const VertexData& v);
 };
 
