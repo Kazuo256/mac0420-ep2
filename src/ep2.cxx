@@ -111,50 +111,6 @@ void render_sun () {
   glColor3dv(old);
 }
 
-void render_skybox () {
-  obj::ModelRenderer::default_material();
-  glBegin(GL_QUADS);
-    // FRENTE = RED
-    glColor3d(1.0, 0.0, 0.0);
-    glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 2.0, 1.0);
-    glVertex3d(-1.0, 2.0, 1.0);
-    glVertex3d(-1.0, 0.0, 1.0);
-    //ATRAS = GREEN
-    glColor3d(0.0, 1.0, 0.0);
-    glVertex3d(-1.0, 0.0, -1.0);
-    glVertex3d(-1.0, 2.0, -1.0);
-    glVertex3d(1.0, 2.0, -1.0);
-    glVertex3d(1.0, 0.0, -1.0);
-    //TOPO = AMA
-    
-    glColor3d(1.0, 1.0, 0.0);   
-    glVertex3d(-1.0, 2.0, -1.0);
-    glVertex3d(1.0, 2.0, -1.0);
-    glVertex3d(1.0, 2.0, 1.0);
-    glVertex3d(-1.0, 2.0, 1.0);
-    //BAIXO = ROXO
-    glColor3d(1.0, 0.0, 1.0);   
-    glVertex3d(-1.0, 0.0, -1.0);
-    glVertex3d(-1.0, 0.0, 1.0);
-    glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 0.0, -1.0);
-    //ESQ = PISCINA
-    glColor3d(0.0, 1.0, 1.0);   
-    glVertex3d(-1.0, 0.0, -1.0);
-    glVertex3d(-1.0, 2.0, -1.0);
-    glVertex3d(-1.0, 2.0, 1.0);
-    glVertex3d(-1.0, 0.0, 1.0);
-    //DIR = BLUE
-    glColor3d(0.0, 0.0, 1.0);   
-    glVertex3d(1.0, 0.0, -1.0);
-    glVertex3d(1.0, 0.0, 1.0);
-    glVertex3d(1.0, 2.0, 1.0);
-    glVertex3d(1.0, 2.0, -1.0);
-  glEnd();
-  glColor3d(1.0, 1.0, 1.0);
-}
-
 static void createimeguy (Scene::Ptr scene) {
   Transform tform;
   tform.translate(Vec4D(0.0, 4.0, 7.0));
