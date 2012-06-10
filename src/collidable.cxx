@@ -42,13 +42,21 @@ bool Collidable::iscolliding (Ptr coll, Vec4D dir) {
   Transform::TransformVec::iterator it;
   if (coll->tformvec_.empty()) return false;
   for ( it = coll->tformvec_.begin(); it < coll->tformvec_.end(); it++ ) {
-    if ( iscollidingwithmodel ( coll->width_, 
+    if (  iscollidingwithskybox (it->matrix()[3], dir) ||
+          iscollidingwithmodel ( coll->width_, 
                                 coll->length_, 
                                 it->matrix()[3], 
                                 dir) )
       return true;
   }
   return false;
+}
+
+bool Collidable::iscollidingwithskybox ( Base4D point, Vec4D dir ) {
+  Point4D newpos = tformvec_[0].matrix()[3]+dir;
+  if (   newpos.x() > 120.0 || newpos.x() < -120.0 
+      || newpos.z() > 120.0 || newpos.z() < -120.0 ) return true;
+  else return false;
 }
 
 bool Collidable::iscollidingwithmodel ( double w, 
@@ -59,10 +67,10 @@ bool Collidable::iscollidingwithmodel ( double w,
     double z = point.z();
     Point4D newpos = tformvec_[0].matrix()[3]+dir;
     // See if coll will collide with "this". 
-    if (   ((newpos.x()-length_/2) > (x+l/2))  // Coll on the left.
-        || ((x-l/2) > (newpos.x()+length_/2))  // Coll on the right.
+    if (   ((newpos.x()-length_/2) > (x+l/2))   // Coll on the left.
+        || ((x-l/2) > (newpos.x()+length_/2))   // Coll on the right.
         || ((newpos.z()-width_/2) > (z+w/2))    // Coll on bottom.
-        || ((z-w/2) > ((newpos).z()+width_/2))  )// Coll on top
+        || ((z-w/2) > ((newpos).z()+width_/2))) // Coll on top
             return false;
     return true;
 }
