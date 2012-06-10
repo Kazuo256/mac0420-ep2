@@ -11,7 +11,7 @@
 [DONE]    Materiais e texturas.
 [DONE]    Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 [DONE]    Iluminação (tonalização)
-          Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
+[GOROBA-FAIL] Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
 [DONE]    Mostrar framerate
           Escrever LEIAME.
 
