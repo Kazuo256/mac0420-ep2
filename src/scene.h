@@ -84,8 +84,10 @@ class Scene {
     Transform             sun_;
     // Keyboard events.
     std::vector<KeyEvent> key_events_;
+    void drawaux(Transform tform);
     explicit Scene () :
       active_(true),
+      shadow_(false),
       key_events_(256, KeyEvent()) {}
 };
 

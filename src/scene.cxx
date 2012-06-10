@@ -18,7 +18,7 @@ void Scene::updatetasks () {
     it->update();
 }
 
-void drawaux (Transform tform) {
+void Scene::drawaux (Transform tform) {
   double matrix[16];
 
   glPushMatrix();
@@ -27,8 +27,10 @@ void drawaux (Transform tform) {
   
   Transform::ModelVec::const_iterator it;
   for (it = tform.modelvec().begin(); it < tform.modelvec().end(); it++ )
-    it->render();
-  
+    if (!shadow_)
+      it->render();
+    else shadow_ = !shadow_;
+
   Transform::TransformVec::const_iterator ite;
   for (ite = tform.transformvec().begin(); ite < tform.transformvec().end(); ite++ )
     drawaux((*ite));
@@ -43,8 +45,8 @@ void Scene::draw () {
     float pos[4] = {0.0, -1.0, 0.0, 0.0};
     glLightfv(GL_LIGHT1, GL_POSITION, pos);
   }
-  drawaux(root_);
   if (!shadow_) drawaux(sun_);
+  drawaux(root_);
 }
 
 void Scene::register_keyevent (unsigned char key, KeyEvent event) {

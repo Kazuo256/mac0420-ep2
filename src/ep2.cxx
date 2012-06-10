@@ -104,6 +104,19 @@ static void decreasespeed (int x, int y) {
 }
 
 void draw_shadow (Scene::Ptr scene) {
+  scene->toggle_shadow();
+  double aux[3];
+  aux[0] = scene->sun().matrix()[3].val()[0];
+  aux[1] = scene->sun().matrix()[3].val()[1];
+  aux[2] = scene->sun().matrix()[3].val()[2];
+  Transform::Matrix T1(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(-aux[0], -aux[1], -aux[2], 1.0));
+  Transform::Matrix M(Base4D::X(), Base4D(0.0, 1.0, 0.0, -1/aux[1]), Base4D::Z(), Base4D(0.0, 0.0, 0.0, 0.0));
+  Transform::Matrix T2(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(aux[0], aux[1], aux[2], 1.0));
+  scene->root().composition(T1);
+  scene->root().composition(M);
+  scene->root().composition(T2);
+  scene->draw();
+  scene->root().set_identity();
 }
 
 void render_sun (Scene::Ptr scene) {
