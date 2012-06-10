@@ -43,7 +43,7 @@ class Transform {
     void rotatez (const double ang);
     void rotatey (const double ang);
     void rotatex (const double ang);
-    void composition (Matrix& matrix);
+    void composition (const Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
     const Matrix& matrix() const { return matrix_; }  

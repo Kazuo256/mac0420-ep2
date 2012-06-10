@@ -9,7 +9,7 @@
 [DONE]    Colisão com paredes.
 [DONE]    Colisão com limites do cenário.
 [DONE]    Materiais e texturas.
-[GOROBA]  Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
+[DONE]    Passagem do tempo (Sol + SUPERDUPERTIMEACCELERATOR)
 [DONE]    Iluminação (tonalização)
           Iluminação (sombras, ver en.wikipedia.org/wiki/Shadow_mapping)
 [DONE]    Mostrar framerate

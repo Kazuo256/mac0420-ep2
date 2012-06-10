@@ -105,7 +105,7 @@ void Transform::rotatex (const double ang) {
   matrix_ = rotate * matrix_;
 }
 
-void Transform::composition (Matrix& matrix) {
+void Transform::composition (const Matrix& matrix) {
   matrix_ = matrix * matrix_;
 }
 

@@ -44,7 +44,7 @@ void Scene::draw () {
     glLightfv(GL_LIGHT1, GL_POSITION, pos);
   }
   drawaux(root_);
-  drawaux(sun_);
+  if (!shadow_) drawaux(sun_);
 }
 
 void Scene::register_keyevent (unsigned char key, KeyEvent event) {

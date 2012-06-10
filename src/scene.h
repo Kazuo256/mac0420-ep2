@@ -37,6 +37,8 @@ class Scene {
     void set_active (bool active = true) { active_ = active; }
     ///
     void toggle_active () { active_ = !active_; }
+    ///
+    void toggle_shadow () { shadow_ = !shadow_; }
     /// Add a new task to this scene.
     void pushtask (const Task& task);
     /// Update all tasks of this scene.
@@ -74,6 +76,8 @@ class Scene {
     Camera                camera_;
     // Whether the scene is active or not.
     bool                  active_;
+    // Shadow drawing
+    bool                  shadow_;
     // Collidables types.
     CollTypes             colltypes_;
     // Sun.

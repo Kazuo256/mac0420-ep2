@@ -103,7 +103,19 @@ static void decreasespeed (int x, int y) {
   printf("diminui pra : %lf\n",speed_of_the_sun);
 }
 
-void render_sun () {
+void draw_shadow (Scene::Ptr scene) {
+  scene->toggle_shadow();
+  scene->root().composition(scene->sun().matrix());
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor3d(0.5, 0.5, 0.5);
+  scene->draw();
+  glColor3dv(old);
+  scene->root().set_identity();
+  scene->toggle_shadow();
+}
+
+void render_sun (Scene::Ptr scene) {
   float pos[] = { 0.0f, 0.0f, 1.0f, 0.0f };
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
@@ -111,6 +123,7 @@ void render_sun () {
   glutSolidSphere(1.0, 10, 10);
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
   glColor3dv(old);
+  draw_shadow(scene);
 }
 
 static void createimeguy (Scene::Ptr scene) {
@@ -148,13 +161,12 @@ static Scene::Ptr make_scene (Window::Ptr win) {
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
-  Model sun = Model(Model::Renderer(render_sun));
+  Model sun = Model(Model::Renderer(bind(render_sun, scene)));
   Transform trans;
   trans.pushmodel(sun);
   trans.scale(Vec4D(1.0, 1.0, 1.0));
   trans.set_position(Point4D(0.0, 0.0, 70.0));
   scene->set_sun(trans);
-  
   return true;
 }
 
