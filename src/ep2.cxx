@@ -67,6 +67,7 @@ static void sun_task (Scene::Ptr scene) {
   double current_time = glutGet(GLUT_ELAPSED_TIME);
   current_time = fmod(current_time, (PI/180));
   scene->sun().rotatex(current_time*speed_of_the_sun);
+  glLightfv(GL_LIGHT2, GL_POSITION, (float*)Point4D().val());
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -108,6 +109,7 @@ void render_sun () {
   glGetDoublev(GL_CURRENT_COLOR, old);
   glColor3d(1.0, 1.0, 0.0);
   glutSolidSphere(2.0, 10, 10);
+  glLightfv(GL_LIGHT2, GL_POSITION, (float*)Point4D().val()); 
   glColor3dv(old);
 }
 
@@ -152,6 +154,7 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   trans.scale(Vec4D(0.5, 0.5, 0.5));
   trans.set_position(Point4D(0.0, 0.0, 70.0));
   scene->set_sun(trans);
+  
   return true;
 }
 
