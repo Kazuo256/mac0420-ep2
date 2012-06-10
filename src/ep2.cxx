@@ -64,11 +64,11 @@ void run () {
 //}
 
 static void sun_task (Scene::Ptr scene) {
-  float pos[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+  //float pos[] = { 0.0f, 0.0f, 0.0f, 1.0f };
   double current_time = glutGet(GLUT_ELAPSED_TIME);
   current_time = fmod(current_time, (PI/180));
   scene->sun().rotatex(current_time*speed_of_the_sun);
-  glLightfv(GL_LIGHT2, GL_POSITION, pos);
+  //glLightfv(GL_LIGHT2, GL_POSITION, pos);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -110,7 +110,7 @@ void render_sun () {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
   glColor3d(1.0, 1.0, 0.0);
-  glutSolidSphere(2.0, 10, 10);
+  glutSolidSphere(1.0, 10, 10);
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
   glColor3dv(old);
 }
@@ -153,7 +153,7 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
   Model sun = Model(Model::Renderer(render_sun));
   Transform trans;
   trans.pushmodel(sun);
-  trans.scale(Vec4D(0.5, 0.5, 0.5));
+  trans.scale(Vec4D(1.0, 1.0, 1.0));
   trans.set_position(Point4D(0.0, 0.0, 70.0));
   scene->set_sun(trans);
   
