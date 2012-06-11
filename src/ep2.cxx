@@ -69,7 +69,7 @@ static void sun_task (Scene::Ptr scene) {
   int dt = current_time - last;
   scene->sun().rotatex(dt*speed_of_the_sun*0.001);
   last = current_time;
-  if ((last%(int)(360000/speed_of_the_sun))*1.0 > 180000.0/speed_of_the_sun) {
+  if (scene->sun().matrix()[3].y() < 0.0) {
     scene->sun().modelvec()[0].set_visible(false);
     glDisable(GL_LIGHT2);
   } else {
