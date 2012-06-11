@@ -1,6 +1,6 @@
 
 MAC0420-2012: Introdução à Computação Gráfica.
-Primeiro Exercício-Programa: Simulação de partículas em um campo de forças.
+Segundo Exercício-Programa: Mundo IME Virtual.
 
 Alunos:                     Nº USP:
   Thiago de Gouveia Nunes     6797289
