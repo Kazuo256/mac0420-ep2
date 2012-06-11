@@ -110,10 +110,10 @@ void draw_shadow (Scene::Ptr scene) {
   aux[1] = scene->sun().matrix()[3].val()[1];
   aux[2] = scene->sun().matrix()[3].val()[2];
   Transform::Matrix T1(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(-aux[0], -aux[1], -aux[2], 1.0));
-  Transform::Matrix M(Base4D(2.0, 0.0, 0.0, 0.0), 
-                      Base4D(0.0, 2.0, 0.0, 0.0), 
-                      Base4D(0.0, 0.0, 5.0, 0.0), 
-                      Base4D(0.0, 0.0, -1.0, 1.0));
+  Transform::Matrix M(Base4D(1.0, 0.0, 0.0, 0.0), 
+                      Base4D(0.0, 1.0, 0.0, -1.0/aux[1]), 
+                      Base4D(0.0, 0.0, 1.0, 0.0), 
+                      Base4D(0.0, 0.0, 0.0, 1.0));
   Transform::Matrix T2(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(aux[0], aux[1], aux[2], 1.0));
   scene->root().composition(T1);
   scene->root().composition(M);
@@ -130,7 +130,7 @@ void render_sun (Scene::Ptr scene) {
   glutSolidSphere(1.0, 10, 10);
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
   glColor3dv(old);
-  //draw_shadow(scene);
+  draw_shadow(scene);
 }
 
 static void createimeguy (Scene::Ptr scene) {
