@@ -118,10 +118,13 @@ void draw_shadow (Scene::Ptr scene) {
   scene->root().composition(T1);
   scene->root().composition(M);
   scene->root().composition(T2);
+  glDisable(GL_LIGHTING);
   glPushMatrix();
   glLoadIdentity();
+  glColor4d(0.0, 0.0, 0.0, 0.5);
   scene->draw();
   glPopMatrix();
+  glEnable(GL_LIGHTING);
   scene->root().set_identity();
 }
 
