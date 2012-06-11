@@ -125,6 +125,7 @@ void draw_shadow (Scene::Ptr scene) {
   scene->draw();
   glPopMatrix();
   glEnable(GL_LIGHTING);
+  glColor4d(1.0, 1.0, 1.0, 1.0);
   scene->root().set_identity();
 }
 
