@@ -11,23 +11,29 @@ I. COMPILAÇÃO.
   Nós usamos CMake para gerar os Makefiles do nosso projeto. Não tivemos a
 oportunidade de testar em Windows ou MACOSX, por isso não podemos garantir nada
 nessas plataformas. Por outro lado, contanto que seja em um Linux com g++
-4.4.4 ou mais recente (para habilitar as funcionalidades TR1), o EP deve
-compilar sem problemas. O EP compila perfeitamente na Rede Linux, por exemplo.
+4.4.4 ou mais recente (para habilitar as funcionalidades TR1), e com as devidas
+dependências intaladas, o EP deve compilar sem problemas.
   Os comandos para compilar ele são: (a partir da mesma pasta desse LEIAME.txt)
   
     $ cmake .
     $ make
 
   Em geral é possível baixar o CMake normalmente pelo gerenciador de pacotes da
-distribuição. Mas qualquer coisa é só pegar no site oficial: www.cmake.org.
-  MAS caso você não queira usar o CMake ou esteja tendo problemas com ele (o
-que é pouco provável), fizemos um Makefile que faz o serviço, embora ele não
-faça todas as verificações legais do CMake. É só copiar TODO o conteúdo da pasta
-build/ para a mesma pasta desse LEIAME.txt e usar o comando:
+distribuição. Mas qualquer coisa é só pegar no site oficial: <www.cmake.org>.
 
-  $ make
+II. DEPENDÊNCIAS
 
-II. ARGUMENTOS DA LINHA DE COMANDO.
+  A única dependência do EP é a libDevIL, usada para carregar imagens em
+texturas de OpenGL. Como essa biblioteca tem, por sua vez, outras dependências,
+recomendamos que ela seja instalada usando um gerenciador de pacotes. Em um
+Ubuntu (10.10 ou mais recente) ou em um Debian (stable) o comando
+
+    $ sudo apt-get install libdevil-dev
+
+  é o suficiente para instalar adequadamente a libDevIL e suas dependências. O
+site oficial dela é <openil.sourceforge.net>.
+
+III. ARGUMENTOS DA LINHA DE COMANDO.
 
   O EP tem a seguinte assinatura de linha de comando:
 
@@ -36,12 +42,9 @@ II. ARGUMENTOS DA LINHA DE COMANDO.
   Os argumentos do GLUT são aqueles que a função glutInit recebe. Para maiores
 detalhes consultar a documentação do GLUT. 
 
-III. CONTROLES DO PROGRAMA.
+IV. CONTROLES DO PROGRAMA.
 
   O programa aceita os seguintes comandos durante sua execução:
-
-    Botão 'q':
-      Pausa/reinicia o programa. O programa começa com DESPAUSADO.
 
     Botão 'w':
       Movimenta o personagem para frente. 
@@ -56,7 +59,8 @@ III. CONTROLES DO PROGRAMA.
     Botão '2':
       Diminui a velocidade de passagem do tempo.
 
- IV. OBSERVAÇÕES
+V. OBSERVAÇÕES
 
   Por falta de tempo, somente o bloco B do ime foi modelado, e
   não temos sombras para a modelagem.
+
