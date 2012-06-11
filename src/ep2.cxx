@@ -113,12 +113,15 @@ void draw_shadow (Scene::Ptr scene) {
   Transform::Matrix M(Base4D(1.0, 0.0, 0.0, 0.0), 
                       Base4D(0.0, 1.0, 0.0, -1.0/aux[1]), 
                       Base4D(0.0, 0.0, 1.0, 0.0), 
-                      Base4D(0.0, 0.0, 0.0, 1.0));
+                      Base4D(0.0, 0.0, 0.0, 0.0));
   Transform::Matrix T2(Base4D::X(), Base4D::Y(), Base4D::Z(), Base4D(aux[0], aux[1], aux[2], 1.0));
   scene->root().composition(T1);
   scene->root().composition(M);
   scene->root().composition(T2);
+  glPushMatrix();
+  glLoadIdentity();
   scene->draw();
+  glPopMatrix();
   scene->root().set_identity();
 }
 
