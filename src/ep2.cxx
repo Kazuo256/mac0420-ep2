@@ -130,7 +130,7 @@ void draw_shadow (Scene::Ptr scene) {
   glDisable(GL_COLOR_MATERIAL);
   glPushMatrix();
   glLoadIdentity();
-  glColor4d(0.0, 0.0, 0.0, 0.2);
+  glColor4d(0.0, 0.0, 0.0, 0.5);
   scene->draw();
   glPopMatrix();
   glEnable(GL_LIGHTING);
