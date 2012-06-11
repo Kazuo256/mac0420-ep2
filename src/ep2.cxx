@@ -64,9 +64,15 @@ void run () {
 //}
 
 static void sun_task (Scene::Ptr scene) {
+  //static double total = 0.0;
   double current_time = glutGet(GLUT_ELAPSED_TIME);
   current_time = fmod(current_time, (PI/180));
   scene->sun().rotatex(current_time*speed_of_the_sun);
+  //total += current_time;
+  //if (total > 180.0)
+  //  scene->sun().modelvec()[0].set_visible(false);
+  //else
+  //  scene->sun().modelvec()[0].set_visible(true);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {

@@ -24,6 +24,8 @@ class Model {
     void toggle_visibility () {
       visible_ = !visible_;
     }
+    ///
+    void set_visible (bool visible) { visible_ = visible; }
     /// Renders this object.
     /** Must be called whithin a glut display callback. */
     void render () const;

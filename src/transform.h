@@ -47,7 +47,7 @@ class Transform {
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
     const Matrix& matrix() const { return matrix_; }  
-    const ModelVec& modelvec () { return modelvec_; }
+    ModelVec& modelvec () { return modelvec_; }
     const TransformVec& transformvec () { return transformvec_; }
     void dump () const;
     static Transform identity ();
