@@ -32,7 +32,7 @@ Window::Ptr win;
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
-static double speed_of_the_sun = 100;
+static double speed_of_the_sun = 10;
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -64,15 +64,15 @@ void run () {
 //}
 
 static void sun_task (Scene::Ptr scene) {
-  //static double total = 0.0;
-  double current_time = glutGet(GLUT_ELAPSED_TIME);
-  current_time = fmod(current_time, (PI/180));
-  scene->sun().rotatex(current_time*speed_of_the_sun);
-  //total += current_time;
-  //if (total > 180.0)
-  //  scene->sun().modelvec()[0].set_visible(false);
-  //else
-  //  scene->sun().modelvec()[0].set_visible(true);
+  static int last = 0.0;
+  int current_time = glutGet(GLUT_ELAPSED_TIME);
+  int dt = current_time - last;
+  scene->sun().rotatex(dt*speed_of_the_sun*0.001);
+  last = current_time;
+  if ((last%(int)(360000/speed_of_the_sun))*1.0 > 180000.0/speed_of_the_sun)
+    scene->sun().modelvec()[0].set_visible(false);
+  else
+    scene->sun().modelvec()[0].set_visible(true);
 }
 
 static void pausescene (Scene::Ptr scene, int x, int y) {
@@ -100,12 +100,12 @@ static void moveD (Scene::Ptr scene, int x, int y) {
 }
 
 static void increasespeed (int x, int y) {
-  speed_of_the_sun += 50.0;
+  speed_of_the_sun += 10.0;
   printf("Aumentei pra : %lf\n",speed_of_the_sun);
 }
 
 static void decreasespeed (int x, int y) {
-  speed_of_the_sun -= 50.0;
+  speed_of_the_sun -= 10.0;
   printf("diminui pra : %lf\n",speed_of_the_sun);
 }
 
@@ -130,7 +130,7 @@ void draw_shadow (Scene::Ptr scene) {
   glDisable(GL_COLOR_MATERIAL);
   glPushMatrix();
   glLoadIdentity();
-  glColor4d(0.0, 0.0, 0.0, 0.5);
+  glColor4d(0.0, 0.0, 0.0, 1.0);
   scene->draw();
   glPopMatrix();
   glEnable(GL_LIGHTING);
