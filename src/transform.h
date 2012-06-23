@@ -46,7 +46,8 @@ class Transform {
     void composition (const Matrix& matrix);
     void pushmodel (const obj::Model& model);
     void pushtransform (const Transform& transform);
-    const Matrix& matrix() const { return matrix_; }  
+    const Matrix& matrix() const { return matrix_; }
+    const Point4D& position() const { return matrix_[3]; }
     ModelVec& modelvec () { return modelvec_; }
     const TransformVec& transformvec () { return transformvec_; }
     void dump () const;
