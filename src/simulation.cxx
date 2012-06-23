@@ -4,7 +4,7 @@
 #include "getglut.h"
 #include "simulation.h"
 
-namespace ep1 {
+namespace ep2 {
 
 using std::string;
 using std::vector;
@@ -80,5 +80,5 @@ void Simulation::add_particles (Transform& tform) {
       }
 }
 
-} // namespace ep1
+} // namespace ep2
 

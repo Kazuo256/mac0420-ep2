@@ -1,13 +1,13 @@
 
-#ifndef EP1_FORCEFIELD_H_
-#define EP1_FORCEFIELD_H_
+#ifndef EP2_FORCEFIELD_H_
+#define EP2_FORCEFIELD_H_
 
 #include <vector>
 #include <cstdio>
 #include "vec4D.h"
 #include "point4D.h"
 
-namespace ep1 {
+namespace ep2 {
 
 /// Represents a force field.
 class ForceField {
@@ -72,7 +72,7 @@ class ForceField {
     Vec4D max_force_, min_force_;
 };
 
-} // namespace ep1
+} // namespace ep2
 
 #endif
 

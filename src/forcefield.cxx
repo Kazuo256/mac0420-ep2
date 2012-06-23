@@ -3,7 +3,7 @@
 
 #include "forcefield.h"
 
-namespace ep1 {
+namespace ep2 {
 
 using std::vector;
 
@@ -65,5 +65,5 @@ Vec4D ForceField::interpolate (const Point4D& pos) const {
   return f1*delta+f0*(1-delta);
 } 
 
-} // namespace ep1
+} // namespace ep2
 
