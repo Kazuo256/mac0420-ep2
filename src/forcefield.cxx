@@ -7,7 +7,7 @@ namespace ep1 {
 
 using std::vector;
 
-void ForceField::load (vector<Vec3D>::iterator it) {
+void ForceField::load (vector<Vec4D>::iterator it) {
   int x, y, z;
   max_force_ = min_force_ = *it;
   for (z = 0; z < depth_; z++)
@@ -17,7 +17,7 @@ void ForceField::load (vector<Vec3D>::iterator it) {
           max_force_ = *it;
         else if (it->length() < min_force_.length())
           min_force_ = *it;
-        forces_[z][y][x] = Vec3D(it->x(), -it->y(), -it->z());
+        forces_[z][y][x] = Vec4D(it->x(), -it->y(), -it->z());
         ++it;
       }
 }
@@ -27,8 +27,8 @@ static double calc_delta (double pos, double vertex) {
   return fabs(vertex - pos);
 }
 
-Vec3D ForceField::interpolate (const Vec3D& pos) const {
-  Vec3D brn, f00, f01, f10, f11, f0, f1, aux; // brn = bottom_right_near 
+Point4D ForceField::interpolate (const Point4D& pos) const {
+  Point4D brn, f00, f01, f10, f11, f0, f1, aux; // brn = bottom_right_near 
   double delta;
 
   // Trilinear interpolation algorithm.

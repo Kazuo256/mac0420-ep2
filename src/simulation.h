@@ -7,12 +7,13 @@
 
 #include <tr1/memory>
 
-#include "vec3D.h"
+#include "vec4D.h"
+#include "point4D.h"
 #include "window.h"
 #include "forcefield.h"
-#include "object.h"
+#include "obj/model.h"
 
-namespace ep1 {
+namespace ep2 {
 
 /// Represents a particle simulation environment.
 class Simulation {
@@ -37,12 +38,11 @@ class Simulation {
     void show_hide_forces ();
   private:
     double                    ratio_;
-    Vec3D                     size_,
+    Vec4D                     size_,
                               dists_;
     Window::Ptr               win_;
     ForceField                field_;
-    std::vector<Object::Ptr>  forces_,
-                              particles_;
+    std::vector<Model>        particles_;
     /// Constructor. See Simulation::create.
     explicit Simulation (const Window::Ptr& win, double ratio) :
       ratio_(ratio), win_(win) {}
@@ -62,7 +62,7 @@ class Simulation {
      ** @param move A reference to the movement vector. Its value may be
                     changed to avoid trespassing boundaries.
      ** @param pos  The position at which the movement happens. */
-    void check_movement (Vec3D& move, const Vec3D& pos) const;
+    void check_movement (Vec4D& move, const Vec4D& pos) const;
 };
 
 } // namespace ep1
