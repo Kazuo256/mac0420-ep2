@@ -37,7 +37,7 @@ class ForceField {
     /** @param ref Position whose floor'd coordinates lead to the wanted
      **            force.
      ** @return Vec4D Force at the given truncated position. */
-    Vec4D force (Vec4D ref) const {
+    Vec4D force (Point4D ref) const {
       int x, y, z;
       x = (int)ref.x();
       y = (int)ref.y();
