@@ -47,6 +47,7 @@ add_executable (ep2
   src/window.cxx
   src/camera.cxx
   src/collidable.cxx
+  src/utils.cxx
   src/rain.cxx
   src/forcefield.cxx
   src/simulation.cxx
