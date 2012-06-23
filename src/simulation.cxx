@@ -18,13 +18,7 @@ void Simulation::init (const string& info_file) {
   dists_ = infos[1];
   field_ = ForceField(size_.x(), size_.y(), size_.z());
   field_.load(infos.begin()+2);
-  win_->init(size_.x(), size_.y(), size_.z());
-  win_->camera().enframe(Vec4D(
-    (size_.x()-1)*dists_.x()/2.0,
-    -(size_.y()-1)*dists_.y()/2.0,
-    -(size_.z()-1)*dists_.z()/2.0
-  ));
-  add_particles(win_->currentscene()->root());
+  add_particles(scene_->root());
 }
 
 /// Transforms from global coordinates to the force field's coordinates.
@@ -72,11 +66,10 @@ void Simulation::add_particles (Transform& tform) {
         Point4D position(dists_.x()*x, -dists_.y()*y, -dists_.z()*z);
         Transform modeltform;
         modeltform.set_position(position);
-        Model particle = Model::create(Object::Renderer(
-                                              bind(sphere, 0.01),
-                                              bind(&Simulation::update_particle, this, _1));
-        modeltform.push_back(particle);
-        tform->pushtransform(modeltform);
+        obj::Model particle = obj::Model(obj::Model::Renderer(
+                                              bind(sphere, 0.01)));
+        modeltform.pushmodel(particle);
+        tform.pushtransform(modeltform);
       }
 }
 

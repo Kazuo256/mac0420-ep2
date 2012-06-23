@@ -48,7 +48,7 @@ class ForceField {
     /** Uses trilinear interpolation.
      ** @param pos A position within the force field.
      ** @result Vec4D The interpolated force at the given position. */
-    Vec4D interpolate (const Vec4D& pos) const;
+    Vec4D interpolate (const Point4D& pos) const;
     /// Gets the biggest force within the field.
     /** @return Vec4D The biggest force within the field. */
     Vec4D max_force () const { return max_force_; }

@@ -7,12 +7,12 @@
 #include <vector>
 #include <string>
 
-#include "vec3D.h"
+#include "vec4D.h"
 
 #define BUFFER_SIZE 256
 
 
-namespace ep1 {
+namespace ep2 {
 
 namespace utils {
 
@@ -22,7 +22,7 @@ namespace utils {
  **                  format specified at <b>EP1-2012.pdf</b>.
  ** @return std::vector<ep1::Vec3D> Array of vectors representing the simulation
  **                                 information. */
-std::vector<Vec3D> LoadForceFieldInfo (const std::string& file_name);
+std::vector<Vec4D> LoadForceFieldInfo (const std::string& file_name);
 
 }
 
