@@ -46,8 +46,6 @@ class Simulation {
     /// Constructor. See Simulation::create.
     explicit Simulation (const Window::Ptr& win, double ratio) :
       ratio_(ratio), win_(win) {}
-    /// Adds all forces to the simulation's force field.
-    void add_forces ();
     /// Adds all particles to the simulation.
     void add_particles ();
     /// Updates a particle object.
