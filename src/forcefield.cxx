@@ -27,8 +27,9 @@ static double calc_delta (double pos, double vertex) {
   return fabs(vertex - pos);
 }
 
-Point4D ForceField::interpolate (const Point4D& pos) const {
-  Point4D brn, f00, f01, f10, f11, f0, f1, aux; // brn = bottom_right_near 
+Vec4D ForceField::interpolate (const Point4D& pos) const {
+  Point4D brn, aux;
+  Vec4D   f00, f01, f10, f11, f0, f1; // brn = bottom_right_near 
   double delta;
 
   // Trilinear interpolation algorithm.
