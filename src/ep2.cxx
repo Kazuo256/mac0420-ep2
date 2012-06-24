@@ -9,7 +9,6 @@
 #include "scene.h"
 #include "transform.h"
 #include "collidable.h"
-#include "rain.h"
 #include "obj/model.h"
 #include "obj/loader.h"
 #include "obj/worldloader.h"
@@ -181,6 +180,10 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
   scene->register_keyevent('1', Scene::KeyEvent(increasespeed));
   scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
+  Rain rain = Rain("Macaco", scene_);
+  scene->rain(rain);
+  scene->pushtask(Task(Task::Updater(bind(rain.simulation()->update_particle_task, scene->raintform))));
+
   //scene->camera().zoom(-5);
   createimeguy(scene);
   return scene;
