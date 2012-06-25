@@ -48,7 +48,6 @@ add_executable (ep2
   src/camera.cxx
   src/collidable.cxx
   src/utils.cxx
-  src/rain.cxx
   src/control/mouse.cxx
 )
 

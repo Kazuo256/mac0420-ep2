@@ -32,7 +32,10 @@ Window::Ptr win;
 static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
-static double speed_of_the_sun = 10;
+static double speed_of_the_sun = 10,
+              speed_of_the_rain = 10;
+static int  rain_number = 8;
+
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -62,6 +65,18 @@ void run () {
 //  else if (pos.y() < 350)
 //    win->currentscene()->camera().rotatex(-1.0);
 //}
+
+static void rain_task (Scene::Ptr scene) {
+  static int last = 0.0;
+  int current_time = glutGet(GLUT_ELAPSED_TIME);
+  int dt = current_time - last;
+  scene->rain().translate(Vec4D(0.0, -dt*speed_of_the_rain*0.001, 0.0));
+  if ( scene->rain().matrix()[3].y() < 0.0 ) {
+    double old_y = scene->rain().matrix()[3].y();
+    printf("%lf\n", old_y);
+    scene->rain().translate(Vec4D(0.0, 10.0-old_y, 0.0));
+  }
+}
 
 static void sun_task (Scene::Ptr scene) {
   static int last = 0.0;
@@ -142,6 +157,14 @@ void draw_shadow (Scene::Ptr scene) {
   scene->root().set_identity();
 }
 
+void render_rain (Scene::Ptr scene) {
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor3d(0.0, 0.0, 1.0);
+  glutSolidSphere(1.0, 10, 10);
+  glColor3dv(old);
+}
+
 void render_sun (Scene::Ptr scene) {
   float pos[] = { 0.0f, 0.0f, 1.0f, 0.0f };
   double old[4];
@@ -151,6 +174,18 @@ void render_sun (Scene::Ptr scene) {
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
   glColor3dv(old);
   draw_shadow(scene);
+}
+
+static void createrain (Scene::Ptr scene, int rain_number) {
+  for ( int j = 0; j < rain_number/2; j++ ) {
+    for ( int i = 0; i < rain_number/2; i++ ) {
+      Transform tform;
+      Model rain = Model(Model::Renderer(bind(render_rain, scene)));
+      tform.matrix()[3] = Point4D(-rain_number/2+i,10.0,-rain_number/2+j);
+      tform.pushmodel(rain);
+      scene->rain().pushtransform(tform);
+    }
+  }
 }
 
 static void createimeguy (Scene::Ptr scene) {
@@ -168,11 +203,14 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
     if (!load_models(scene, "ime.scene", "ime.collidables"))
     return Scene::Ptr();
+  createrain(scene, rain_number);
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(30.0, 30.0, 30.0);
   scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
+  scene->rain().set_position(Point4D(0.0, 10.0, 7.0));
   //scene->pushtask(Task(Task::Updater(bind(camera_task, win))));
   scene->pushtask(Task(Task::Updater(bind(sun_task, scene))));
+  scene->pushtask(Task(Task::Updater(bind(rain_task, scene))));
   scene->register_keyevent('q', Scene::KeyEvent(bind(pausescene, scene, _1, _2)));
   scene->register_keyevent('w', Scene::KeyEvent(bind(moveW, scene, _1, _2)));
   scene->register_keyevent('a', Scene::KeyEvent(bind(moveA, scene, _1, _2)));

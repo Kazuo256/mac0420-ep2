@@ -35,6 +35,7 @@ bool Collidable::willmove (Scene::Ptr scene, unsigned char key) {
       return false;
   tformvec_[0].translate(dir);
   scene->camera().set_position(tformvec_[0].matrix()[3]);
+  scene->rain().translate(dir);
   return true;
 }
 
