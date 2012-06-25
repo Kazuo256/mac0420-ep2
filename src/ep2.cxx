@@ -33,7 +33,7 @@ static Scene::Ptr make_scene (Window::Ptr win);
 static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
-              speed_of_the_rain = 0.1;
+              speed_of_the_rain = 10;
 static int  rain_number = 8;
 
 
@@ -67,23 +67,22 @@ void run () {
 //}
 
 static void rain_task (Scene::Ptr scene) {
-  static int last = 0.0;
+  static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
   int dt = current_time - last;
   scene->rain().translate(Vec4D(0.0, -dt*speed_of_the_rain*0.001, 0.0));
-  scene->rain().dump();
-  //Transform::TransformVec::const_iterator it;
-  //it = scene->rain().transformvec().begin();
-  //(*it).dump();
+  last = current_time;
+  //scene->rain().dump();
+  Transform::TransformVec::const_iterator it;
+  it = scene->rain().transformvec().begin();
   if ( scene->rain().matrix()[3].y() < 0.0 ) {
     double old_y = scene->rain().matrix()[3].y();
-    printf("Velocidade da chuva: %lf\n", speed_of_the_rain);
     scene->rain().translate(Vec4D(0.0, -old_y+10.0, 0.0));
   }
 }
 
 static void sun_task (Scene::Ptr scene) {
-  static int last = 0.0;
+  static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
   int dt = current_time - last;
   scene->sun().rotatex(dt*speed_of_the_sun*0.001);
@@ -165,7 +164,9 @@ void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
   glColor3d(0.0, 0.0, 1.0);
-  glutSolidSphere(0.9, 10, 10);
+  glBegin(LINE);
+
+  glEnd();
   glColor3dv(old);
 }
 
@@ -185,7 +186,7 @@ static void createrain (Scene::Ptr scene, int rain_number) {
     for ( int i = 0; i < rain_number/2; i++ ) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
-      tform.set_position(Point4D(-5.0+i*(10.0/rain_number),10.0,-5.0+j*(10.0/rain_number)));
+      tform.set_position(Point4D(-5.0+i*(10.0/rain_number),0.0,-5.0+j*(10.0/rain_number)));
       tform.pushmodel(rain);
       scene->rain().pushtransform(tform);
     }
