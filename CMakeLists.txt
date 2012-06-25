@@ -49,8 +49,6 @@ add_executable (ep2
   src/collidable.cxx
   src/utils.cxx
   src/rain.cxx
-  src/forcefield.cxx
-  src/simulation.cxx
   src/control/mouse.cxx
 )
 

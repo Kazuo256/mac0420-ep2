@@ -7,7 +7,6 @@
 #include "getglut.h"
 #include "camera.h"
 #include "collidable.h"
-#include "rain.h"
 
 #include <vector>
 #include <string>
@@ -52,12 +51,6 @@ class Scene {
     Transform& sun() { return sun_; }
     // Sun setter.
     void set_sun (Transform sun) { sun_ = sun; }
-    // Rain getter
-    Rain rain() { return rain_; }
-    // Rain setter
-    void set_rain (Rain rain) { rain_ = rain; }
-    // Rain transformation getter.
-    Transform raintform () { return rain_tform_; }
     /// Adds an event to a keyboard input.
     /** @param key    Character key associated to the given event.
      ** @param event  The event that happens when the given key is pressed. */
@@ -89,10 +82,6 @@ class Scene {
     CollTypes             colltypes_;
     // Sun.
     Transform             sun_;
-    // Rain.
-    Transform             rain_tform_;
-    // Rain object
-    Rain                  rain_;
     // Keyboard events.
     std::vector<KeyEvent> key_events_;
     void drawaux(Transform tform);

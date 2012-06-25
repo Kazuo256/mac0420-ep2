@@ -48,7 +48,6 @@ void Scene::draw () {
   if (!shadow_) {
     drawaux(root_);
     drawaux(sun_);
-    drawaux(rain_);
   } else {
     drawaux(root_);
   }
