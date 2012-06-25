@@ -1,0 +1,15 @@
+# Blender v2.63 (sub 0) OBJ File: 'wallA01.blend'
+# www.blender.org
+mtllib wallA.mtl
+o Plane
+v 1.000000 0.000000 0.000000
+v -1.000000 0.000000 0.000000
+v 1.000000 8.000000 -0.000000
+v -1.000000 8.000000 -0.000000
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 1.000000
+usemtl Concrete_ConcreteBare0280_39_S.jpg
+s off
+f 2/1 1/2 3/3 4/4

@@ -1,0 +1,13 @@
+# Blender MTL File: 'wallA01.blend'
+# Material Count: 1
+newmtl Concrete_ConcreteBare0280_39_S.jpg
+Ns 96.078431
+Ka 0.640000 0.640000 0.640000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/kazuo/Workspaces/usp/2012.1/MAC0420/ep2/textures/ConcreteBare0280_39_S.jpg
+
+
