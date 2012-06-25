@@ -183,8 +183,8 @@ void render_sun (Scene::Ptr scene) {
 }
 
 static void createrain (Scene::Ptr scene, int rain_number) {
-  for ( int j = 0; j < rain_number/2; j++ ) {
-    for ( int i = 0; i < rain_number/2; i++ ) {
+  for ( int j = 0; j < rain_number; j++ ) {
+    for ( int i = 0; i < rain_number; i++ ) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
       tform.set_position(Point4D(-5.0+i*(10.0/rain_number),0.0,-5.0+j*(10.0/rain_number)));
