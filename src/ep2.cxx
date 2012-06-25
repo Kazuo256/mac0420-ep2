@@ -17,6 +17,7 @@
 #include <tr1/memory>
 #include <tr1/functional>
 #include <cmath>
+#include <cstdlib>
 
 #define PI 3.14159265
 
@@ -40,6 +41,8 @@ static int  rain_number = 64;
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
   glutInit(&argc, argv);
+  // Rand init
+  srand(time(NULL));
   // <--- Insert argument handling here.
   // Everythin OK, let's do this!
   // Init GLUT.
@@ -70,15 +73,20 @@ static void rain_task (Scene::Ptr scene) {
   static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
   int dt = current_time - last;
-  scene->rain().translate(Vec4D(0.0, -dt*speed_of_the_rain*0.001, 0.0));
-  last = current_time;
-  //scene->rain().dump();
-  Transform::TransformVec::const_iterator it;
-  it = scene->rain().transformvec().begin();
-  if ( scene->rain().matrix()[3].y() < 0.0 ) {
-    double old_y = scene->rain().matrix()[3].y();
-    scene->rain().translate(Vec4D(0.0, -old_y+10.0, 0.0));
+  double move_rand = 1; //(rand())/2.0;
+  Transform::TransformVec::iterator it;
+  for ( it = scene->rain().transformvec().begin();
+        it < scene->rain().transformvec().end();
+        it++ ) {
+    it->translate(Vec4D(0.0, -dt*speed_of_the_rain*move_rand*0.001, 0.0));
+    if ( it->matrix()[3].y() < 0.0 ) {
+      double old_y = it->matrix()[3].y();
+      printf("Old: %lf\n", old_y);
+      it->translate(Vec4D(0.0, -old_y+10.0, 0.0));
+    }
   }
+  last = current_time;
+  
 }
 
 static void sun_task (Scene::Ptr scene) {

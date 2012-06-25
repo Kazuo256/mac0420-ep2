@@ -49,7 +49,7 @@ class Transform {
     const Matrix& matrix() const { return matrix_; }
     const Base4D position() const { return matrix_[3]; }
     ModelVec& modelvec () { return modelvec_; }
-    const TransformVec& transformvec () { return transformvec_; }
+    TransformVec& transformvec () { return transformvec_; }
     void dump () const;
     static Transform identity ();
   private:
