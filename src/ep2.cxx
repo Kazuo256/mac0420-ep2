@@ -34,7 +34,7 @@ static bool load_models (Scene::Ptr scene, std::string modelfile, std::string co
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
               speed_of_the_rain = 10;
-static int  rain_number = 8;
+static int  rain_number = 64;
 
 
 void init (int argc, char **argv) {
@@ -164,8 +164,9 @@ void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
   glColor3d(0.0, 0.0, 1.0);
-  glBegin(LINE);
-
+  glBegin(GL_LINES);
+  glVertex3f(0.0, 0.0, 0.0);
+  glVertex3f(0.0, 1.0, 0.0);
   glEnd();
   glColor3dv(old);
 }
