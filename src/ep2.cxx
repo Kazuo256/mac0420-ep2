@@ -156,7 +156,7 @@ static void moveD (Scene::Ptr scene, int x, int y) {
 static void increaserain (Scene::Ptr scene, int x, int y) {
   if ( rain_number <= 256 ) {
     scene->rain().transformvec().clear();
-    rain_number *= 2;
+    rain_number += 8;
     createrain(scene, rain_number);
   }
 }
@@ -164,7 +164,7 @@ static void increaserain (Scene::Ptr scene, int x, int y) {
 static void decreaserain (Scene::Ptr scene, int x, int y) {
   if ( rain_number >= 0 ) {
     scene->rain().transformvec().clear();
-    rain_number /= 2;
+    rain_number -= 8;
     createrain(scene, rain_number);
   }    
 }
