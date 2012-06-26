@@ -255,7 +255,7 @@ static void createfog () {
  
   glFogi(GL_FOG_MODE, GL_EXP2);        // Fog Mode
   glFogfv(GL_FOG_COLOR, fcolor);            // Set Fog Color
-  glFogf(GL_FOG_DENSITY, 0.025f);              // How Dense Will The Fog Be
+  glFogf(GL_FOG_DENSITY, 0.01f);              // How Dense Will The Fog Be
   glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
   glFogf(GL_FOG_START, 1.0f);             // Fog Start Depth
   glFogf(GL_FOG_END, 5.0f);               // Fog End Depth
