@@ -216,11 +216,17 @@ static void createimeguy (Scene::Ptr scene) {
 }
 
 static void createfog () {
-  GLfloat fcolor[4] = {1.0, 1.0, 1.0, 1};
-  glEnable(GL_FOG);
-  glFogf(GL_FOG_MODE, GL_EXP);
-  glFogf(GL_FOG_DENSITY, 0.1);
-  glFogfv(GL_FOG, fcolor);
+  GLfloat fcolor[4] = {0.7, 0.7, 0.7, 1.0};
+
+  glClearColor(0.5f,0.5f,0.5f,1.0f);          // We'll Clear To The Color Of The Fog ( Modified )
+ 
+  glFogi(GL_FOG_MODE, GL_EXP);        // Fog Mode
+  glFogfv(GL_FOG_COLOR, fcolor);            // Set Fog Color
+  glFogf(GL_FOG_DENSITY, 0.05f);              // How Dense Will The Fog Be
+  glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
+  glFogf(GL_FOG_START, 1.0f);             // Fog Start Depth
+  glFogf(GL_FOG_END, 5.0f);               // Fog End Depth
+  glEnable(GL_FOG);                   // Enables GL_FOG
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
