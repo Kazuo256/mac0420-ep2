@@ -105,6 +105,30 @@ static void sun_task (Scene::Ptr scene) {
   }
 }
 
+void render_rain (Scene::Ptr scene) {
+  double old[4];
+  glGetDoublev(GL_CURRENT_COLOR, old);
+  glColor4d(0.0, 0.0, 1.0, 0.5);
+  glBegin(GL_LINES);
+  glVertex3f(0.0, 0.0, 0.0);
+  glVertex3f(0.0, 0.25, 0.0);
+  glEnd();
+  glColor3dv(old);
+}
+
+static void createrain (Scene::Ptr scene, int rain_number) {
+  for ( int j = 0; j < rain_number; j++ ) {
+    for ( int i = 0; i < rain_number; i++ ) {
+      Transform tform;
+      Model rain = Model(Model::Renderer(bind(render_rain, scene)));
+      double pos_rand = rand_goroba()*10;
+      tform.set_position(Point4D(-125.0+i*(250.0/rain_number),20.0+pos_rand,-125.0+j*(250.0/rain_number)));
+      tform.pushmodel(rain);
+      scene->rain().pushtransform(tform);
+    }
+  }
+}
+
 static void pausescene (Scene::Ptr scene, int x, int y) {
   scene->toggle_active();
 }
@@ -127,6 +151,22 @@ static void moveS (Scene::Ptr scene, int x, int y) {
 static void moveD (Scene::Ptr scene, int x, int y) {
   scene->camera().rotatey(15.0);
   imeguy->rotate(-15.0);
+}
+
+static void increaserain (Scene::Ptr scene, int x, int y) {
+  if ( rain_number <= 256 ) {
+    scene->rain().transformvec().clear();
+    rain_number *= 2;
+    createrain(scene, rain_number);
+  }
+}
+
+static void decreaserain (Scene::Ptr scene, int x, int y) {
+  if ( rain_number >= 0 ) {
+    scene->rain().transformvec().clear();
+    rain_number /= 2;
+    createrain(scene, rain_number);
+  }    
 }
 
 static void increasespeed (int x, int y) {
@@ -169,17 +209,6 @@ void draw_shadow (Scene::Ptr scene) {
   scene->root().set_identity();
 }
 
-void render_rain (Scene::Ptr scene) {
-  double old[4];
-  glGetDoublev(GL_CURRENT_COLOR, old);
-  glColor4d(0.0, 0.0, 1.0, 0.5);
-  glBegin(GL_LINES);
-  glVertex3f(0.0, 0.0, 0.0);
-  glVertex3f(0.0, 0.25, 0.0);
-  glEnd();
-  glColor3dv(old);
-}
-
 void render_sun (Scene::Ptr scene) {
   float pos[] = { 0.0f, 0.0f, 1.0f, 0.0f };
   double old[4];
@@ -189,19 +218,6 @@ void render_sun (Scene::Ptr scene) {
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
   glColor3dv(old);
   draw_shadow(scene);
-}
-
-static void createrain (Scene::Ptr scene, int rain_number) {
-  for ( int j = 0; j < rain_number; j++ ) {
-    for ( int i = 0; i < rain_number; i++ ) {
-      Transform tform;
-      Model rain = Model(Model::Renderer(bind(render_rain, scene)));
-      double pos_rand = rand_goroba()*10;
-      tform.set_position(Point4D(-125.0+i*(250.0/rain_number),20.0+pos_rand,-125.0+j*(250.0/rain_number)));
-      tform.pushmodel(rain);
-      scene->rain().pushtransform(tform);
-    }
-  }
 }
 
 static void createimeguy (Scene::Ptr scene) {
@@ -248,6 +264,8 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
   scene->register_keyevent('1', Scene::KeyEvent(increasespeed));
   scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
+  scene->register_keyevent('3', Scene::KeyEvent(increaserain));
+  scene->register_keyevent('4', Scene::KeyEvent(decreaserain));
   //scene->camera().zoom(-5);
   createimeguy(scene);
   createfog();
