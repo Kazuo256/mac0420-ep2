@@ -37,6 +37,9 @@ static double speed_of_the_sun = 10,
               speed_of_the_rain = 10;
 static int  rain_number = 64;
 
+static double rand_goroba () {
+  return 1.0*rand()/RAND_MAX;
+}
 
 void init (int argc, char **argv) {
   // Init GLUT, also capturing glut-intended arguments.
@@ -69,10 +72,6 @@ void run () {
 //    win->currentscene()->camera().rotatex(-1.0);
 //}
 
-static double rand_goroba () {
-  return 1.0*rand()/RAND_MAX;
-}
-
 static void rain_task (Scene::Ptr scene) {
   static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
@@ -82,10 +81,10 @@ static void rain_task (Scene::Ptr scene) {
         it < scene->rain().transformvec().end();
         it++ ) {
     double move_rand = 0.25 + rand_goroba()/2;
-    it->translate(Vec4D(0.0, -dt*speed_of_the_rain*move_rand*0.001, 0.0));
+    it->translate(Vec4D(0.0, -dt*speed_of_the_rain*move_rand*0.004, 0.0));
     if ( it->matrix()[3].y() < 0.0 ) {
       double old_y = it->matrix()[3].y();
-      it->translate(Vec4D(0.0, -old_y+10.0, 0.0));
+      it->translate(Vec4D(0.0, -old_y+20.0, 0.0));
     }
   }
   last = current_time;
@@ -197,8 +196,8 @@ static void createrain (Scene::Ptr scene, int rain_number) {
     for ( int i = 0; i < rain_number; i++ ) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
-      double pos_rand = 0.25 + rand_goroba()/2;
-      tform.set_position(Point4D(-10.0+i*(20.0/rain_number),10.0+pos_rand*5,-10.0+j*(20.0/rain_number)));
+      double pos_rand = rand_goroba()*10;
+      tform.set_position(Point4D(-125.0+i*(250.0/rain_number),20.0+pos_rand,-125.0+j*(250.0/rain_number)));
       tform.pushmodel(rain);
       scene->rain().pushtransform(tform);
     }
