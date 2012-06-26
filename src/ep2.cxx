@@ -176,7 +176,7 @@ void render_rain (Scene::Ptr scene) {
   glColor3d(0.0, 0.0, 1.0);
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
-  glVertex3f(0.0, 1.0, 0.0);
+  glVertex3f(0.0, 0.25, 0.0);
   glEnd();
   glColor3dv(old);
 }
@@ -197,7 +197,8 @@ static void createrain (Scene::Ptr scene, int rain_number) {
     for ( int i = 0; i < rain_number; i++ ) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
-      tform.set_position(Point4D(-5.0+i*(10.0/rain_number),10.0,-5.0+j*(10.0/rain_number)));
+      double pos_rand = 0.25 + rand_goroba()/2;
+      tform.set_position(Point4D(-10.0+i*(20.0/rain_number),10.0+pos_rand*5,-10.0+j*(20.0/rain_number)));
       tform.pushmodel(rain);
       scene->rain().pushtransform(tform);
     }
