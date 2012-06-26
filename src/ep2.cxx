@@ -31,7 +31,8 @@ using obj::Loader;
 Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
-static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile);
+static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile),
+            fog = false;
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
               speed_of_the_rain = 10;
@@ -179,6 +180,16 @@ static void decreasespeed (int x, int y) {
   printf("diminui pra : %lf\n",speed_of_the_sun);
 }
 
+static void toogle_fog (int x, int y) {
+  if ( fog == true ) {
+    glDisable(GL_FOG);
+    fog = false;
+  } else {
+    glEnable(GL_FOG);
+    fog = true;
+  }
+}
+
 void draw_shadow (Scene::Ptr scene) {
   scene->toggle_shadow();
   double aux[3];
@@ -243,6 +254,7 @@ static void createfog () {
   glFogf(GL_FOG_START, 1.0f);             // Fog Start Depth
   glFogf(GL_FOG_END, 5.0f);               // Fog End Depth
   glEnable(GL_FOG);                   // Enables GL_FOG
+  fog = true;
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
@@ -266,6 +278,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
   scene->register_keyevent('3', Scene::KeyEvent(bind(increaserain, scene, _1, _2)));
   scene->register_keyevent('4', Scene::KeyEvent(bind(decreaserain, scene, _1, _2)));
+  scene->register_keyevent('f', Scene::KeyEvent(toogle_fog));
   //scene->camera().zoom(-5);
   createimeguy(scene);
   createfog();
