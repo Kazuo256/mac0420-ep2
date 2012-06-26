@@ -109,7 +109,7 @@ static void sun_task (Scene::Ptr scene) {
 void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
-  glColor4d(0.0, 0.0, 1.0, 0.5);
+  glColor4d(0.8, 0.8, 1.0, 0.5);
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
   glVertex3f(0.0, 0.25, 0.0);
@@ -247,14 +247,13 @@ static void createfog () {
 
   glClearColor(0.5f,0.5f,0.5f,1.0f);          // We'll Clear To The Color Of The Fog ( Modified )
  
-  glFogi(GL_FOG_MODE, GL_EXP);        // Fog Mode
+  glFogi(GL_FOG_MODE, GL_EXP2);        // Fog Mode
   glFogfv(GL_FOG_COLOR, fcolor);            // Set Fog Color
   glFogf(GL_FOG_DENSITY, 0.025f);              // How Dense Will The Fog Be
   glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
   glFogf(GL_FOG_START, 1.0f);             // Fog Start Depth
   glFogf(GL_FOG_END, 5.0f);               // Fog End Depth
-  glEnable(GL_FOG);                   // Enables GL_FOG
-  fog = true;
+  if ( fog == true ) glEnable(GL_FOG);                   // Enables GL_FOG
 }
 
 static Scene::Ptr make_scene (Window::Ptr win) {
