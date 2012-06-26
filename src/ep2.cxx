@@ -172,7 +172,7 @@ void draw_shadow (Scene::Ptr scene) {
 void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
-  glColor3d(0.0, 0.0, 1.0);
+  glColor4d(0.0, 0.0, 1.0, 0.5);
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
   glVertex3f(0.0, 0.25, 0.0);
