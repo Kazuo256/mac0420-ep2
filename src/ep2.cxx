@@ -215,6 +215,14 @@ static void createimeguy (Scene::Ptr scene) {
   scene->insertcolltype("imeguy", imeguy);
 }
 
+static void createfog () {
+  GLfloat fcolor[4] = {1.0, 1.0, 1.0, 1};
+  glEnable(GL_FOG);
+  glFogf(GL_FOG_MODE, GL_EXP);
+  glFogf(GL_FOG_DENSITY, 0.1);
+  glFogfv(GL_FOG, fcolor);
+}
+
 static Scene::Ptr make_scene (Window::Ptr win) {
   Scene::Ptr scene = Scene::create();
     if (!load_models(scene, "ime.scene", "ime.collidables"))
@@ -236,6 +244,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
   //scene->camera().zoom(-5);
   createimeguy(scene);
+  createfog();
   return scene;
 }
 
