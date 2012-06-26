@@ -264,8 +264,8 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->register_keyevent('d', Scene::KeyEvent(bind(moveD, scene, _1, _2)));
   scene->register_keyevent('1', Scene::KeyEvent(increasespeed));
   scene->register_keyevent('2', Scene::KeyEvent(decreasespeed));
-  scene->register_keyevent('3', Scene::KeyEvent(increaserain));
-  scene->register_keyevent('4', Scene::KeyEvent(decreaserain));
+  scene->register_keyevent('3', Scene::KeyEvent(bind(increaserain, scene, _1, _2)));
+  scene->register_keyevent('4', Scene::KeyEvent(bind(decreaserain, scene, _1, _2)));
   //scene->camera().zoom(-5);
   createimeguy(scene);
   createfog();
