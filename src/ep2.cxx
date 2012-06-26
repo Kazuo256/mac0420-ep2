@@ -221,13 +221,19 @@ void draw_shadow (Scene::Ptr scene) {
 }
 
 void render_sun (Scene::Ptr scene) {
-  float pos[] = { 0.0f, 0.0f, 1.0f, 0.0f };
-  double old[4];
-  glGetDoublev(GL_CURRENT_COLOR, old);
-  glColor3d(1.0, 1.0, 0.0);
-  glutSolidSphere(1.0, 10, 10);
+  float pos[] = { 0.0f, 0.0f, 1.0f, 0.0f },
+        white[] = { 1.0f, 1.0f, 1.0f, 1.0f },
+        yellow[] = { 1.0f, 1.0f, 0.4f, 1.0f };
+  //double old[4];
+  //glGetDoublev(GL_CURRENT_COLOR, old);
+  //glColor3d(1.0, 1.0, 0.0);
   glLightfv(GL_LIGHT2, GL_POSITION, pos); 
-  glColor3dv(old);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, yellow);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, yellow);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, yellow);
+  glutSolidSphere(1.0, 10, 10);
+  //glColor3dv(old);
   draw_shadow(scene);
 }
 
