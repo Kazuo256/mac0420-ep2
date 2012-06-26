@@ -69,24 +69,26 @@ void run () {
 //    win->currentscene()->camera().rotatex(-1.0);
 //}
 
+static double rand_goroba () {
+  return 1.0*rand()/RAND_MAX;
+}
+
 static void rain_task (Scene::Ptr scene) {
   static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
   int dt = current_time - last;
-  double move_rand = 1; //(rand())/2.0;
-  Transform::TransformVec::iterator it;
+    Transform::TransformVec::iterator it;
   for ( it = scene->rain().transformvec().begin();
         it < scene->rain().transformvec().end();
         it++ ) {
+    double move_rand = 0.25 + rand_goroba()/2;
     it->translate(Vec4D(0.0, -dt*speed_of_the_rain*move_rand*0.001, 0.0));
     if ( it->matrix()[3].y() < 0.0 ) {
       double old_y = it->matrix()[3].y();
-      printf("Old: %lf\n", old_y);
       it->translate(Vec4D(0.0, -old_y+10.0, 0.0));
     }
   }
   last = current_time;
-  
 }
 
 static void sun_task (Scene::Ptr scene) {
@@ -195,7 +197,7 @@ static void createrain (Scene::Ptr scene, int rain_number) {
     for ( int i = 0; i < rain_number; i++ ) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
-      tform.set_position(Point4D(-5.0+i*(10.0/rain_number),0.0,-5.0+j*(10.0/rain_number)));
+      tform.set_position(Point4D(-5.0+i*(10.0/rain_number),10.0,-5.0+j*(10.0/rain_number)));
       tform.pushmodel(rain);
       scene->rain().pushtransform(tform);
     }
@@ -221,7 +223,7 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   scene->camera().set_perspective(4.0/3.0);
   scene->camera().set_view(30.0, 30.0, 30.0);
   scene->camera().set_position(Point4D(0.0, 4.0, 7.0));
-  scene->rain().set_position(Point4D(0.0, 10.0, 7.0));
+  scene->rain().set_position(Point4D(0.0, 0.0, 7.0));
   //scene->pushtask(Task(Task::Updater(bind(camera_task, win))));
   scene->pushtask(Task(Task::Updater(bind(sun_task, scene))));
   scene->pushtask(Task(Task::Updater(bind(rain_task, scene))));
