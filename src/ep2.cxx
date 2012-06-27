@@ -209,11 +209,14 @@ void draw_shadow (Scene::Ptr scene) {
   scene->root().composition(T3);
   glDisable(GL_LIGHTING);
   glDisable(GL_COLOR_MATERIAL);
+  //glEnable(GL_STENCIL_TEST);
+  //glClearStencil(0);
   glPushMatrix();
   glLoadIdentity();
   glColor4d(0.0, 0.0, 0.0, 1.0);
   scene->draw();
   glPopMatrix();
+  //glDisable(GL_STENCIL_TEST);
   glEnable(GL_LIGHTING);
   glEnable(GL_COLOR_MATERIAL);
   glColor4d(1.0, 1.0, 1.0, 1.0);

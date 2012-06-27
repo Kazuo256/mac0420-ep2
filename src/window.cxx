@@ -36,6 +36,8 @@ static void init_opengl (double ratio) {
   glEnable(GL_BLEND);
   glShadeModel(GL_SMOOTH);
   glEnable(GL_COLOR_MATERIAL);
+  glStencilFunc(GL_NOTEQUAL, 1, ~0);
+  glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHT2);
