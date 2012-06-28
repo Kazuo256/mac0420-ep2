@@ -10,7 +10,8 @@ using std::string;
 
 Parser::Parser (const string& filename) : objfile(NULL) {
   objfile = fopen(filename.c_str(), "r");
-  if (!objfile) puts("WARNING!"); // TODO
+  if (!objfile)
+    printf("WARNING! No such file '%s'.\n", filename.c_str());
 }
 
 Parser::~Parser () {
