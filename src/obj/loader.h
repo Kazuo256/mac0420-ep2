@@ -30,6 +30,7 @@ class Loader {
     DECLARE_HANDLER (objname);
     DECLARE_HANDLER (vertex);
     DECLARE_HANDLER (texcoord);
+    DECLARE_HANDLER (normal);
     DECLARE_HANDLER (face);
     DECLARE_HANDLER (materialimport);
     DECLARE_HANDLER (materialusage);

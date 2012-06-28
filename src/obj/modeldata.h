@@ -9,6 +9,7 @@
 #include <tr1/unordered_map>
 
 #include "base4D.h"
+#include "vec4D.h"
 
 namespace ep2 {
 namespace obj {
@@ -47,6 +48,7 @@ class ModelData {
     void set_name (const std::string& name) { name_ = name; }
     void add_vertex (const Base4D& vertex);
     void add_texcoord (const Base4D& texcoord);
+    void add_normal (const Vec4D& normal);
     void add_face (const Face& face);
     void add_material (const std::string& name, const Material& material);
     void add_material_index (const std::string& name);
@@ -55,6 +57,9 @@ class ModelData {
     }
     const std::vector<Base4D>& texture_vertices () const {
       return texture_vertices_;
+    }
+    const std::vector<Vec4D>& normals () const {
+      return normals_;
     }
     const std::vector<Face>& faces () const {
       return faces_;
@@ -73,7 +78,7 @@ class ModelData {
     std::string                 name_;
     std::vector<Base4D>         vertices_;
     std::vector<Base4D>         texture_vertices_;
-    //std::vector<Vec4D>    normals_;
+    std::vector<Vec4D>          normals_;
     std::vector<Face>           faces_;
     MaterialLib                 materials_;
     std::vector<MaterialIndex>  material_indexes_;

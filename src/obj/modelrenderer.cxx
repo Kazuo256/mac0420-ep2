@@ -61,10 +61,20 @@ void ModelRenderer::render_triangle (const VertexData& v1,
   Point4D a = data_->vertices()[v1.vtx-1],
           b = data_->vertices()[v2.vtx-1],
           c = data_->vertices()[v3.vtx-1];
-  Vec4D norm = Vec4D::normal(a,b,c);
-  glNormal3d(norm.x(), norm.y(), norm.z());
+  Vec4D norm1 = v1.norm
+                ? data_->normals()[v1.norm]
+                : Vec4D::normal(a,b,c),
+        norm2 = v2.norm
+                ? data_->normals()[v2.norm]
+                : norm1,
+        norm3 = v3.norm
+                ? data_->normals()[v3.norm]
+                : norm2;
+  glNormal3d(norm1.x(), norm1.y(), norm1.z());
   vertex(v1);
+  glNormal3d(norm2.x(), norm2.y(), norm2.z());
   vertex(v2);
+  glNormal3d(norm3.x(), norm3.y(), norm3.z());
   vertex(v3);
 }
 

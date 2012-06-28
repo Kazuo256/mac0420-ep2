@@ -34,6 +34,10 @@ void ModelData::add_texcoord (const Base4D& texcoord) {
   texture_vertices_.push_back(texcoord);
 }
 
+void ModelData::add_normal (const Vec4D& normal) {
+  normals_.push_back(normal);
+}
+
 void ModelData::add_face (const Face& face) {
   faces_.push_back(face);
 }

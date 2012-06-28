@@ -20,7 +20,7 @@ using namespace std::tr1::placeholders;
 
 typedef void (Loader::*Handler) (ModelData::Ptr, const Command&);
 
-#define OBJ_HANDLERTABLE_SIZE 6
+#define OBJ_HANDLERTABLE_SIZE 7
 #define MTL_HANDLERTABLE_SIZE 8
 #define GET_HANDLER(name) &Loader::handle_##name
 
@@ -35,7 +35,8 @@ static RawHandlerTable obj_handlers_table[OBJ_HANDLERTABLE_SIZE] = {
   {"f", GET_HANDLER(face) },
   {"mtllib", GET_HANDLER(materialimport) },
   {"usemtl", GET_HANDLER(materialusage) },
-  {"vt", GET_HANDLER(texcoord) }
+  {"vt", GET_HANDLER(texcoord) },
+  {"vn", GET_HANDLER(normal) }
 };
 
 static RawHandlerTable mtl_handlers_table[MTL_HANDLERTABLE_SIZE] = {
@@ -120,6 +121,13 @@ DEFINE_HANDLER(texcoord) {
   data->add_texcoord(Base4D(raw_vertex));
 }
 
+DEFINE_HANDLER(normal) {
+  double raw_vertex[4] = { 0.0, 0.0, 0.0, 0.0 };
+  for (unsigned i = 0; i < 3 && i+1 < cmd.size(); i++)
+    raw_vertex[i] = atof(cmd[i+1].c_str());
+  data->add_texcoord(Base4D(raw_vertex));
+}
+
 static void parse_vtx (Face& face, const string& vtx) {
   size_t begin = 0, pos;
   VertexData vtxdata = VertexData(0, 0, 0);
@@ -129,10 +137,18 @@ static void parse_vtx (Face& face, const string& vtx) {
   } else {
     vtxdata.vtx =
       strtoul(vtx.substr(begin, pos-begin).c_str(), NULL, 0);
-    vtxdata.tex = strtoul(vtx.substr(pos+1).c_str(), NULL, 0);
+    //vtxdata.tex = strtoul(vtx.substr(pos+1).c_str(), NULL, 0);
+    begin = pos+1;
+    pos = vtx.find("/", begin);
+    if (pos == string::npos)
+      vtxdata.tex = strtoul(vtx.substr(begin).c_str(), NULL, 0);
+    else {
+      vtxdata.tex = 
+        strtoul(vtx.substr(begin, pos-begin).c_str(), NULL, 0);
+      vtxdata.norm = strtoul(vtx.substr(pos+1).c_str(), NULL, 0);
+    }
   }
   face.push_back(vtxdata);
-  // TODO: cleanup + normals?
 }
 
 DEFINE_HANDLER(face) {
