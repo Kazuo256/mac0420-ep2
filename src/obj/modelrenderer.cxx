@@ -62,13 +62,13 @@ void ModelRenderer::render_triangle (const VertexData& v1,
           b = data_->vertices()[v2.vtx-1],
           c = data_->vertices()[v3.vtx-1];
   Vec4D norm1 = v1.norm
-                ? data_->normals()[v1.norm]
+                ? data_->normals()[v1.norm-1].normalized()
                 : Vec4D::normal(a,b,c),
         norm2 = v2.norm
-                ? data_->normals()[v2.norm]
+                ? data_->normals()[v2.norm-1].normalized()
                 : norm1,
         norm3 = v3.norm
-                ? data_->normals()[v3.norm]
+                ? data_->normals()[v3.norm-1].normalized()
                 : norm2;
   glNormal3d(norm1.x(), norm1.y(), norm1.z());
   vertex(v1);

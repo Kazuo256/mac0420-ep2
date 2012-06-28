@@ -125,7 +125,7 @@ DEFINE_HANDLER(normal) {
   double raw_vertex[4] = { 0.0, 0.0, 0.0, 0.0 };
   for (unsigned i = 0; i < 3 && i+1 < cmd.size(); i++)
     raw_vertex[i] = atof(cmd[i+1].c_str());
-  data->add_texcoord(Base4D(raw_vertex));
+  data->add_normal(Base4D(raw_vertex));
 }
 
 static void parse_vtx (Face& face, const string& vtx) {
