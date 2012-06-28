@@ -109,10 +109,11 @@ static void sun_task (Scene::Ptr scene) {
 void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
-  glColor4d(0.8, 0.8, 1.0, 0.5);
   glBegin(GL_LINES);
+  glColor4d(0.5, 0.5, 1.0, 0.7);
   glVertex3f(0.0, 0.0, 0.0);
-  glVertex3f(0.0, 0.25, 0.0);
+  glColor4d(0.8, 0.8, 1.0, 0.2);
+  glVertex3f(0.0, 0.5, 0.0);
   glEnd();
   glColor3dv(old);
 }
