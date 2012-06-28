@@ -85,7 +85,7 @@ static void rain_task (Scene::Ptr scene) {
     it->translate(Vec4D(0.0, -dt*speed_of_the_rain*move_rand*0.004, 0.0));
     if ( it->matrix()[3].y() < 0.0 ) {
       double old_y = it->matrix()[3].y();
-      it->translate(Vec4D(0.0, -old_y+20.0, 0.0));
+      it->translate(Vec4D(0.0, -old_y+50.0, 0.0));
     }
   }
   last = current_time;
@@ -123,7 +123,7 @@ static void createrain (Scene::Ptr scene, int rain_number) {
       Transform tform;
       Model rain = Model(Model::Renderer(bind(render_rain, scene)));
       double pos_rand = rand_goroba()*10;
-      tform.set_position(Point4D(-125.0+i*(250.0/rain_number),20.0+pos_rand,-125.0+j*(250.0/rain_number)));
+      tform.set_position(Point4D(-125.0+i*(250.0/rain_number),50.0+pos_rand,-125.0+j*(250.0/rain_number)));
       tform.pushmodel(rain);
       scene->rain().pushtransform(tform);
     }
