@@ -228,7 +228,7 @@ void render_sun (Scene::Ptr scene) {
   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, yellow);
   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, yellow);
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
-  glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, yellow);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, white);
   glutSolidSphere(1.0, 10, 10);
   //glColor3dv(old);
   draw_shadow(scene);
