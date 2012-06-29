@@ -23,6 +23,7 @@
 
 namespace ep2 {
 
+using std::string;
 using std::tr1::bind;
 using namespace std::tr1::placeholders;
 using obj::Model;
@@ -31,7 +32,7 @@ using obj::Loader;
 Window::Ptr win;
 
 static Scene::Ptr make_scene (Window::Ptr win);
-static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile),
+static bool load_models (Scene::Ptr scene, const string& modelfile, const string& collidefile),
             fog = false;
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
@@ -286,7 +287,8 @@ static Scene::Ptr make_scene (Window::Ptr win) {
   return scene;
 }
 
-static bool load_models (Scene::Ptr scene, std::string modelfile, std::string collidefile) {
+static bool load_models (Scene::Ptr scene, const string& modelfile,
+                         const string& collidefile) {
   WorldLoader wl = WorldLoader(modelfile, collidefile);
   wl.loadworld(scene);
   Model sun = Model(Model::Renderer(bind(render_sun, scene)));
