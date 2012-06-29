@@ -65,14 +65,6 @@ void run () {
   glutMainLoop();
 }
 
-//static void camera_task (Window::Ptr win) {
-//  Point4D pos = win->mouse().position();
-//  if (pos.y() > 250) 
-//    win->currentscene()->camera().rotatex(1.0);
-//  else if (pos.y() < 350)
-//    win->currentscene()->camera().rotatex(-1.0);
-//}
-
 static void rain_task (Scene::Ptr scene) {
   static int last = 0;
   int current_time = glutGet(GLUT_ELAPSED_TIME);
@@ -110,9 +102,9 @@ void render_rain (Scene::Ptr scene) {
   double old[4];
   glGetDoublev(GL_CURRENT_COLOR, old);
   glBegin(GL_LINES);
-  glColor4d(0.5, 0.5, 1.0, 0.7);
+  glColor4d(0.5, 1.0, 1.0, 0.7);
   glVertex3f(0.0, 0.0, 0.0);
-  glColor4d(0.8, 0.8, 1.0, 0.2);
+  glColor4d(0.8, 1.0, 1.0, 0.2);
   glVertex3f(0.0, 0.5, 0.0);
   glEnd();
   glColor3dv(old);
