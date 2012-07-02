@@ -37,7 +37,7 @@ III. ARGUMENTOS DA LINHA DE COMANDO.
 
   O EP tem a seguinte assinatura de linha de comando:
 
-    ./ep2 [argumentos_do_glut]
+    ./ep3 [argumentos_do_glut]
 
   Os argumentos do GLUT são aqueles que a função glutInit recebe. Para maiores
 detalhes consultar a documentação do GLUT. 
