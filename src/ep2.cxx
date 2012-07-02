@@ -36,7 +36,7 @@ static bool load_models (Scene::Ptr scene, const string& modelfile, const string
             fog = false;
 static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
-              speed_of_the_rain = 10;
+              speed_of_the_rain = 20;
 static int  rain_number = 64;
 
 static double rand_goroba () {
