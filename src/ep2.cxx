@@ -38,6 +38,8 @@ static Collidable::Ptr imeguy = Collidable::create(1.0, 1.0);
 static double speed_of_the_sun = 10,
               speed_of_the_rain = 20;
 static int  rain_number = 64;
+static GLfloat fogcolorday[4] = {0.7f, 0.7f, 0.7f, 1.0f},
+               fogcolornight[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 
 static double rand_goroba () {
   return 1.0*rand()/RAND_MAX;
@@ -93,9 +95,11 @@ static void sun_task (Scene::Ptr scene) {
   if (scene->sun().matrix()[3].y() < 0.0) {
     scene->sun().modelvec()[0].set_visible(false);
     glDisable(GL_LIGHT2);
+    glFogfv(GL_FOG_COLOR, fogcolornight);            // Set Fog Color
   } else {
     scene->sun().modelvec()[0].set_visible(true);
     glEnable(GL_LIGHT2);
+    glFogfv(GL_FOG_COLOR, fogcolorday);            // Set Fog Color
   }
 }
 
@@ -246,12 +250,11 @@ static void createimeguy (Scene::Ptr scene) {
 }
 
 static void createfog () {
-  GLfloat fcolor[4] = {0.7, 0.7, 0.7, 1.0};
 
   glClearColor(0.5f,0.5f,0.5f,1.0f);          // We'll Clear To The Color Of The Fog ( Modified )
  
   glFogi(GL_FOG_MODE, GL_EXP2);        // Fog Mode
-  glFogfv(GL_FOG_COLOR, fcolor);            // Set Fog Color
+  glFogfv(GL_FOG_COLOR, fogcolorday);            // Set Fog Color
   glFogf(GL_FOG_DENSITY, 0.01f);              // How Dense Will The Fog Be
   glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
   glFogf(GL_FOG_START, 1.0f);             // Fog Start Depth
