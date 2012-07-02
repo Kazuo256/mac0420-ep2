@@ -17,7 +17,7 @@ void WorldLoader::loadcollidables (Scene::Ptr scene) {
   char objname[64];
   while ( fscanf(pcfile, "%s", objname) != EOF ) {
     double length, width;
-    fscanf(pcfile, "%lf %lf", &length, &width);
+    if(fscanf(pcfile, "%lf %lf", &length, &width));
     Collidable::Ptr coll = Collidable::create(width, length);
     std::string collname = objname;
     scene->insertcolltype(collname, coll);
@@ -35,7 +35,7 @@ void WorldLoader::loadmodels (Scene::Ptr scene) {
     Transform::Matrix matrix;
     for (int j = 0; j < 4; j++) {
       for (int i = 0; i < 4; i++) {
-        fscanf(pmfile, "%lf", &buffer[i]);
+        if(fscanf(pmfile, "%lf", &buffer[i]));
         //printf("%lf-",buffer[i]);
       }
       matrix[j].set_val(buffer);
