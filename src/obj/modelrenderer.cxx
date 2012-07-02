@@ -83,7 +83,7 @@ void ModelRenderer::operator () () {
   vector<Face>::const_iterator          fit;
   for (fit = data_->faces().begin(); fit < data_->faces().end(); fit++) {
     if (mit < data_->material_indexes().end() &&
-        fit - (data_->faces().begin()) == mit->begin) {
+        (unsigned)(fit - (data_->faces().begin())) == mit->begin) {
       MaterialLib::const_iterator m = data_->materials().find(mit->name);
       if (m != data_->materials().end())
         setup_material(m->second);
