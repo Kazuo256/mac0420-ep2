@@ -1,7 +1,7 @@
 
 cmake_minimum_required (VERSION 2.8)
 
-project (ep2 CXX C)
+project (ep3 CXX C)
 include_directories (src)
 
 find_package(OpenGL REQUIRED)
@@ -28,7 +28,7 @@ else (${IL_FOUND})
   message (FATAL_ERROR "DevIL not found!")
 endif (${IL_FOUND})
 
-add_executable (ep2
+add_executable (ep3
   src/main.cxx
   src/ep2.cxx
   src/obj/model.cxx
@@ -51,6 +51,6 @@ add_executable (ep2
   src/control/mouse.cxx
 )
 
-target_link_libraries (ep2 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY} ${IL_LIBRARIES} ${ILUT_LIBRARIES})
-set_target_properties (ep2 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O0 -g")
+target_link_libraries (ep3 ${OPENGL_LIBRARIES} ${GLUT_glut_LIBRARY} ${IL_LIBRARIES} ${ILUT_LIBRARIES})
+set_target_properties (ep3 PROPERTIES COMPILE_FLAGS "-ansi -Wall -O3")
 

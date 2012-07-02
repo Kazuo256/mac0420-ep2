@@ -1,6 +1,6 @@
 #!/bin/bash
 
-outdir=ep2-Thiago-Wilson
+outdir=ep3-Thiago-Wilson
 
 if [ ! -d $outdir ]; then
   mkdir $outdir
