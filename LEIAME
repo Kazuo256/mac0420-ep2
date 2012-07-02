@@ -1,6 +1,6 @@
 
 MAC0420-2012: Introdução à Computação Gráfica.
-Segundo Exercício-Programa: Mundo IME Virtual.
+Terceiro Exercício-Programa: Mundo IME Virtual (Parte II).
 
 Alunos:                     Nº USP:
   Thiago de Gouveia Nunes     6797289
@@ -58,11 +58,25 @@ IV. CONTROLES DO PROGRAMA.
       Aumenta a velocidade de passagem do tempo.
     Botão '2':
       Diminui a velocidade de passagem do tempo.
+    Botão '3':
+      Aumenta a intensidade da chuva.
+    Botão '4':
+      Diminui a intensidade da chuva.
+    Botão 'f':
+      Ativa/Desativa a névoa (fog).
 
 V. OBSERVAÇÕES
 
-  Por falta de tempo, somente o bloco B do ime foi modelado, e
-  e os efeitos de luz deixam um pouco a desejar.
+  Não pudemos deixar tudo como gostaríamos, mas estamos bastante satisfeitos com
+o resultado. Os principais problemas são:
 
-  Na próxima fase melhoraremos essas partes que ficaram pra trás.
+    - O Sol não emite "luz própria". Mexemos no EMISSION do material dele mas
+      não obtivemos resultado.
+    - As sombras apresentam artefatos em alguns momentos quando renderizadas
+      junto com a fog. Não descobrimos o motivo.
+    - Em alguns computadores, as cores da alguns materiais não aparecem e o
+      medidor de FPS também não. Tampouco descobrimos a causa.
+
+
+
 
